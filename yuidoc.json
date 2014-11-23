@@ -1,11 +1,11 @@
 {
-    "name": "Pocketknife UI",
-    "description": "Pocketknife UI Documentation",
+    "name": "Open UI",
+    "description": "Open UI Documentation",
     "version": "0.0.1",
-    "url": "https://github.com/sw4/pocketknife",
+    "url": "https://github.com/open-ui/open-ui",
     "options": {
         "linkNatives": "true",
-        "outdir": "./docs",
+        "outdir": "../public-site/docs",
         "paths": "./src"
     }
 }
