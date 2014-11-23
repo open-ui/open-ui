@@ -1,23 +1,23 @@
 {
-  "name": "pocketknife",
-  "title": "pocketknife",
-  "description": "pocketknife",
-  "version": "0.0.1233",
-  "homepage": "https://github.com/sw4/pocketknife",
+  "name": "open-ui",
+  "title": "Open UI",
+  "description": "Open UI",
+  "version": "0.0.54",
+  "homepage": "https://github.com/open-ui/open-ui",
   "author": {
-    "name": "Pocketknife Ltd."
+    "name": "Open UI"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/sw4/pocketknife.git"
+    "url": "git://github.com/open-ui/open-ui.git"
   },
   "bugs": {
-    "url": "https://github.com/sw4/pocketknife/issues"
+    "url": "https://github.com/open-ui/open-ui/issues"
   },
   "licenses": [
     {
-      "type": "CC BY-NC-SA",
-      "url": "https://github.com/sw4/pocketknife/blob/master/LICENSE-CC-NC-SA.md"
+      "type": "MIT",
+      "url": "https://github.com/open-ui/open-ui/blob/master/LICENSE-MIT.md"
     }
   ],
   "engines": {
