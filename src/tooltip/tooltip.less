@@ -1,0 +1,119 @@
+@import "../core/core.less";
+.pk-tooltip{
+	position:absolute;
+	z-index:999;
+	background:@color-foreground;
+	color:@color-background;
+	font-size:.9em;
+	box-sizing:border-box;
+	opacity:0;
+	display:none;
+	transition:opacity 200ms ease-in, margin 100ms ease-in;
+	&:before{
+		content:'';
+		position:absolute;
+		width: 0;
+		height: 0;
+		border-style: solid;
+	}	
+	&.pk-top{		
+		&:before{
+			border-width: 7px 7px 0 7px;
+			border-color: @color-foreground transparent transparent transparent;
+			bottom:-7px;
+			left:7px;		
+		}
+	}
+	&.pk-right{		
+		&:before{	
+			border-width: 7px 7px 7px 0;
+			border-color: transparent @color-foreground transparent transparent;
+			top:7px;
+			left:-7px;
+		}
+	}
+	&.pk-bottom{		
+		&:before{
+			border-width: 0 7px 7px 7px;
+			border-color: transparent transparent @color-foreground transparent;
+			top:-7px;
+			left:7px;		
+		}
+	}	
+	&.pk-left{
+		&:before{
+			border-width: 7px 0 7px 7px;
+			border-color: transparent transparent transparent @color-foreground;
+			top:7px;
+			right:-7px;
+		}
+	}
+	&.pk-show{
+		display:block;		
+		padding:@item-height/8 @item-height/4;
+		animation-duration:200ms;
+		animation-timing-function:ease-in;
+		animation-fill-mode:forwards;
+		&.pk-top{	
+			animation-name: pk-anim-tooltip-top;
+			opacity:1;	
+			margin:-1 * (@item-height/2) 0 0 0;
+		}		
+		&.pk-right{		
+			animation-name: pk-anim-tooltip-right;	
+			opacity:1;		
+			margin:-3.5px 0 0 @item-height/2;	
+		}		
+		&.pk-bottom{
+			animation-name: pk-anim-tooltip-bottom;		
+			margin:@item-height/2 0 0 0;	
+			opacity:1;	
+		}		
+		&.pk-left{		
+			animation-name: pk-anim-tooltip-left;
+			opacity:1;	
+			margin:-3.5px 0 0 -1*(@item-height); 
+		}
+	}
+}
+@keyframes pk-anim-tooltip-top { 
+	from { 
+		opacity:0;
+		margin:-1 * (@item-height) 0 0 0; 
+	} 
+	to { 
+		opacity:1;
+		margin:-1 * (@item-height/2) 0 0 0;
+	}  
+}
+@keyframes pk-anim-tooltip-right { 
+	from { 
+		opacity:0;
+		margin:-3.5px 0 0 @item-height;
+	} 
+	to { 
+		opacity:1;
+		margin:-3.5px 0 0 @item-height/2;
+	}  
+}
+@keyframes pk-anim-tooltip-bottom { 
+	from { 
+		opacity:0;
+		margin:@item-height 0 0 0;
+	} 
+	to { 
+		opacity:1;
+		margin:@item-height/2 0 0 0;
+	}  
+}
+
+@keyframes pk-anim-tooltip-left { 
+	from { 
+		opacity:0;
+		margin:-3.5px 0 0 -1*(@item-height*2); 
+	} 
+	to { 
+		opacity:1;
+		margin:-3.5px 0 0 -1*(@item-height); 
+	}  
+}

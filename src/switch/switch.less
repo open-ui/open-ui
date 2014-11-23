@@ -1,0 +1,59 @@
+@import "../core/core.less";
+.pk-switch{
+    height:@item-height*.6;
+    line-height:@item-height*.6;;
+    width:@item-height*2;
+	box-sizing:border-box;
+    display:inline-block;
+    position:relative;
+	input{
+		display:none;
+		&:checked{
+			~ .pk-indicator{
+				left:50%;				
+				border-color:@color-highlight;
+			}
+			+ .pk-label{
+				border-color:@color-highlight; 
+				background:@color-highlight; 
+			}
+		}
+	}
+	.pk-label,.pk-indicator{	
+		height:100%;
+		position:absolute;
+		pointer-events:none;
+	}
+	.pk-label{
+		border-radius:@item-rounding*2;    
+		border:1px solid darken(@color-background, 20%);
+		background:darken(@color-background, 15%);
+		width:100%;
+		font-size:18px;
+		color:@color-background;
+		transition:all 100ms ease-in;
+		&:before, &:after{		
+			position:absolute;
+			width:50%;
+			text-align:center;	
+			font-size:13px;			
+		}
+		&:before{
+			content:'\2713';
+		}
+		&:after{
+			content:'\00D7';
+			right:0;
+			top:-1px;
+			font-size:@item-height*.8;
+		}
+	}
+	.pk-indicator{
+		width:50%;
+		background:@color-background;
+		left:0;
+		transition:left 100ms ease-in;
+		border:1px solid darken(@color-background, 20%);
+		border-radius:@item-rounding*2;
+	}
+}

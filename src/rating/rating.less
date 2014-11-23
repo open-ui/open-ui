@@ -1,0 +1,72 @@
+@import "../core/core.less";
+.pk-rating {
+	fieldset {
+		float: left;
+		border: none;
+		padding:0;
+		margin:0;
+	}
+	input{
+		display: none;
+		&:checked{
+			& ~ label {
+				color: @color-highlight;
+				transform:scale(0.8);
+			}
+		}
+	}
+	label {
+		float: right;
+		width: 1em;
+		padding: 0 .1em;
+		overflow: hidden;
+		white-space: nowrap;
+		cursor: pointer;
+		font-size: 200%;
+		line-height: 1.2;
+		color: darken(@color-background, 10%);
+		transition: all 100ms ease-in;
+		transform:scale(0.6);
+		&:before{
+			content: '★';
+		}		
+		&:active{
+		    position: relative;
+		}
+	}
+	&.pk-disabled{
+		label, label ~ label {
+			color: darken(@color-background, 20%);
+		}
+		input:checked + label,
+		input:checked + label ~ label,
+		input:checked ~ label,
+		input:checked ~ label ~ label,
+		label ~ input:checked ~ label{
+			color: darken(@color-background, 40%);
+		}
+	}
+	&:not(.pk-disabled){
+		input{
+			&:checked{
+				& + label:hover,
+				& + label:hover ~ label,
+				& ~ label:hover,
+				& ~ label:hover ~ label{
+					color: lighten(@color-highlight, 5%);
+					transform:scale(1);
+				}
+			}
+		}
+		
+		label{
+			&:hover, &:hover ~ label {
+				color: darken(@color-background, 20%);
+			}
+			&:hover ~ input:checked ~ label {
+				color: lighten(@color-highlight, 5%);
+				transform:scale(1);
+			}
+		}
+	}
+}

@@ -1,0 +1,90 @@
+@import "../core/core.less";
+.pk-modal-mask {
+	background:@color-foreground;
+    background: rgba(0, 0, 0, 0.5);
+    /* browsers */
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#4cffffff', endColorstr='#4cffffff');
+    /* IE */
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    z-index: 998;
+    transition: opacity 100ms ease-in;
+	&.pk-show {
+	    opacity: 1;
+	}
+}
+
+.pk-modal-box {
+    background: @color-background;
+    display: block;
+    width: 40%;
+    max-width: 600px;
+    position: relative;
+    max-height: 90%;
+    min-width: 400px;
+	margin-top: -20%; 
+	opacity:0;
+    transition: opacity 500ms ease-in,margin-top 400ms cubic-bezier(0.765, -0.450, 0.425, 1.545); /* custom */
+    transition-timing-function: cubic-bezier(0.765, -0.450, 0.425, 1.545); /* custom */
+		
+	&.pk-animated{
+	//	transition:opacity 200ms ease-in,margin-top 700ms cubic-bezier(0.765, -0.450, 0.425, 1.545), all 150ms ease-in;
+	}
+}
+.pk-modal-mask.pk-show .pk-modal-box{
+	opacity:1;
+	margin-top: 0;
+}
+
+.pk-modal-header {
+    background: @color-highlight;
+    color: white;
+    font-weight: 100;
+    text-transform: uppercase;
+	font-size: 1.2em;
+    line-height: @item-height*1.3;
+}
+
+.pk-modal-header, .pk-modal-content {
+    padding: 0 @item-height/3;
+    margin: 0;
+    text-align: left;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.pk-modal-close {
+    display: inline-block;
+    position: absolute;
+    width: @item-height;
+    height: @item-height;
+    line-height: @item-height;
+    font-size: @item-height;
+    right: @item-height/3;
+    top: 4px;
+    cursor: pointer;
+    text-align: center;
+    overflow: hidden;
+    vertical-align: middle;
+	transition:all 200ms ease-in;
+	&:after {
+	    content: '\00d7';
+	    display: inline-block;
+        top: -2px;
+        position: relative;
+	}
+}
+.pk-modal-close:hover{
+	background:@color-background;
+	color: @color-highlight;
+	border-radius:100%;
+}
+
+.pk-modal-content {
+    padding-top: @item-height/3;
+    padding-bottom: @item-height/3;
+}

@@ -1,0 +1,52 @@
+@import "../core/core.less";
+.pk-checkbox{
+    position:relative;
+    text-align:left;
+	.pk-noselect;
+	input{
+		display:none;
+		&:checked+.pk-label:before{
+			transform: rotateX(180deg);
+			background:@color-highlight;
+			border-color:@color-highlight;
+		}
+		&:checked+.pk-label:after{
+			transform: rotateX(0deg);	
+			opacity:1;
+		}
+	}
+	.pk-label{
+		cursor:pointer;
+		font-weight:normal;
+		&:before{
+			display:inline-block;
+			content:'';
+			height:@item-height*.6; 
+			width:@item-height*.65;
+			margin:-3px 5px 0 0;
+			vertical-align:middle;
+			transform: rotateX(0deg);		
+			transition:all 150ms ease-in;			
+			border: 1px solid darken(@color-background, 20%);
+			background:darken(@color-background, 5%);
+		}	
+		&:after{
+			content:'\2713';
+			position:absolute;	
+			left:5px;		
+			opacity:0;
+			top:0;
+			color:@color-background;	
+			transform: rotateX(180deg);
+			transition:all 150ms ease-in;			
+		}		
+	}
+	&:hover{
+		.pk-label{
+			&:before{
+				border-color:@color-highlight;
+				background:@color-background;
+			}	
+		}
+	}
+}
