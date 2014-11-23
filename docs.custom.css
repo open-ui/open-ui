@@ -62,55 +62,61 @@ code.param-name:not(.optional) + .type:after{
   padding: 3px 4px 2px;
 }
 .yui3-skin-sam .yui3-tabview-list{
-	border-bottom: solid hsl(204, 70%, 58%)!important;
+  border-bottom: solid hsl(211, 28%, 25%)!important;
 }
 .yui3-skin-sam .yui3-tab-selected .yui3-tab-label{
-	border-color: hsl(204, 70%, 58%)!important;
-	border: solid hsl(204, 70%, 58%)!important;
+  border-color: hsl(211, 28%, 25%)!important;
+  border: solid hsl(211, 28%, 25%)!important;
 }
 .yui3-skin-sam .yui3-tab-selected{
-	margin-bottom:0!important;
+  margin-bottom:0!important;
 }
 .yui3-skin-sam .yui3-tab-selected .yui3-tab-label, .yui3-skin-sam .yui3-tab-selected .yui3-tab-label:focus, .yui3-skin-sam .yui3-tab-selected .yui3-tab-label:hover{
-background: hsl(204, 70%, 58%)!important;
-	border: solid hsl(204, 70%, 58%)!important;
+background: hsl(211, 28%, 25%)!important;
+  border: solid hsl(211, 28%, 25%)!important;
 }
 .yui3-skin-sam .yui3-tab-label{
-	background: #F2F2F2!important;
-	border: solid #F2F2F2!important;
-	transition:background 200ms ease-in, border 200ms ease-in;
+  background: #F2F2F2!important;
+  border: solid #F2F2F2!important;
+  transition:background 200ms ease-in, border 200ms ease-in;
 }
 .yui3-skin-sam .yui3-tab-label:hover, .yui3-skin-sam .yui3-tab-label:focus{
-	color:hsl(204, 70%, 58%);
-	background: #F2F2F2!important;
-	border: solid #F2F2F2!important;
+  color:hsl(211, 28%, 25%);
+  background: #F2F2F2!important;
+  border: solid #F2F2F2!important;
 }
 .apis a {
-	font-size: 0.96em;
-	padding: 4px 4px;
+  font-size: 0.96em;
+  padding: 4px 4px;
 }
 .apis a:hover, .apis a:focus {
-	background: hsl(169, 91%, 40%);
-	background: hsl(204, 64%, 49%);
-	border-color: hsl(204, 70%, 58%);
-	border-radius: 0;
-	color: #fff;
-	outline: none;
+  background: hsl(169, 91%, 40%);
+  background: hsl(211, 28%, 25%);
+  border-color: hsl(211, 28%, 25%);
+  border-radius: 0;
+  color: #fff;
+  outline: none;
 }
 .api-list-item a:hover, .api-list-item a:focus{
-	text-shadow:none;
+  text-shadow:none;
 }
 #classdocs .item{
-	border-bottom-color:#a9d1c9;
+  border-bottom-color:#a9d1c9;
+}
+.content{
+  padding-top:15px;
 }
 a{
-color: hsl(204, 64%, 49%);
+color: hsl(211, 28%, 25%);
 }
 #api-list > h2{
   position:relative;
   width:0;
   color:#fff;
   margin: 10px 0 20px;
+}
+#api-list > h2{
+  display:none;
 }
 #api-list > h2:after{
   display:block;
@@ -120,7 +126,7 @@ color: hsl(204, 64%, 49%);
   top:0;
   color:#000;
   white-space:nowrap;
-  content:'OpenUI';
+  content:'Open UI';
 }
 
 #api-options{
@@ -132,9 +138,9 @@ color: hsl(204, 64%, 49%);
   margin-bottom: 10px;
 }
 .intro code{
-	background: #FCFBFA;
-	border: 1px solid #EFEEED;
-	padding: 0 3px;
+  background: #FCFBFA;
+  border: 1px solid #EFEEED;
+  padding: 0 3px;
 }
 .info-well:before{
   content: "\f05a";
@@ -169,7 +175,7 @@ color: hsl(204, 64%, 49%);
   padding: 2px 0;
 
   /* Set the base colour */
-  background-color: hsl(204, 64%, 49%);
+  background-color: hsl(211, 28%, 25%);
 
   /* Set a gradient: transparent black at the top to almost-transparent black at the bottom */
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.15)));
