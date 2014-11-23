@@ -70,7 +70,7 @@
 		position:absolute;
 		left:-1 * (@item-height + (@item-height/3));
 		top:calc(~"50% - 25px");   
-		color:fade(@color-background, 20%);		
+		color:fade(@color-highlight, 20%);		
 		cursor:pointer;    		
 		width:@item-height + (@item-height/3);
 		height:@item-height*1.66;
@@ -90,7 +90,7 @@
 			left:@item-height /3;
 		}
 		&:hover{    
-			color:fade(@color-background, 60%);		
+			color:fade(@color-highlight, 60%);		
 		//	background:fade(@color-foreground, 15%);
 		}
 	}
@@ -130,7 +130,7 @@
 			width: @item-height /2;
 			height: @item-height /2;
 			opacity:0.65;
-			background:white;    
+			background:@color-highlight;    
 			transform: scale(0.6);
 			transition:all 100ms ease-in;
 		}
