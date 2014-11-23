@@ -3,7 +3,7 @@ var pk = pk || {};
 Class used for creating tooltips
 
 <div class='info-well'>
-The value passed to the `position` attribute is added to the tooltip as a CSS class of the format `pk-*position*`. Custom positions containing the keywords `top`, `left`, `bottom` and/or `right` can be applied to assume the relevant attributes, i.e. `bottomright`
+The value passed to the `position` attribute is added to the tooltip as a CSS class of the format `oui-*position*`. Custom positions containing the keywords `top`, `left`, `bottom` and/or `right` can be applied to assume the relevant attributes, i.e. `bottomright`
 </div>
 
 HTML
@@ -12,13 +12,13 @@ HTML
 	
 Javascript:
 
-	pk.tooltip({
+	oui.tooltip({
 		element:document.getElementById('tooltip'),
 		content:'Tooltip content',
 		position:'left'
 	});
 
-@class pk.tooltip
+@class oui.tooltip
 @constructor
 @param options {Object}
 @param options.element {Object} DOM element to apply tooltip to
@@ -31,17 +31,17 @@ Javascript:
 
 (function(pk) {
 	var ttEl=null;
-	pk.tooltip=function(opt){
+	oui.tooltip=function(opt){
 		if(!ttEl){
-			ttEl=pk.createEl("<div class='pk-tooltip'></div>");
+			ttEl=oui.createEl("<div class='oui-tooltip'></div>");
 			document.body.appendChild(ttEl);
 		}
 		var delay=opt.delay || 500, timer=null;
-		pk.bindEvent('mouseover', opt.element,function(){
+		oui.bindEvent('mouseover', opt.element,function(){
 			ttEl.innerHTML=opt.content;
 			ttEl.style.display='block';				
-			var tl=pk.layout(ttEl),
-				pl=pk.layout(opt.element),
+			var tl=oui.layout(ttEl),
+				pl=oui.layout(opt.element),
 				t=0,l=0, o={x:(opt.offset ? (opt.offset.x ? opt.offset.x : 0) : 0),y:(opt.offset ? (opt.offset.y ? opt.offset.y : 0) : 0)};
 			
 			opt.position=opt.position || 'right';				
@@ -61,24 +61,24 @@ Javascript:
 			
 			ttEl.style.top=t+o.y+'px';
 			ttEl.style.left=l+o.x+'px';
-			pk.addClass(ttEl, 'pk-'+opt.position);	
+			oui.addClass(ttEl, 'oui-'+opt.position);	
 			if(!timer){
 				timer = setTimeout(function(){				
-					pk.addClass(ttEl, 'pk-show');	
+					oui.addClass(ttEl, 'oui-show');	
 					clearTimeout(timer);
 					timer=null;	
 				},delay);
 			}
 			
 		});
-		pk.bindEvent('mouseout', opt.element,function(){
+		oui.bindEvent('mouseout', opt.element,function(){
 			ttEl.innerHTML='';
 			if(timer){	
 				clearTimeout(timer);
 				timer=null;
 			}	
-			pk.removeClass(ttEl, 'pk-show');	
-			pk.removeClass(ttEl, 'pk-'+opt.position);		
+			oui.removeClass(ttEl, 'oui-show');	
+			oui.removeClass(ttEl, 'oui-'+opt.position);		
 		});
 		return {
 			0:opt.element

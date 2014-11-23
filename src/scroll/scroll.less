@@ -1,13 +1,13 @@
 @import "../core/core.less";
-.pk-scroll-content:focus, .pk-scroll-content:active {
+.oui-scroll-content:focus, .oui-scroll-content:active {
     outline: 0;
 }
 
-.pk-scroll-scrolling {
+.oui-scroll-scrolling {
     cursor: default;
 }
 
-.pk-scroll-content {
+.oui-scroll-content {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -17,7 +17,7 @@
     box-sizing: border-box;
 }
 
-.pk-scroll-trackY, .pk-scroll-trackX {
+.oui-scroll-trackY, .oui-scroll-trackX {
     position: absolute;
     background: rgba(0, 0, 0, .04);
     cursor: default;
@@ -28,27 +28,27 @@
     overflow: hidden;
 }
 
-.pk-scroll-container.pk-scroll-enableY .pk-scroll-trackY {
+.oui-scroll-container.oui-scroll-enableY .oui-scroll-trackY {
     display: block;
 }
 
-.pk-scroll-container.pk-scroll-enableX .pk-scroll-trackX {
+.oui-scroll-container.oui-scroll-enableX .oui-scroll-trackX {
     display: block;
 }
 
-.pk-scroll-trackY {
+.oui-scroll-trackY {
     right: 0;
     height: 100%;
     width: 7px;
 }
 
-.pk-scroll-trackX {
+.oui-scroll-trackX {
     bottom: 0;
     height: 7px;
     width: 100%;
 }
 
-.pk-scroll-floatY, .pk-scroll-floatX {
+.oui-scroll-floatY, .oui-scroll-floatX {
     position: absolute;
     cursor: default;
     border-radius: 10px;
@@ -57,17 +57,17 @@
     box-sizing: border-box;
 }
 
-.pk-scroll-container:hover .pk-scroll-floatY, .pk-scroll-container:hover .pk-scroll-floatX, .pk-scroll-floatY.pk-drag-dragging,.pk-scroll-floatX.pk-drag-dragging {
+.oui-scroll-container:hover .oui-scroll-floatY, .oui-scroll-container:hover .oui-scroll-floatX, .oui-scroll-floatY.oui-drag-dragging,.oui-scroll-floatX.oui-drag-dragging {
     background: @color-prominent;
 }
 
-.pk-scroll-floatY {
+.oui-scroll-floatY {
     top: 0;
     height: 20%;
     width: 100%;
 }
 
-.pk-scroll-floatX {
+.oui-scroll-floatX {
     height: 100%;
     width: 20%;
 }

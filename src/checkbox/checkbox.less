@@ -1,21 +1,21 @@
 @import "../core/core.less";
-.pk-checkbox{
+.oui-checkbox{
     position:relative;
     text-align:left;
-	.pk-noselect;
+	.oui-noselect;
 	input{
 		display:none;
-		&:checked+.pk-label:before{
+		&:checked+.oui-label:before{
 			transform: rotateX(180deg);
 			background:@color-highlight;
 			border-color:@color-highlight;
 		}
-		&:checked+.pk-label:after{
+		&:checked+.oui-label:after{
 			transform: rotateX(0deg);	
 			opacity:1;
 		}
 	}
-	.pk-label{
+	.oui-label{
 		cursor:pointer;
 		font-weight:normal;
 		&:before{
@@ -42,7 +42,7 @@
 		}		
 	}
 	&:hover{
-		.pk-label{
+		.oui-label{
 			&:before{
 				border-color:@color-highlight;
 				background:@color-background;

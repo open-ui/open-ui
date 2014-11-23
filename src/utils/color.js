@@ -6,16 +6,16 @@ Utility class for converting color types and generating color schemes.
 For color conversion methods, where the expected parameter is an array e.g `[0,0,0]`, the method can also be passed a comma separated value string, e.g. `'0,0,0'`, from which an array will automatically be extrapolated.
 </div>
 
-@class pk.color
+@class oui.color
 */
 
 (function(pk) {
-    pk.color = {
+    oui.color = {
 
         /**
         Convert a HEX color string to an RGB
 
-            var color=pk.color.hex2rgb('#FF0000');
+            var color=oui.color.hex2rgb('#FF0000');
             // color = [255,0,0]
 
         @method hex2rgb 
@@ -40,7 +40,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         /**
         Convert an RGB array to a HEX color string
 
-            var color=pk.color.rgb2hex([255,0,0]);
+            var color=oui.color.rgb2hex([255,0,0]);
             // color = '#FF0000'
 
         @method rgb2hex
@@ -48,7 +48,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         @return {String} Returns HEX color string
         */
         rgb2hex: function(rgb) {
-			rgb=pk.toArr(rgb);
+			rgb=oui.toArr(rgb);
             var hex = '',
                 h, i, c;
             for (i = 0; i < rgb.length; i += 1) {
@@ -62,7 +62,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         /**
         Convert an RGB array to a HSV array
 
-            var color=pk.color.rgb2hsv([255,0,0]);
+            var color=oui.color.rgb2hsv([255,0,0]);
             // color = [0,100,100]
 
         @method rgb2hsv
@@ -70,7 +70,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         @return {Array} Returns array of hue, saturation and value components
         */
         rgb2hsv: function(rgb) {		
-			rgb=pk.toArr(rgb);
+			rgb=oui.toArr(rgb);
             var
                 r = rgb[0],
                 g = rgb[1],
@@ -106,7 +106,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         /**
         Convert an HSV array to a RGB array
 
-            var color=pk.color.hsv2rgb([0,100,100]);
+            var color=oui.color.hsv2rgb([0,100,100]);
             // color = [255,0,0]
 
         @method hsv2rgb
@@ -114,7 +114,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         @return {Array} Returns array of red, blue and green components
         */
         hsv2rgb: function(hsv) {
-			hsv=pk.toArr(hsv);
+			hsv=oui.toArr(hsv);
             var
                 r, g, b, i, f, p, q, t, h = hsv[0],
                 s = hsv[1],
@@ -175,7 +175,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         /**
         Convert an RGB array to a HSL array
 
-            var color=pk.color.rgb2hsl([255,0,0]);
+            var color=oui.color.rgb2hsl([255,0,0]);
             // color = [0,100,50]
 
         @method rgb2hsl
@@ -183,7 +183,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         @return {Array} Returns array of hue, saturation and lightness components
         */		
         rgb2hsl: function(rgb) {
-			rgb=pk.toArr(rgb);
+			rgb=oui.toArr(rgb);
             var r = rgb[0],
                 g = rgb[1],
                 b = rgb[2];
@@ -216,7 +216,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         /**
         Convert an HSL array to a RGB array
 
-            var color=pk.color.hsl2rgb([0,100,50]);
+            var color=oui.color.hsl2rgb([0,100,50]);
             // color = [255,0,0]
 
         @method hsl2rgb
@@ -224,7 +224,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         @return {Array} Returns array of red, green and blue components
         */				
         hsl2rgb: function(hsl) {
-			hsl=pk.toArr(hsl);
+			hsl=oui.toArr(hsl);
             var h = hsl[0],
                 s = hsl[1],
                 l = hsl[2],
@@ -264,7 +264,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         /**
         Convert a HEX color string to a HSL array
 
-            var color=pk.color.hex2hsl('#FF0000');
+            var color=oui.color.hex2hsl('#FF0000');
             // color = [0,100,50]
 
         @method hex2hsl
@@ -277,7 +277,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         /**
         Convert an HSL array to a HEX color string
 
-            var color=pk.color.hsl2hex([0,100,50]);
+            var color=oui.color.hsl2hex([0,100,50]);
             // color = '#FF0000'
 
         @method hsl2hex
@@ -285,13 +285,13 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         @return {String} Returns HEX color string
         */
         hsl2hex: function(hsl) {
-            return this.rgb2hex(this.hsl2rgb(pk.toArr(hsl)));
+            return this.rgb2hex(this.hsl2rgb(oui.toArr(hsl)));
         },
 		
         /**
         Convert an HSV array to HSL array
 
-            var color=pk.color.hsv2hsl([0,100,100]);
+            var color=oui.color.hsv2hsl([0,100,100]);
             // color = [0,100,50]
 
         @method hsv2hsl
@@ -299,13 +299,13 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         @return {Array} Returns array of hue, saturation and lightness components
         */
         hsv2hsl: function(hsv) {
-            return this.rgb2hsl(this.hsv2rgb(pk.toArr(hsv)));
+            return this.rgb2hsl(this.hsv2rgb(oui.toArr(hsv)));
         },
 			
         /**
         Convert an HSL array to HSV array
 
-            var color=pk.color.hsl2hsv([0,100,50]);
+            var color=oui.color.hsl2hsv([0,100,50]);
             // color = [0,100,100]
 
         @method hsl2hsv
@@ -313,13 +313,13 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         @return {Array} Returns array of hue, saturation and value components
         */
         hsl2hsv: function(hsl) {
-            return this.rgb2hsv(this.hsl2rgb(pk.toArr(hsl)));
+            return this.rgb2hsv(this.hsl2rgb(oui.toArr(hsl)));
         },			
 		
         /**
         Convert a HEX color string to a HSV array
 
-            var color=pk.color.hex2hsv('#FF0000');
+            var color=oui.color.hex2hsv('#FF0000');
             // color = [0,100,100]
 
         @method hex2hsv
@@ -332,7 +332,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         /**
         Convert an HSV array to a HEX color string
 
-            var color=pk.color.hsv2hex([0,100,100]);
+            var color=oui.color.hsv2hex([0,100,100]);
             // color = '#FF0000'
 
         @method hsv2hex
@@ -340,12 +340,12 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         @return {String} Returns HEX color string
         */
         hsv2hex: function(hsv) {
-            return this.rgb2hex(this.hsv2rgb(pk.toArr(hsv)));
+            return this.rgb2hex(this.hsv2rgb(oui.toArr(hsv)));
         },
         /**
         Generate a series of color biased (high saturation/lightness) randomized HEX color strings
 
-            var palette=pk.color.random(5);
+            var palette=oui.color.random(5);
             // palette = ["#efa6a8", "#91abb", "#ebac2c", "#2b561", "#7b4b51"]
 
         @method random
@@ -362,13 +362,13 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
 			if(hex1 && hex2){
 			 var hsv1=this.hex2hsv(hex1),
 				 hsv2=this.hex2hsv(hex2);
-				 h=pk.getRand(Math.min.apply(Math, [hsv1[0], hsv2[0]]), Math.max.apply(Math, [hsv1[0], hsv2[0]]));
-				 s=pk.getRand(Math.min.apply(Math, [hsv1[1], hsv2[1]]), Math.max.apply(Math, [hsv1[1], hsv2[1]]));
-				 v=pk.getRand(Math.min.apply(Math, [hsv1[2], hsv2[2]]), Math.max.apply(Math, [hsv1[2], hsv2[2]]));
+				 h=oui.getRand(Math.min.apply(Math, [hsv1[0], hsv2[0]]), Math.max.apply(Math, [hsv1[0], hsv2[0]]));
+				 s=oui.getRand(Math.min.apply(Math, [hsv1[1], hsv2[1]]), Math.max.apply(Math, [hsv1[1], hsv2[1]]));
+				 v=oui.getRand(Math.min.apply(Math, [hsv1[2], hsv2[2]]), Math.max.apply(Math, [hsv1[2], hsv2[2]]));
 			}else{
-				h=pk.getRand(0,360);
+				h=oui.getRand(0,360);
 				s=100;
-				v=pk.getRand(75,100);
+				v=oui.getRand(75,100);
 			}
 			
             for (i = 0; i < count; i += 1) {
@@ -380,10 +380,10 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         /**
         Generate (palette of) complementary color(s) from passed HEX color string
 		
-            var palette=pk.color.complement('#FF0000', 'split');
+            var palette=oui.color.complement('#FF0000', 'split');
             // palette = ["#80ff00", "#00ffff", "#8000ff"]
 			
-            var palette=pk.color.complement('#FF0000', 'double');
+            var palette=oui.color.complement('#FF0000', 'double');
             // palette = ["#80ff00", "#00ff40", "#00ffff", "#0040ff", "#8000ff"] 			
 		
         @method complement
@@ -417,7 +417,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         /**
         Generate triadic color palette
 		
-            var palette=pk.color.triadic('#FF0000');
+            var palette=oui.color.triadic('#FF0000');
             // palette = ["#ff0000", "#00ff00", "#0000ff"] 
 				
 		
@@ -431,7 +431,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         /**
         Generate tetradic color palette
 		
-            var palette=pk.color.triadic('#FF0000');
+            var palette=oui.color.triadic('#FF0000');
             // palette = ["#ff0000", "#80ff00", "#00ffff", "#8000ff"] 
 			
         @method tetradic
@@ -447,7 +447,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         /**
         Generate pentadic color palette
 		
-            var palette=pk.color.triadic('#FF0000');
+            var palette=oui.color.triadic('#FF0000');
             // palette = ["#ff0000", "#ccff00", "#00ff66", "#0066ff", "#cc00ff"] 
 			
         @method pentadic
@@ -472,7 +472,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         /**
         Generate a color from a percentage point between two colors
 		
-            var color=pk.color.percentage(0.5);
+            var color=oui.color.percentage(0.5);
             // color = "#f2e600";
 			
         @method percentage
@@ -484,14 +484,14 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
 		percentage:function(perc, hex1, hex2){
 			hex1=hex1 || '#ff0000';
 			hex2=hex2 || '#27ae62';	
-			var hsv1=pk.color.hex2hsv(hex1),
-				hsv2=pk.color.hex2hsv(hex2);				
-			return pk.color.hsv2hex([Math.round(hsv1[0]+perc*(hsv2[0]-hsv1[0])),Math.round(hsv1[1]+perc*(hsv2[1]-hsv1[1])),Math.round(hsv1[2]+perc*(hsv2[2]-hsv1[2]))]);
+			var hsv1=oui.color.hex2hsv(hex1),
+				hsv2=oui.color.hex2hsv(hex2);				
+			return oui.color.hsv2hex([Math.round(hsv1[0]+perc*(hsv2[0]-hsv1[0])),Math.round(hsv1[1]+perc*(hsv2[1]-hsv1[1])),Math.round(hsv1[2]+perc*(hsv2[2]-hsv1[2]))]);
 		},		
 		/**
         Scale either hue, saturation or value of a color by a percentage amount
 		
-            var scale=pk.scale.percentage(0.5);
+            var scale=oui.scale.percentage(0.5);
             // color = "#f2e600";
 			
         @method scale
@@ -513,7 +513,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
 		/**
         Lighten a color by a percentage amount
 		
-            var color=pk.color.lighten('#840000', 70);
+            var color=oui.color.lighten('#840000', 70);
             // color = "#da0000";
 			
         @method lighten
@@ -529,7 +529,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
 		/**
         Darken a color by a percentage amount
 		
-            var color=pk.color.darken('#840000', 70);
+            var color=oui.color.darken('#840000', 70);
             // color = "#da0000";
 			
         @method darken
@@ -545,7 +545,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
 		/**
         Saturate a color by a percentage amount
 		
-            var color=pk.color.saturate('#840000', 70);
+            var color=oui.color.saturate('#840000', 70);
             // color = "#820000";
 			
         @method saturate
@@ -561,7 +561,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
 		/**
         Desaturate a color by a percentage amount
 		
-            var color=pk.color.desaturate('#840000', 70);
+            var color=oui.color.desaturate('#840000', 70);
             // color = "#820000";
 			
         @method saturate
@@ -577,16 +577,16 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
         /**
         Generate algorithmic color palette
 		
-            var palette=pk.color.algorithmic ({hex:'#FF0000'});
+            var palette=oui.color.algorithmic ({hex:'#FF0000'});
             // palette = ["#ff0000", "#00ff00", "#0000ff"] 		
 		
-            var palette=pk.color.algorithmic ({hex:'#FF0000', count: 5});
+            var palette=oui.color.algorithmic ({hex:'#FF0000', count: 5});
             // palette = ["#ff0000", "#ccff00", "#00ff66", "#0066ff", "#cc00ff"]  			
 		
-            var palette=pk.color.algorithmic ({hex:'#FF0000', scope: 100, count:4});
+            var palette=oui.color.algorithmic ({hex:'#FF0000', scope: 100, count:4});
             // palette = ["#ff00d4", "#ff0047", "#ff4700", "#ffd500"]
 
-            var palette=pk.color.algorithmic ({hex:'#FF0000', type:'saturation', scope:50});
+            var palette=oui.color.algorithmic ({hex:'#FF0000', type:'saturation', scope:50});
             // palette = ["#ffffff", "#ffbfbf", "#ff8080"]
 			
         @method algorithmic

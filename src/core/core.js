@@ -56,7 +56,7 @@ For the passed event object prevent bubbling up the DOM tree
 @return {Boolean} Returns `false`
 */
 
-    pk.preventBubble = function(e) {
+    oui.preventBubble = function(e) {
         if (e.preventDefault) {
             e.preventDefault();
         }
@@ -78,16 +78,16 @@ For the passed element, toggle presence of CSS class
 */
 
 
-    pk.toggleClass = function(el, c, t) {
+    oui.toggleClass = function(el, c, t) {
         if (t === true) {
-            pk.addClass(el, c);
+            oui.addClass(el, c);
             return true;
         } else if (t === false) {
-            pk.removeClass(el, c);
+            oui.removeClass(el, c);
             return false;
         }
-        pk.toggleClass(el, c, !pk.hasClass(el, c));
-        return pk.hasClass(el, c);
+        oui.toggleClass(el, c, !oui.hasClass(el, c));
+        return oui.hasClass(el, c);
     };
 
 /**
@@ -98,7 +98,7 @@ For the passed element, detect presence of CSS class
 @return {Boolean} `true` if class found, `false` if not.
 */
 
-    pk.hasClass = function(el, c) {
+    oui.hasClass = function(el, c) {
         var ca = el.getAttribute('class') || '';
         return (ca && ca.indexOf(c) > -1) ? true : false;
     };
@@ -109,7 +109,7 @@ For the passed element, center horizontally and vertically within the parentNode
 @return {Object} Returns passed DOM element
 @chainable
 */    
-    pk.center = function(el) {
+    oui.center = function(el) {
         el.style.top = el.parentNode.clientHeight / 2 - (el.offsetHeight / 2) + 'px';
         el.style.left = el.parentNode.clientWidth / 2 - (el.offsetWidth / 2) + 'px';
    return el;
@@ -121,7 +121,7 @@ For the passed element, get the passed style property value
 @return {String} Returns style property value
 */   
     };
-    pk.getStyle = function(el, p) {
+    oui.getStyle = function(el, p) {
         return window.getComputedStyle(el).getPropertyValue(p);
     };
 
@@ -134,8 +134,8 @@ For the passed element, add CSS class
 @return {Object} Returns passed DOM element
 @chainable
 */  
-    pk.addClass = function(el, c) {
-        if (pk.hasClass(el, c)) {
+    oui.addClass = function(el, c) {
+        if (oui.hasClass(el, c)) {
             return;
         }
         var ca = el.getAttribute('class') || '';
@@ -150,7 +150,7 @@ For the passed element, remove CSS class
 @return {Object} Returns passed DOM element
 @chainable
 */  
-    pk.removeClass = function(el, c) {
+    oui.removeClass = function(el, c) {
         var ca = el.getAttribute('class');
         if (!ca) {
             return;
@@ -171,7 +171,7 @@ Bind an element handler to a DOM node
 @return {Object} Returns passed DOM element
 @chainable
 */      
-    pk.bindEvent = function(e, el, fn) {
+    oui.bindEvent = function(e, el, fn) {
         if (e === "mousewheel") {
             e = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel"; //FF doesn't recognize mousewheel as of FF3.x  
         }
@@ -191,7 +191,7 @@ Unbind an element handler from a DOM node
 @return {Object} Returns passed DOM element
 @chainable
 */      
-	pk.unbindEvent = function(e, el, fn) {
+	oui.unbindEvent = function(e, el, fn) {
 		if (el.removeEventListener){
 			el.removeEventListener (e,fn,false);
 		}
@@ -208,8 +208,8 @@ Calculate positioning properties of passed DOM element, optionally augment passe
 @param [event] {Object} Event
 @return {Object} Returns object consisting of `top`, `right`, `bottom`, `left`, `height` and `width` values as well as sub `offset` and `parent` objects
 */  
-	pk.layout=function(el, e){
-		if(e){e=pk.procEvent(e);}
+	oui.layout=function(el, e){
+		if(e){e=oui.procEvent(e);}
 		var p={
 			offset:el.getBoundingClientRect(),
 			parent:{ 
@@ -232,10 +232,10 @@ Apply a series of event listeners to a DOM element
 @return {Object} Returns passed DOM element
 @chainable
 */ 
-    pk.bindListeners = function(l, el) {
+    oui.bindListeners = function(l, el) {
         for (var e in l) {
 			if(l.hasOwnProperty(e)){
-				pk.bindEvent(e, el, l[e]);
+				oui.bindEvent(e, el, l[e]);
 			}
         }
         return el;
@@ -247,7 +247,7 @@ Generate a random number between the passed `min` and `max` values
 @param max {Number} Maximum value of calculated number
 @return {Number} Returns pseudo-random number between §min§ and §max§
 */     
-    pk.getRand = function(min, max) {
+    oui.getRand = function(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
     };
 /**
@@ -256,7 +256,7 @@ Extract unit type from passed string
 @param String {String} Alphanumeric string (e.g. style property value)
 @return {String} Returns unit type
 */         
-    pk.getUnits = function(str) {
+    oui.getUnits = function(str) {
         return str.replace(/\d+/, '');
     };
 	
@@ -272,7 +272,7 @@ Finds matching DOM elements within passed DOM element
 @param [opt.attribute.value] {String} Attribute value to filter
 @return {Array} Returns matching DOM elements
 */     
-    pk.findEl = function(el, opt) {		
+    oui.findEl = function(el, opt) {		
 	
 	 var nodes=[],
 		 nType=opt.type || null,
@@ -285,7 +285,7 @@ Finds matching DOM elements within passed DOM element
 				if(nType && treeWalker.currentNode.tagName.toLowerCase()!==nType.toLowerCase()){
 					match=false;
 				}
-				if(nClass && !pk.hasClass(treeWalker.currentNode, nClass)){
+				if(nClass && !oui.hasClass(treeWalker.currentNode, nClass)){
 					match=false;
 				}
 				if(
@@ -309,8 +309,8 @@ Wrap the passed DOM element in a new DOM node created from the `wrapper` string
 @return {Object} Returns newly created DOM wrapper element
 @chainable
 */     
-    pk.wrapEl = function(el, str) {
-        var helperEl = pk.createEl(str);
+    oui.wrapEl = function(el, str) {
+        var helperEl = oui.createEl(str);
         el.parentNode.insertBefore(helperEl, el);
         helperEl.appendChild(el);
         return helperEl;
@@ -323,7 +323,7 @@ Create a new DOM element from the passed `HTML` string (SVG agnostic)
 @chainable
 */  
 	
-	pk.createEl = function(str, attr) {
+	oui.createEl = function(str, attr) {
 		var el = document.createElement('div');    
 		if (['<g', '<path', '<line', '<circle', '<rect'].some(function(v) { return str.indexOf(v) >= 0; })) {    
 			el.innerHTML = '<svg>' + str + '</svg>';
@@ -341,7 +341,7 @@ Get the index of the passed DOM node within the immediate parent
 @param element {Object} DOM element to return index for
 @return {Number} Returns index of passed element
 */  
-    pk.getIndex = function(el) {
+    oui.getIndex = function(el) {
         if (!el) {
             return null;
         }
@@ -360,8 +360,8 @@ Replace the passed DOM element with a new element created from the passed string
 @return {Object} Returns newly created DOM element
 @chainable
 */  
-    pk.replaceEl = function(el, str, clean) {
-        var newEl = pk.createEl(str);
+    oui.replaceEl = function(el, str, clean) {
+        var newEl = oui.createEl(str);
         for (var i = 0; i < el.attributes.length; i++) {
             newEl.setAttribute(el.attributes[i].nodeName, el.attributes[i].value);
         }
@@ -378,7 +378,7 @@ Forces the passed variable into an array, xploding comma seperated strings, keep
 @param variable {Undefined} Variable to force into array
 @return {Array} Returns array of passed variable
 */  
-    pk.toArr = function(v) {	
+    oui.toArr = function(v) {	
         var a = [];
         if (v && typeof v !== "object") {
             if (v.indexOf(',') !== -1) {
@@ -399,10 +399,10 @@ Collides two arrays, either replacing one with the other, removing one from anot
 @param [type=0] {Number} Type of collision, `0` default, replace `array1` with `array2`, `1` add `array2` to `array1`, `2` remove `array2` from `array1`, `3` toggle `array2` values in `array1` (intelligent add/replace)
 @return {Array} Returns resulting `array`
 */  
-    pk.collide = function(a1, a2, s) {
+    oui.collide = function(a1, a2, s) {
         s = s || 0;
-        a1 = pk.toArr(a1);
-        a2 = pk.toArr(a2);
+        a1 = oui.toArr(a1);
+        a2 = oui.toArr(a2);
         /* 
             s = switch
             0 (default) = replace a1 with a2
@@ -430,7 +430,7 @@ Returns normalized percentage value
 @param Total {Float} total (out of)
 @return {Float} Returns noramlized percentage value between 1 and 0
 */ 	
-    pk.perc = function(v,t) {
+    oui.perc = function(v,t) {
         v=v/t;
 		v = v < 0 ? 0 : v;
 		v = v > 1 ? 1 : v;		
@@ -445,7 +445,7 @@ Gets of sets attribute values, either explicitly or implicitly declared
 @return {Object} Returns `element`
 @chainable
 */ 
-    pk.attribute = function(el, attr, val) {
+    oui.attribute = function(el, attr, val) {
         if (typeof el !== "object") {
             return false;
         }
@@ -483,7 +483,7 @@ Augments event object with additional X and Y helper coordinates
 @param event {Object} Event to normalize
 @return {Object} Returns object with the additional attributes `posX`, `posY` are normalized absolutes, `offsetX`, offsetY` are normalized parent offsets, `viewportX`, `viewportY` are normalized viewport offsets
 */     
-    pk.procEvent=function(e){
+    oui.procEvent=function(e){
         e.posX = 0;
         e.posY = 0;
         if (!e) {e = window.event;}
@@ -511,12 +511,12 @@ Gets browser agnostic offset coordinates for applicable mouse events
 @param event {Object} Event to normalize
 @return {Object} Returns object comprising of normalized `x` and `y` offsets
 */ 
-	pk.getEventOffset=function(e){
+	oui.getEventOffset=function(e){
 		return {
 			x:e.offsetX===undefined?e.layerX:e.offsetX,
 			y:e.offsetY===undefined?e.layerY:e.offsetY
 		};
 	};
 	
-    window.onload=function(){pk.addClass(document.body, 'pk-ui');};
+    window.onload=function(){oui.addClass(document.body, 'oui-ui');};
 })(pk);

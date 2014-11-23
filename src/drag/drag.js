@@ -8,7 +8,7 @@ HTML:
 
 Javascript:
 	
-	pk.drag({
+	oui.drag({
 		element: document.getElementById('draggable'),
 		move: true,
 		container:{
@@ -28,7 +28,7 @@ Javascript:
 		}
 	});
 
-@class pk.drag
+@class oui.drag
 @constructor
 @param options {Object}
 @param options.element {Object} DOM element to attach drag handlers to
@@ -42,7 +42,7 @@ Javascript:
 @chainable
 */
 (function(pk) {
-    pk.drag = function(opt) {
+    oui.drag = function(opt) {
         var el = opt.element;
         var handle = opt.handle || opt.element;
         var container = {
@@ -50,7 +50,7 @@ Javascript:
             style: opt.container && opt.container.style ? opt.container.style : 'restrict'
         };
 
-        pk.addClass(handle, 'pk-drag');
+        oui.addClass(handle, 'oui-drag');
         var fn = opt.listeners;
         var m = opt.move;
         if (m && typeof m !== 'object') {
@@ -77,8 +77,8 @@ Javascript:
                     y: e.dragEnd.y - e.dragStart.y
                 };
                 e.dragPerc = {
-                    x: ( e.dragDist.x + e.dragOffset.x) / pk.layout(container.element).width,
-                    y: ( e.dragDist.y + e.dragOffset.y) / pk.layout(container.element).height
+                    x: ( e.dragDist.x + e.dragOffset.x) / oui.layout(container.element).width,
+                    y: ( e.dragDist.y + e.dragOffset.y) / oui.layout(container.element).height
                 };
                 return e;
             }
@@ -102,7 +102,7 @@ Javascript:
         @param element {Object} Element event fired on
         @param event {Object} Event object
         */
-        pk.bindEvent("mousedown", handle, function(e) {
+        oui.bindEvent("mousedown", handle, function(e) {
             dragging = true;
             dragStart = {
                 x: e.clientX,
@@ -113,8 +113,8 @@ Javascript:
                 y: e.clientY - el.getBoundingClientRect().top
             };
             e = augmentEvent(e);
-            pk.addClass(handle, 'pk-drag-dragging');
-            pk.addClass(document.body, 'pk-noselect');
+            oui.addClass(handle, 'oui-drag-dragging');
+            oui.addClass(document.body, 'oui-noselect');
             document.onselectstart = function() {
                 return false;
             };
@@ -122,14 +122,14 @@ Javascript:
                 fn.dragstart(el, e);
             }
         });
-        pk.bindEvent("mouseup", window, function(e) {
+        oui.bindEvent("mouseup", window, function(e) {
             if (!dragging) {
                 return;
             }
             dragging = false;
             e = augmentEvent(e);
-            pk.removeClass(handle, 'pk-drag-dragging');
-            pk.removeClass(document.body, 'pk-noselect');
+            oui.removeClass(handle, 'oui-drag-dragging');
+            oui.removeClass(document.body, 'oui-noselect');
             document.onselectstart = function() {
                 return true;
             };
@@ -160,7 +160,7 @@ Javascript:
                 el.style.top = h - el.offsetHeight - oY + 'px';
             }
         }
-        pk.bindEvent("mousemove", window, function(e) {
+        oui.bindEvent("mousemove", window, function(e) {
             if (!dragging) {
                 return;
             }

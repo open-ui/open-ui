@@ -9,12 +9,12 @@ HTML
 Javascript:
 
 	function showNotification(){
-		pk.notify.push({
+		oui.notify.push({
 			content:'Default message'
 		});
 	}
 
-@class pk.notify
+@class oui.notify
 @static
 */
 
@@ -33,22 +33,22 @@ Remove a notification
 @param element {Object} Notification element to remove
 */
 (function(pk) {
-    var nEl = pk.createEl("<ul class='pk-notify'></ul>");
+    var nEl = oui.createEl("<ul class='oui-notify'></ul>");
     document.body.appendChild(nEl);
-    pk.notify = {
+    oui.notify = {
         add: function(opt) {
-            var mEl = pk.createEl("<li tabindex='" + pk.getRand(1, 999) + "'>" + opt.content + "</li>"),
+            var mEl = oui.createEl("<li tabindex='" + oui.getRand(1, 999) + "'>" + opt.content + "</li>"),
                 delay = opt.delay || 8000;
             nEl.appendChild(mEl);
             setTimeout(function() {
-                pk.addClass(mEl, 'pk-show');
+                oui.addClass(mEl, 'oui-show');
             }, 10);
             var scope = this;
             setTimeout(function() {
                 scope.remove(mEl);
             }, delay);
 
-            pk.bindEvent('click', mEl, function() {
+            oui.bindEvent('click', mEl, function() {
                 scope.remove(mEl);
             });
             return {
@@ -56,10 +56,10 @@ Remove a notification
             };
         },
         remove: function(dEl) {
-            if (!pk.hasClass(dEl, 'pk-show')) {
+            if (!oui.hasClass(dEl, 'oui-show')) {
                 return;
             }
-            pk.removeClass(dEl, 'pk-show');
+            oui.removeClass(dEl, 'oui-show');
             setTimeout(function() {
                 if (dEl) {
                     nEl.removeChild(dEl);

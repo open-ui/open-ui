@@ -8,24 +8,24 @@ HTML
 
 Javascript
 
-	pk.datepicker({
+	oui.datepicker({
 		element: document.getElementById('datepicker')
 	});	
 			
 	
-@class pk.datepicker
+@class oui.datepicker
 @constructor
 @param options {Object}
 @param options.element {Object} DOM element to convert to control
 @param [options.value=0] {String} Value of initially selected option, defaults to the attribute value set on the passed element, or `0`
-@param [options.name=pk-select-RandInt] {String} Name of underlying input control, defaults to the attribute value set on the passed element, or `pk-select-RandInt`
+@param [options.name=oui-select-RandInt] {String} Name of underlying input control, defaults to the attribute value set on the passed element, or `oui-select-RandInt`
 @param [options.tabindex=0] {Number} Tabindex of control, defaults to the attribute value set on the passed element, or `0`
 @param [options.disabled=false] {Boolean} Disabled state of control, defaults to the attribute value set on the passed element, or `false`
 @return Object {Object} Consisting of original DOM element (item `0`) and class methods (see below)
 @chainable
 */
 (function(pk) {
-    pk.datepicker = function(opt) {
+    oui.datepicker = function(opt) {
 		var y = opt.year || 2014,
 			m = opt.month || 11,
 			d = opt.day || 1,
@@ -37,7 +37,7 @@ Javascript
 			month={
 				m:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']		
 			},
-			tpl="<div class='pk-datepicker'></div>",			
+			tpl="<div class='oui-datepicker'></div>",			
 			el=opt.element,
 			yearEl=null,
 			yearsEl=null,
@@ -46,7 +46,7 @@ Javascript
 			sD=0,
 			eD=0,
 			pD=0;
-		el=pk.replaceEl(el, tpl);		
+		el=oui.replaceEl(el, tpl);		
 		function parseDate(){
 			function normalizeDay(v){
 				if(v===0){
@@ -84,9 +84,9 @@ Javascript
 				if(c>=sD && c<=eD+sD-1){
 					tpl+="<td data-day='"+(c-sD+1)+"'>"+(c-sD+1)+"</td>";
 				}else if(c<sD){
-					tpl+="<td class='pk-prev' data-day='"+(pD-(sD-c-1))+"' data-month='"+(m-2 < 0 ? 11 : m-2)+"' "+(m-2 < 0 ? "data-year='"+(y-1)+"'": '')+">"+(pD-(sD-c-1))+"</td>"; 
+					tpl+="<td class='oui-prev' data-day='"+(pD-(sD-c-1))+"' data-month='"+(m-2 < 0 ? 11 : m-2)+"' "+(m-2 < 0 ? "data-year='"+(y-1)+"'": '')+">"+(pD-(sD-c-1))+"</td>"; 
 				}else{
-					tpl+="<td class='pk-next' data-day='"+(c-sD-eD+1)+"' data-month='"+(m===12 ? 0 : m)+"' "+(m===12 ? "data-year='"+(y+1)+"'": '')+">"+(c-sD-eD+1)+"</td>"; 
+					tpl+="<td class='oui-next' data-day='"+(c-sD-eD+1)+"' data-month='"+(m===12 ? 0 : m)+"' "+(m===12 ? "data-year='"+(y+1)+"'": '')+">"+(c-sD-eD+1)+"</td>"; 
 				}
 				if(c%7 === 6){
 					tpl+="</tr>";
@@ -112,26 +112,26 @@ Javascript
 			yearsEl.innerHTML=tpl;
 		}
 		
-		metaEl=pk.createEl("<div class='pk-datepicker-meta'>"+666+"</div>");
+		metaEl=oui.createEl("<div class='oui-datepicker-meta'>"+666+"</div>");
 		el.appendChild(metaEl);			
-		yearEl=pk.createEl("<div class='pk-datepicker-year'>"+y+"</div>");
+		yearEl=oui.createEl("<div class='oui-datepicker-year'>"+y+"</div>");
 		el.appendChild(yearEl);
 		
-		tpl="<ul class='pk-datepicker-month'>";
+		tpl="<ul class='oui-datepicker-month'>";
 		for(var n=0;n<12;n++){		
 			tpl+="<li data-month='"+n+"'>"+month.m[n]+"</li>";
 		}
 		tpl+="</ul>";
-		monthEl=pk.createEl(tpl);
+		monthEl=oui.createEl(tpl);
 		el.appendChild(monthEl);	
 		
 		
-		tpl="<table class='pk-datepicker-day'></table>";
-		daysEl=pk.createEl(tpl);
+		tpl="<table class='oui-datepicker-day'></table>";
+		daysEl=oui.createEl(tpl);
 		el.appendChild(daysEl);		
 		
 			
-		yearsEl=pk.createEl("<table class='pk-datepicker-years'></table>");
+		yearsEl=oui.createEl("<table class='oui-datepicker-years'></table>");
 		el.appendChild(yearsEl); 
 		createYears();
 		
@@ -149,9 +149,9 @@ Javascript
 		}		
 		function setMonth(){		
 			for(var n=0;n<12;n++){			
-				pk.removeClass(monthEl.children[n], 'selected');
+				oui.removeClass(monthEl.children[n], 'selected');
 			}
-			pk.addClass(monthEl.children[m-1], 'selected');
+			oui.addClass(monthEl.children[m-1], 'selected');
 			createDays();	
 		}
 		function setDay(){	
@@ -159,33 +159,33 @@ Javascript
 			for(w=0;w<6;w++){
 				for(c=0;c<7;c++){
 					i++;	 				
-					pk.removeClass(daysEl.children[1].children[w].children[c], 'selected');
+					oui.removeClass(daysEl.children[1].children[w].children[c], 'selected');
 					if(i===sD+d){
-						pk.addClass(daysEl.children[1].children[w].children[c], 'selected');
+						oui.addClass(daysEl.children[1].children[w].children[c], 'selected');
 					}
 				}		
 			}
 		}				
 		function resolveClick(e){
 			var tEl=e.target;
-			if(pk.attribute(tEl, 'year')!==null){ 			
-				y=parseInt(pk.attribute(tEl, 'year'),0);	
+			if(oui.attribute(tEl, 'year')!==null){ 			
+				y=parseInt(oui.attribute(tEl, 'year'),0);	
 				setYear();		
 			}			
-			if(pk.attribute(tEl, 'month')!==null){
-				m=parseInt(pk.attribute(tEl, 'month'),0)+1;		
+			if(oui.attribute(tEl, 'month')!==null){
+				m=parseInt(oui.attribute(tEl, 'month'),0)+1;		
 				setMonth();				
 			}
-			if(pk.attribute(tEl, 'day')!==null){ 			
-				d=parseInt(pk.attribute(tEl, 'day'),0);		
+			if(oui.attribute(tEl, 'day')!==null){ 			
+				d=parseInt(oui.attribute(tEl, 'day'),0);		
 				setDay();
 			}
 			setMeta();
 		}
-		pk.bindEvent('click', el, resolveClick);	
+		oui.bindEvent('click', el, resolveClick);	
 
-		pk.bindEvent("mousewheel", yearEl, function(e) { 
-			pk.preventBubble(e);
+		oui.bindEvent("mousewheel", yearEl, function(e) { 
+			oui.preventBubble(e);
 			if (e.wheelDelta > 0 || e.detail < 0) {
 				y++;
             }else{ 
@@ -194,8 +194,8 @@ Javascript
 			setYear();
 			setMeta();
 		});		
-		pk.bindEvent("mousewheel", monthEl, function(e) { 
-			pk.preventBubble(e);
+		oui.bindEvent("mousewheel", monthEl, function(e) { 
+			oui.preventBubble(e);
 			if (e.wheelDelta > 0 || e.detail < 0) {
 				d=d > parseDate().nextend ? parseDate().nextend : d;
 				if(m===12){
@@ -216,8 +216,8 @@ Javascript
 			setYear();
 			setMeta();
 		});
-		pk.bindEvent("mousewheel", daysEl, function(e) { 
-		 	pk.preventBubble(e); 
+		oui.bindEvent("mousewheel", daysEl, function(e) { 
+		 	oui.preventBubble(e); 
 			if (e.wheelDelta > 0 || e.detail < 0) {
 				if(d===eD){				
 					d=1;

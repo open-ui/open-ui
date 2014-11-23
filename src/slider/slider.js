@@ -8,7 +8,7 @@ HTML:
 	
 Javascript:
 
-	pk.slider({
+	oui.slider({
 		element: document.getElementById('slider'),
 		units: 'mm',
 		min: 30,
@@ -16,7 +16,7 @@ Javascript:
 		value: 133
 	});
 	
-@class pk.slider
+@class oui.slider
 @constructor
 @param options {Object}
 @param options.element {Object} DOM element to convert to control
@@ -25,7 +25,7 @@ Javascript:
 @param [options.min=0] {Number} Minimum value
 @param [options.max=100] {Number} Maximum value
 @param [options.decimals=0] {Number} Number of decimal places
-@param [options.name=pk-slider-RandInt] {String} Name of underlying input control, defaults to the attribute value set on the passed element, or `pk-slider-RandInt`
+@param [options.name=oui-slider-RandInt] {String} Name of underlying input control, defaults to the attribute value set on the passed element, or `oui-slider-RandInt`
 @param [options.tabindex=0] {Number} Tabindex of control, defaults to the attribute value set on the passed element, or `0`
 @param [options.disabled=false] {Boolean} Disabled state of control, defaults to the attribute value set on the passed element, or `false`
 @param [options.listeners] {Object} Object array of event listeners to bind to underlying input(s)
@@ -37,7 +37,7 @@ Javascript:
 @chainable
 */
 (function(pk) {
-    pk.slider = function(opt) {
+    oui.slider = function(opt) {
         var el = opt.element,
             units = opt.units === undefined ? '' : opt.units,
             listeners = opt.listeners === undefined ? {} : opt.listeners,
@@ -48,7 +48,7 @@ Javascript:
             range = Math.abs(max - min),
             inputValue = opt.value || el.getAttribute('value') || 0,
             inputDisabled = (opt.disabled || el.getAttribute('disabled')) ? 'disabled' : '',
-            inputName = opt.name || el.getAttribute('name') || 'pk-slider-' + pk.getRand(1, 999),
+            inputName = opt.name || el.getAttribute('name') || 'oui-slider-' + oui.getRand(1, 999),
             inputTabIndex = opt.tabindex || el.getAttribute('tabindex') || 0,
 			circle = opt.circle || false;
 			// circle=false;
@@ -68,12 +68,12 @@ Javascript:
             axis = "x";
         }
 
-        var tpl = "<div class='pk-slider pk-slider-" + axis + " " + (inputDisabled ? 'pk-disabled' : '') + " " +(circle ? 'pk-slider-circle': '') + "' tabindex='" + inputTabIndex + "'>\
+        var tpl = "<div class='oui-slider oui-slider-" + axis + " " + (inputDisabled ? 'oui-disabled' : '') + " " +(circle ? 'oui-slider-circle': '') + "' tabindex='" + inputTabIndex + "'>\
             <input type='hidden' name='" + inputName + "' " + inputDisabled + " value='" + inputValue + "'/>\
         </div>";
 		
-        el = pk.replaceEl(el, tpl);
-		var l=pk.layout(el);
+        el = oui.replaceEl(el, tpl);
+		var l=oui.layout(el);
 		var d = l.height > l.width ? l.width : l.height;
 		function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
 		  var angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
@@ -89,26 +89,26 @@ Javascript:
 				startAngle=endAngle-(circle.length / 2);
 				endAngle=endAngle+(circle.length / 2);
 			}
-			return pk.svg.arcPath(x, y, radius, startAngle, endAngle);       
+			return oui.svg.arcPath(x, y, radius, startAngle, endAngle);       
 		}
 		var pathEl='';
 		var innerTpl='';
 		if(circle){			
 			innerTpl="<svg height='"+d+"' width='"+d+"' xmlns='http://www.w3.org/2000/svg' version='1.1'>\
-			   <circle class='pk-slider-circle' cx='"+d/2+"' cy='"+d/2+"' r='"+((d-Math.max(circle.stroke.inner, circle.stroke.outer))/2)+"' stroke='black' stroke-width='"+circle.stroke.outer+"' fill='none' />\
+			   <circle class='oui-slider-circle' cx='"+d/2+"' cy='"+d/2+"' r='"+((d-Math.max(circle.stroke.inner, circle.stroke.outer))/2)+"' stroke='black' stroke-width='"+circle.stroke.outer+"' fill='none' />\
 			   <path x='"+d/2+"' y='"+d/2+"' fill='none' d='' stroke-width='"+circle.stroke.inner+"'/>\
 			</svg>";
-			el.appendChild(pk.createEl(innerTpl));
-			el.appendChild(pk.createEl("<span class='pk-slider-monitor'><span class='pk-slider-value'></span><span class='pk-slider-units'></span></span>"));
+			el.appendChild(oui.createEl(innerTpl));
+			el.appendChild(oui.createEl("<span class='oui-slider-monitor'><span class='oui-slider-value'></span><span class='oui-slider-units'></span></span>"));
 			
 			pathEl = el.children[1].childNodes[3]; 
-			pk.attribute(pathEl, 'd', describeArc(d/2, d/2, (d-Math.max(circle.stroke.inner, circle.stroke.outer))/2, 0, 360));	
+			oui.attribute(pathEl, 'd', describeArc(d/2, d/2, (d-Math.max(circle.stroke.inner, circle.stroke.outer))/2, 0, 360));	
 		}else{
 			// get biggest dimension
-			innerTpl="<div class='pk-slider-bar pk-animated'>\
-                <span class='pk-slider-value'></span><span class='pk-slider-units'></span>\
+			innerTpl="<div class='oui-slider-bar oui-animated'>\
+                <span class='oui-slider-value'></span><span class='oui-slider-units'></span>\
             </div>";
-			el.appendChild(pk.createEl(innerTpl));
+			el.appendChild(oui.createEl(innerTpl));
 		}
 		
         var indicatorEl = circle ? el.children[1].childNodes[1] : el.children[1],
@@ -136,8 +136,8 @@ Javascript:
         @param element {Object} Element event fired on
         @param event {Object} Event object
         */
-        pk.bindListeners(listeners, inputEl);
-        pk.drag({
+        oui.bindListeners(listeners, inputEl);
+        oui.drag({
             element: el,
             contain: {
                 element: el
@@ -149,7 +149,7 @@ Javascript:
                         return false;
                     }			
 					var perc=0;
-				    var p =pk.layout(el,e);
+				    var p =oui.layout(el,e);
 					if(circle){
 						var origin={
 							x:p.left+(p.width/2),
@@ -162,7 +162,7 @@ Javascript:
 						}		
 						perc=perc/360;						
 					}else{
-						perc = axis === "x" ? (e.dragDist.x + e.dragOffset.x) / pk.layout(el).width : 1 - (e.dragDist.y + e.dragOffset.y) / pk.layout(el).height;
+						perc = axis === "x" ? (e.dragDist.x + e.dragOffset.x) / oui.layout(el).width : 1 - (e.dragDist.y + e.dragOffset.y) / oui.layout(el).height;
 						perc = perc < 0 ? 0 : perc;
 						perc = perc > 1 ? 1 : perc;
 						
@@ -180,7 +180,7 @@ Javascript:
                     if (listeners && listeners.slidestart) {
                         listeners.slidestart(el, e);
                     }
-                    pk.removeClass(indicatorEl, 'pk-animated');
+                    oui.removeClass(indicatorEl, 'oui-animated');
                 },
                 dragend: function(el, e) {
                     if (obj.disabled()) {
@@ -189,18 +189,18 @@ Javascript:
                     if (listeners && listeners.slideend) {
                         listeners.slideend(el, e);
                     }
-                    pk.addClass(indicatorEl, 'pk-animated');
+                    oui.addClass(indicatorEl, 'oui-animated');
                 }
             }
         });
 		
-        pk.bindEvent('click', el, function(e) {
+        oui.bindEvent('click', el, function(e) {
             if (obj.disabled()) {
                 return false;
             }
 			var perc=0;
 			if(circle){			
-				var p =pk.layout(el,e);
+				var p =oui.layout(el,e);
 				var origin={
 					x:p.left+(p.width/2),
 					y:p.top+(p.height/2)
@@ -212,12 +212,12 @@ Javascript:
 				}		
 				perc=perc/360;					
 			}else{
-				perc = axis === "x" ? ((e.clientX - el.getBoundingClientRect().left) / pk.layout(el).width) : 1 - ((e.clientY - el.getBoundingClientRect().top) / pk.layout(el).height);
+				perc = axis === "x" ? ((e.clientX - el.getBoundingClientRect().left) / oui.layout(el).width) : 1 - ((e.clientY - el.getBoundingClientRect().top) / oui.layout(el).height);
 			}
             obj.val(min + Math.round(perc * range));
         });
-        pk.bindEvent("mousewheel", el, function(e) {
-            pk.preventBubble(e);
+        oui.bindEvent("mousewheel", el, function(e) {
+            oui.preventBubble(e);
             if (obj.disabled()) {
                 return false;
             }
@@ -250,7 +250,7 @@ Javascript:
                 val = val > max ? max : val;
                 inputEl.value = val;
 				if(circle){  
-					pk.attribute(pathEl, 'd', describeArc(d/2, d/2, (d-Math.max(circle.stroke.inner, circle.stroke.outer))/2, 0, (val - min) *360 / range));						
+					oui.attribute(pathEl, 'd', describeArc(d/2, d/2, (d-Math.max(circle.stroke.inner, circle.stroke.outer))/2, 0, (val - min) *360 / range));						
 				}else{
 					if (axis === "x") {
 						indicatorEl.style.width = (val - min) * 100 / range + '%';
@@ -266,10 +266,10 @@ Javascript:
             },
             disabled: function(val) {
                 if (val !== undefined) {
-                    pk.toggleClass(el, 'pk-disabled', val);
-                    pk.attribute(inputEl, 'disabled', val);
+                    oui.toggleClass(el, 'oui-disabled', val);
+                    oui.attribute(inputEl, 'disabled', val);
                 }
-                return pk.attribute(inputEl, 'disabled');
+                return oui.attribute(inputEl, 'disabled');
             }
         };
         obj.val(inputValue, true);

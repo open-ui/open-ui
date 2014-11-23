@@ -8,7 +8,7 @@ HTML
 
 Javascript:
 
-	pk.colorpicker({
+	oui.colorpicker({
 		element: document.getElementById('colorpicker'),
 		value:'#FF0000',
 		listeners:{
@@ -18,7 +18,7 @@ Javascript:
 		}
 	});
 	
-@class pk.colorpicker
+@class oui.colorpicker
 @constructor
 @param options {Object}
 @param options.element {Object} DOM element to convert to control 
@@ -28,23 +28,23 @@ Javascript:
 @chainable
 */
 (function(pk) {
-    pk.colorpicker = function(opt) {
+    oui.colorpicker = function(opt) {
 
 
         var type = (window.SVGAngle || document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1") ? "SVG" : "VML"),
             listeners = opt.listeners === undefined ? {} : opt.listeners,
             el = opt.element,
             value = opt.value || '#000000',
-            tpl = "<div class='pk-colorpicker'>\
-				<div class='pk-colorpicker-area'>\
-					<div class='pk-colorpicker-slPicker'></div>\
+            tpl = "<div class='oui-colorpicker'>\
+				<div class='oui-colorpicker-area'>\
+					<div class='oui-colorpicker-slPicker'></div>\
 				</div>\
-				<div class='pk-colorpicker-range'>\
-					<div class='pk-colorpicker-hPicker'></div>\
+				<div class='oui-colorpicker-range'>\
+					<div class='oui-colorpicker-hPicker'></div>\
 				</div>\
 			</div>";
 
-        el = pk.replaceEl(el, tpl);
+        el = oui.replaceEl(el, tpl);
         var areaTpl, areaEl, rangeTpl, rangeEl;
         if (type === 'SVG') {
             areaTpl = "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='100%' height='100%'>\
@@ -101,8 +101,8 @@ Javascript:
 
 
 
-        areaEl = pk.createEl(areaTpl);
-        rangeEl = pk.createEl(rangeTpl);
+        areaEl = oui.createEl(areaTpl);
+        rangeEl = oui.createEl(rangeTpl);
         el.children[0].appendChild(areaEl);
         el.children[1].appendChild(rangeEl);
 
@@ -120,10 +120,10 @@ Javascript:
             var x = c.x,
                 y = c.y,
                 pEl = rEl.parentNode,
-                pH = pk.layout(pEl).height,
-                pW = pk.layout(pEl).width,
-                h = pk.layout(rEl).height,
-                w = pk.layout(rEl).width,
+                pH = oui.layout(pEl).height,
+                pW = oui.layout(pEl).width,
+                h = oui.layout(rEl).height,
+                w = oui.layout(rEl).width,
                 prevCol = color;
 
             if (x) {
@@ -158,36 +158,36 @@ Javascript:
             if (rEl === lightnessEl) {
                 hsv.s = Math.round(c.x * 100);
                 hsv.v = Math.round((1 - c.y) * 100);
-                color = pk.color.hsv2hex([hsv.h, hsv.s, hsv.v]);
+                color = oui.color.hsv2hex([hsv.h, hsv.s, hsv.v]);
             }
             if (rEl === hueEl) {
                 hsv.h = Math.round(c.y * 360);
-                color = pk.color.hsv2hex([hsv.h, hsv.s, hsv.v]);
-                lightnessEl.parentNode.style.backgroundColor = pk.color.hsv2hex([hsv.h, 100, 100]);
+                color = oui.color.hsv2hex([hsv.h, hsv.s, hsv.v]);
+                lightnessEl.parentNode.style.backgroundColor = oui.color.hsv2hex([hsv.h, 100, 100]);
             }
             if (listeners.change && typeof listeners.change === 'function') {
                 listeners.change(prevCol, color);
             }
         }
-        pk.bindEvent('click', lightnessEl.parentNode, function(e) {
+        oui.bindEvent('click', lightnessEl.parentNode, function(e) {
             if (e.target === lightnessEl) {
                 return;
             }
             resolvePos(lightnessEl, {
-                x: (pk.getEventOffset(e).x - pk.layout(lightnessEl).width / 2) / pk.layout(lightnessEl.parentNode).width,
-                y: (pk.getEventOffset(e).y - pk.layout(lightnessEl).height / 2) / pk.layout(lightnessEl.parentNode).width
+                x: (oui.getEventOffset(e).x - oui.layout(lightnessEl).width / 2) / oui.layout(lightnessEl.parentNode).width,
+                y: (oui.getEventOffset(e).y - oui.layout(lightnessEl).height / 2) / oui.layout(lightnessEl.parentNode).width
             });
         });
-        pk.bindEvent('click', hueEl.parentNode, function(e) {
+        oui.bindEvent('click', hueEl.parentNode, function(e) {
             if (e.target === hueEl) {
                 return;
             }
             resolvePos(hueEl, {
                 x: false,
-                y: pk.getEventOffset(e).y / pk.layout(hueEl.parentNode).height
+                y: oui.getEventOffset(e).y / oui.layout(hueEl.parentNode).height
             });
         });
-        pk.drag({
+        oui.drag({
             element: hueEl.parentNode,
             move: false,
             container: {
@@ -203,7 +203,7 @@ Javascript:
             }
         });
 
-        pk.drag({
+        oui.drag({
             element: lightnessEl.parentNode,
             move: false,
             container: {
@@ -235,7 +235,7 @@ Javascript:
                 if (!val) {
                     return color;
                 }
-                var hsvArr = pk.color.hex2hsv(val);
+                var hsvArr = oui.color.hex2hsv(val);
                 hsv = {
                     h: hsvArr[0],
                     s: hsvArr[1],

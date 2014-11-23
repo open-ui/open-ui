@@ -8,7 +8,7 @@ HTML
 
 Javascript:
 
-	pk.chart({
+	oui.chart({
 		element: document.getElementById('chart'),
 		type:'pie',
 		data: [
@@ -28,7 +28,7 @@ Javascript:
 		series: ['series1', 'series2']
 	});
 	
-@class pk.chart
+@class oui.chart
 @constructor 
 @beta
 @param type {String} Chart type to create, `pie` (use to create donut charts), `line`, `scatter` (use to create bubble charts), `area`, `column` or `bar`
@@ -48,11 +48,11 @@ Javascript:
 @chainable
 */
 (function(pk) {
-    pk.chart = function(opt) {
-        var el=pk.replaceEl(opt.element, "<div class='pk-chart'></div>", true),
-			l=pk.layout(el),
-			svgEl=pk.createEl("<svg />"),
-			axesEl=pk.createEl("<g class='pk-axes' />"),
+    oui.chart = function(opt) {
+        var el=oui.replaceEl(opt.element, "<div class='oui-chart'></div>", true),
+			l=oui.layout(el),
+			svgEl=oui.createEl("<svg />"),
+			axesEl=oui.createEl("<g class='oui-axes' />"),
 			data=opt.data || [],
 			series=opt.series,
 			seriesMeta={},
@@ -72,46 +72,46 @@ Javascript:
 				series:0,
 				category:10
 			},
-			legendEl=pk.createEl("<div class='pk-legend'></div>"), 
+			legendEl=oui.createEl("<div class='oui-legend'></div>"), 
 			legend=typeof opt.legend==='function'?opt.legend:!opt.legend ? false : function(mInf){
 
 				if(type==='pie'){
-					pk.addClass(legendEl, 'pk-table');
+					oui.addClass(legendEl, 'oui-table');
 					if(series.length > 1){
-						var hTpl="<div class='pk-row pk-legend-header'><div class='pk-legend-category pk-cell'></div>";
+						var hTpl="<div class='oui-row oui-legend-header'><div class='oui-legend-category oui-cell'></div>";
 						for(var e=0;e<series.length;e++){
-							hTpl+="<div class='pk-cell pk-legend-series'>"+series[e]+"</div>";
+							hTpl+="<div class='oui-cell oui-legend-series'>"+series[e]+"</div>";
 						}
 						legendEl.innerHTML+=hTpl+"</div>";
 					}
 					
 					for(var c in mInf){
 						var sI=0;
-						var lTpl="<div class='pk-row pk-legend-entry'>";					
+						var lTpl="<div class='oui-row oui-legend-entry'>";					
 						if(series.length > 1){
-							lTpl+="<div class='pk-cell pk-legend-category'>"+c+":</div>";
+							lTpl+="<div class='oui-cell oui-legend-category'>"+c+":</div>";
 						}
 						for(s in mInf[c]){ 
-							lTpl+="<div class='pk-cell pk-legend-series' data-rel='"+('rel'+s+c).replace(' ' ,'')+"'><span class='pk-indicator' style='border-color:"+mInf[c][s].color+";background-color:"+mInf[c][s].color+";' data-rel='"+('rel'+s).replace(' ' ,'')+"'></span>"+mInf[c][s].percentage+"%"+"</div>";
+							lTpl+="<div class='oui-cell oui-legend-series' data-rel='"+('rel'+s+c).replace(' ' ,'')+"'><span class='oui-indicator' style='border-color:"+mInf[c][s].color+";background-color:"+mInf[c][s].color+";' data-rel='"+('rel'+s).replace(' ' ,'')+"'></span>"+mInf[c][s].percentage+"%"+"</div>";
 							sI++;
 						}   
 						if(series.length === 1){
-							lTpl+="<div class='pk-cell pk-legend-category'>"+c+"</div>";
+							lTpl+="<div class='oui-cell oui-legend-category'>"+c+"</div>";
 						}
 						lTpl+="</div>"; 
 						legendEl.innerHTML+=lTpl;	 
 					}	
-					pk.addClass(el, (l.height >= l.width ? "pk-legend-bottom" : "pk-legend-right")); 
+					oui.addClass(el, (l.height >= l.width ? "oui-legend-bottom" : "oui-legend-right")); 
 	
 				}else{
 					for(s in mInf){
-						legendEl.innerHTML+= "<div class='pk-legend-series' data-rel='"+('rel'+s).replace(' ' ,'')+"'><span class='pk-indicator' style='border-color:"+colors[s]+";background-color:"+colors[s]+";' data-rel='"+('rel'+s).replace(' ' ,'')+"'></span>"+s+"</div>";						
+						legendEl.innerHTML+= "<div class='oui-legend-series' data-rel='"+('rel'+s).replace(' ' ,'')+"'><span class='oui-indicator' style='border-color:"+colors[s]+";background-color:"+colors[s]+";' data-rel='"+('rel'+s).replace(' ' ,'')+"'></span>"+s+"</div>";						
 					}					
 				}
 				
 			},
 			tooltip=typeof opt.tooltip==='function'?opt.tooltip:!opt.tooltip ? false : function(tEl, tInf, tO){
-				pk.tooltip({element:tEl, content:tInf.series + ', '+tInf.values.x + ': '+tInf.values.y, position:'top',offset:{x:tO.x}});
+				oui.tooltip({element:tEl, content:tInf.series + ', '+tInf.values.x + ': '+tInf.values.y, position:'top',offset:{x:tO.x}});
 			};
 
 		 
@@ -121,29 +121,29 @@ Javascript:
 		margin.x=margin.left+margin.right;
 		margin.y=margin.top+margin.bottom;
 		
-		pk.addClass(el, 'pk-'+type+'-chart');
+		oui.addClass(el, 'oui-'+type+'-chart');
 			
 		data.sort(function(a,b) {return (a[axis.x] > b[axis.x]) ? 1 : ((b[axis.x] > a[axis.x]) ? -1 : 0);} );		
 		
-		pk.bindEvent('mouseover', el, function(e){		
-			if(pk.attribute(e.target, 'data-rel')){
-				var hIt=pk.findEl(el, {attribute:{name:'data-rel', value:pk.attribute(e.target, 'data-rel')}});	
+		oui.bindEvent('mouseover', el, function(e){		
+			if(oui.attribute(e.target, 'data-rel')){
+				var hIt=oui.findEl(el, {attribute:{name:'data-rel', value:oui.attribute(e.target, 'data-rel')}});	
 				for(h=0;h<hIt.length;h++){							
-					pk.addClass(hIt[h], 'selected'); 
+					oui.addClass(hIt[h], 'selected'); 
 				}	
 			}				
 		});
-		pk.bindEvent('mouseout', el, function(e){
-			if(pk.attribute(e.target, 'data-rel')){
-				var hIt=pk.findEl(el, {attribute:{name:'data-rel', value:pk.attribute(e.target, 'data-rel')}});	
+		oui.bindEvent('mouseout', el, function(e){
+			if(oui.attribute(e.target, 'data-rel')){
+				var hIt=oui.findEl(el, {attribute:{name:'data-rel', value:oui.attribute(e.target, 'data-rel')}});	
 				for(h=0;h<hIt.length;h++){							
-					pk.removeClass(hIt[h], 'selected'); 
+					oui.removeClass(hIt[h], 'selected'); 
 				}	 
 			}
 		});		
 		
 		
-		pk.attribute(svgEl, {height:'100%', width:'100%', 'viewBox':'0 0 '+(type==='pie' ? d : l.width)+' '+(type==='pie' ? d : l.height)});
+		oui.attribute(svgEl, {height:'100%', width:'100%', 'viewBox':'0 0 '+(type==='pie' ? d : l.width)+' '+(type==='pie' ? d : l.height)});
 
 		
 		function drawAxis(xy, type){
@@ -151,29 +151,29 @@ Javascript:
 			// Series of .5 pt adjustments to create crisp edges in IE
 			var svgTpl="";
 			if(xy==='x'){
-				svgTpl="<g class='pk-xAxis' transform='translate("+margin.left+","+(l.height-margin.bottom+0.5)+")'>\
+				svgTpl="<g class='oui-xAxis' transform='translate("+margin.left+","+(l.height-margin.bottom+0.5)+")'>\
 						<line x2='"+(l.width-margin.x)+"'></line>";												 
 					for(t=0;t<=axesMeta.x.range;t++){
 						svgTpl+="<g class='tick' transform='translate("+(Math.floor((t*axesMeta.x.unit)+(type==='categorical' ? axesMeta.x.unit: 0))+0.5)+", 0)'>\
 							<line y2='5'></line>";
-							if(gridlines && (t>0 || type==='categorical')){svgTpl+="<line class='pk-tick-line' y2='"+(-1*(l.height-margin.y-1))+"'></line>";}							
+							if(gridlines && (t>0 || type==='categorical')){svgTpl+="<line class='oui-tick-line' y2='"+(-1*(l.height-margin.y-1))+"'></line>";}							
 							svgTpl+="<text "+ (type==='categorical' ? "x='-"+(axesMeta.x.unit/2) : "")+"' y='17' y='4' text-anchor='middle'>"+(type==='ordinal' ? (t+axesMeta.x.min) : axesMeta.x.data[t])+"</text>\
 						</g>";					
 					} 
 					svgTpl+="</g>";
 			}else if(xy==='y'){
-				svgTpl="<g class='pk-yAxis' transform='translate("+(margin.left-0.5)+","+margin.top+")'>\
+				svgTpl="<g class='oui-yAxis' transform='translate("+(margin.left-0.5)+","+margin.top+")'>\
 						<line y2='"+(l.height-margin.y)+"'></line>";
 					for(var t=0;t<=axesMeta.y.range;t++){
 						svgTpl+="<g class='tick' transform='translate(-5,"+(Math.floor((t*axesMeta.y.unit))+0.5)+")'>\
 							<line x2='5'></line>";  
-							if(gridlines && (t<axesMeta.y.range|| type==='categorical')){svgTpl+="<line class='pk-tick-line' x1='6' x2='"+(5+l.width-margin.x)+"'></line>";}
+							if(gridlines && (t<axesMeta.y.range|| type==='categorical')){svgTpl+="<line class='oui-tick-line' x1='6' x2='"+(5+l.width-margin.x)+"'></line>";}
 							svgTpl+="<text x='"+(-5)+"' y='"+ (type==='categorical' ? (axesMeta.y.unit/2)+2 : "2")+"' text-anchor='end'>"+(type==='ordinal' ? (axesMeta.y.range+axesMeta.y.min)-t : axesMeta.y.data[t])+"</text>\
 						</g>";				 	 
 					} 
 					svgTpl+="</g>";
 			}				
-			axesEl.appendChild(pk.createEl(svgTpl));			
+			axesEl.appendChild(oui.createEl(svgTpl));			
 		}	
 
 		function resolveAxis(xyr, type){
@@ -225,7 +225,7 @@ Javascript:
 						seriesMeta[series[s]].data.push(data[i][series[s]]);
 						seriesMeta[series[s]].sum+=Math.abs(parseInt(data[i][series[s]],0));
 						if(!colors[data[i][axis.x]]){
-							colors[data[i][axis.x]]=pk.color.percentage(i/data.length); 
+							colors[data[i][axis.x]]=oui.color.percentage(i/data.length); 
 						}
 					}			
 					seriesMeta[series[s]].min=Math.min.apply(Math, seriesMeta[series[s]].data);
@@ -239,14 +239,14 @@ Javascript:
 				var ttlArc=0;
 				for(i=0;i<seriesMeta[s].data.length;i++){	
 				
-					var pathCol=pk.color.darken(colors[data[i][axis.x]], sIndex*(50/series.length));
-					var pathEl=pk.createEl("<path x='"+d/2+"' y='"+d/2+"' fill='none' stroke='"+pathCol+"' d='' stroke-width='"+(stroke/series.length+1)+"'/>");
+					var pathCol=oui.color.darken(colors[data[i][axis.x]], sIndex*(50/series.length));
+					var pathEl=oui.createEl("<path x='"+d/2+"' y='"+d/2+"' fill='none' stroke='"+pathCol+"' d='' stroke-width='"+(stroke/series.length+1)+"'/>");
 					
 					svgEl.appendChild(pathEl);
 					var arc = Math.round((Math.abs(seriesMeta[s].data[i])/seriesMeta[s].sum)*360);
 					r=((d-stroke/2)/2) - (stroke/2*sIndex);
 					r = series.length>1 ? r : (d/2)-stroke/2;
-					pk.attribute(pathEl, {'d':pk.svg.arcPath(d/2, d/2,  r, ttlArc, ttlArc+arc), 'data-rel':('rel'+s+data[i][axis.x]).replace(' ' ,'')});  
+					oui.attribute(pathEl, {'d':oui.svg.arcPath(d/2, d/2,  r, ttlArc, ttlArc+arc), 'data-rel':('rel'+s+data[i][axis.x]).replace(' ' ,'')});  
 					if(typeof legend === 'function'){
 						if(!metaObj[data[i][axis.x]]){
 							metaObj[data[i][axis.x]]={};
@@ -280,7 +280,7 @@ Javascript:
 			if(['column', 'bar'].indexOf(type)===-1 && typeof axis.r === 'string' && data[0][axis.r]!=='undefined'){	
 				resolveAxis('r', 'ordinal'); 
 			}
-			var groupEl=pk.createEl("<g class='pk-series'></g>");
+			var groupEl=oui.createEl("<g class='oui-series'></g>");
 			svgEl.appendChild(groupEl);
 		
 			/*
@@ -290,9 +290,9 @@ Javascript:
 			sIndex=0;
 			for(s in seriesMeta){				
 				if(!colors[s]){
-					colors[s]=pk.color.random();  
+					colors[s]=oui.color.random();  
 				}					
-				var seriesEl=pk.createEl("<g class='pk-series-"+sIndex+"' />");
+				var seriesEl=oui.createEl("<g class='oui-series-"+sIndex+"' />");
 				var sPath='', aPath='', sRect='';
 				
 				for(i=0;i<seriesMeta[s].x.data.length;i++){	
@@ -314,13 +314,13 @@ Javascript:
 					}else if(['column'].indexOf(type)!==-1){ 
 						pxX= Math.floor(margin.left+(sIndex*(axesMeta.x.unit/Object.keys(seriesMeta).length)+(axesMeta.x.unit * axesMeta.x.data.indexOf(seriesMeta[s].x.data[i]))));
 						pxY=axesMeta.y.unit * (seriesMeta[s].y.data[i]-axesMeta.y.min);
-						svgItemEl=pk.createEl("<rect x='"+(pxX-0)+"' y='"+(l.height-margin.bottom-pxY)+"' height='"+pxY+"' width='"+(0+(axesMeta.x.unit/Object.keys(seriesMeta).length))+"' stroke='"+colors[s]+"' fill='"+colors[s]+"' data-rel='rel"+s.replace(' ','')+"'/>");						
+						svgItemEl=oui.createEl("<rect x='"+(pxX-0)+"' y='"+(l.height-margin.bottom-pxY)+"' height='"+pxY+"' width='"+(0+(axesMeta.x.unit/Object.keys(seriesMeta).length))+"' stroke='"+colors[s]+"' fill='"+colors[s]+"' data-rel='rel"+s.replace(' ','')+"'/>");						
 						seriesEl.appendChild(svgItemEl);
 						ttX+=(0+(axesMeta.x.unit/Object.keys(seriesMeta).length))/2;				
 					}else if(['bar'].indexOf(type)!==-1){		
 						pxX= Math.round(margin.left + (axesMeta.x.unit * (seriesMeta[s].x.data[i]-axesMeta.x.min)));
 						pxY= Math.floor(margin.top+(sIndex*(axesMeta.y.unit/Object.keys(seriesMeta).length)+(axesMeta.y.unit * axesMeta.y.data.indexOf(seriesMeta[s].y.data[i]))));
-						svgItemEl=pk.createEl("<rect x='"+margin.left+"' y='"+pxY+"' height='"+(0+(axesMeta.y.unit/Object.keys(seriesMeta).length))+"' width='"+(pxX-margin.left)+"' stroke='"+colors[s]+"' fill='"+colors[s]+"' data-rel='rel"+s.replace(' ','')+"'/>");						
+						svgItemEl=oui.createEl("<rect x='"+margin.left+"' y='"+pxY+"' height='"+(0+(axesMeta.y.unit/Object.keys(seriesMeta).length))+"' width='"+(pxX-margin.left)+"' stroke='"+colors[s]+"' fill='"+colors[s]+"' data-rel='rel"+s.replace(' ','')+"'/>");						
 						seriesEl.appendChild(svgItemEl);	
 						ttX+=ttX+(pxX-margin.left);
 					}
@@ -336,21 +336,21 @@ Javascript:
 					if(['column', 'bar'].indexOf(type)===-1){
 						// draw points				
 						r=seriesMeta[s].r && seriesMeta[s].r.data[i] ? (seriesMeta[s].r.data[i]*20 / axesMeta.r.range)  : typeof axis.r === 'number' ? axis.r : 5;						
-						svgItemEl=pk.createEl("<circle cx='"+pxX+"' cy='"+pxY+"' r='"+r+"' fill='"+colors[s]+"' stroke='"+colors[s]+"' data-rel='rel"+s.replace(' ','')+"' />");
+						svgItemEl=oui.createEl("<circle cx='"+pxX+"' cy='"+pxY+"' r='"+r+"' fill='"+colors[s]+"' stroke='"+colors[s]+"' data-rel='rel"+s.replace(' ','')+"' />");
 						seriesEl.appendChild(svgItemEl);  
 						ttX+=r;		 
 					}
-					if(tooltip && pk.tooltip){
+					if(tooltip && oui.tooltip){
 						tooltip(svgItemEl, {series:s, values:{x:seriesMeta[s].x.data[i], y:seriesMeta[s].y.data[i], r:seriesMeta[s].r ? seriesMeta[s].r.data[i] : 0}}, {x:ttX, y:0}); 	
 					}
 				}  
 				if(['scatter', 'column', 'bar'].indexOf(type)===-1){ 
 					// draw connecting lines
-					seriesEl.insertBefore(pk.createEl("<path class='pk-line' fill='none' stroke='"+colors[s]+"' d='"+sPath.trim()+"' data-rel='rel"+s.replace(' ','')+"' />"),seriesEl.firstChild );
+					seriesEl.insertBefore(oui.createEl("<path class='oui-line' fill='none' stroke='"+colors[s]+"' d='"+sPath.trim()+"' data-rel='rel"+s.replace(' ','')+"' />"),seriesEl.firstChild );
 				}
 				if(['area'].indexOf(type)!==-1){
 					// draw fill area
-					seriesEl.insertBefore(pk.createEl("<path class='pk-area' fill='"+colors[s]+"' d='"+aPath.trim()+"' data-rel='rel"+s.replace(' ','')+"' />"),seriesEl.firstChild );
+					seriesEl.insertBefore(oui.createEl("<path class='oui-area' fill='"+colors[s]+"' d='"+aPath.trim()+"' data-rel='rel"+s.replace(' ','')+"' />"),seriesEl.firstChild );
 				}
 				groupEl.appendChild(seriesEl);  
 				sIndex++;

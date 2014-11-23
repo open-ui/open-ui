@@ -1,50 +1,50 @@
 @import "../core/core.less";
-.pk-chart{
+.oui-chart{
 	position:relative;
 	height:@item-width;
 	width:@item-width*2;
-	&.pk-legend-right{
+	&.oui-legend-right{
 		text-align:left;
-		.pk-legend{
+		.oui-legend{
 			position:absolute;
 			right:0;
 			top: 50%;
 			transform: translateY(-50%);
 		}
 	}
-	.pk-legend{
+	.oui-legend{
 		background:fade(@color-background, 50%);
 		border-collapse:collapse;
 		border-spacing:0;
 		margin:0 auto;
-		.pk-cell{
+		.oui-cell{
 			vertical-align:bottom;
 			position:relative;
 			padding:2px 5px;
 			font-size:1.2em;
 			font-weight:300;
 		}
-		&.pk-bottom{
+		&.oui-bottom{
 			width:100%;
 			position:relative;
 		}
-		.pk-legend-category{
+		.oui-legend-category{
 			text-align:left;
 			font-size:.85em;
 			font-weight:500;
 		}
-		.pk-legend-series{ 
+		.oui-legend-series{ 
 			text-align:center;
 			padding:0 5px 0 30px;
 			cursor:default;
 			position:relative;
 			&.selected{
-				.pk-indicator:before{
+				.oui-indicator:before{
 					opacity:0.2;
 				}
 			}
 		}
-		.pk-indicator{
+		.oui-indicator{
 			display:inline-block;
 			margin-left:5px;
 			border-radius:100%;
@@ -87,12 +87,12 @@
 	text{
 		font-size:.8em;
 	}
-	&:not(.pk-pie-chart){
+	&:not(.oui-pie-chart){
 		path, circle, rect{
 			transition:all 150ms ease-in;
 		}
-		.pk-axes{
-			.pk-tick-line{
+		.oui-axes{
+			.oui-tick-line{
 				stroke:darken(@color-background,3%);
 			}
 			line{
@@ -113,7 +113,7 @@
 		rect.selected{
 			fill-opacity:1;
 		}
-		.pk-series g{
+		.oui-series g{
 			path.selected{
 				stroke-width:2;
 			}
@@ -121,16 +121,16 @@
 				stroke-opacity:0.2;
 			}
 		}
-		.pk-legend{
+		.oui-legend{
 			position:absolute;
 			bottom:0;
 			width:100%;
 			text-align:center;
-			.pk-legend-series{
+			.oui-legend-series{
 				display:inline-block;
 			}
 		}
-		.pk-area{
+		.oui-area{
 			opacity:0.1;
 		}
 	}

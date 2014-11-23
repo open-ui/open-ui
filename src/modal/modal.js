@@ -10,14 +10,14 @@ HTML:
 Javascript: 
 
 	function showModal(){
-		pk.modal({
+		oui.modal({
 			header:'Modal header',
 			content:'Modal content', 
 			draggable:true
 		});
 	}
 
-@class pk.modal
+@class oui.modal
 @constructor
 @param options {Object}
 @param options.element {Object} DOM element to convert to component
@@ -29,18 +29,18 @@ Javascript:
 */
 
 (function(pk) {
-    pk.modal = function(opt) {
+    oui.modal = function(opt) {
         var h = opt.header,
             c = opt.content;
         /*jshint multistr: true */
-        var tpl = "<div class='pk-modal-mask'>\
-			<div class='pk-modal-box pk-animated'>\
-				<div class='pk-modal-header'>" + h + "<span class='pk-modal-close'></span></div>\
-				<div class='pk-modal-content'>" + c + "</div>\
+        var tpl = "<div class='oui-modal-mask'>\
+			<div class='oui-modal-box oui-animated'>\
+				<div class='oui-modal-header'>" + h + "<span class='oui-modal-close'></span></div>\
+				<div class='oui-modal-content'>" + c + "</div>\
 			</div>\
 		</div>";
 
-        var el = pk.createEl(tpl),
+        var el = oui.createEl(tpl),
             box = el.children[0],
             header = box.children[0],
             close = header.children[0];
@@ -52,46 +52,46 @@ Javascript:
         }
 
         function closeModal() {
-            pk.removeClass(el, 'pk-show');
+            oui.removeClass(el, 'oui-show');
             setTimeout(function() {
                 el.parentNode.removeChild(el);
             }, 500);
         }
-        pk.bindEvent("click", el, function(e) {
+        oui.bindEvent("click", el, function(e) {
             if (e.target !== el) {
                 return;
             }
             closeModal();
         });
-        pk.bindEvent("click", close, closeModal);
-        pk.bindEvent("resize", window, function() {
-            pk.center(box);
+        oui.bindEvent("click", close, closeModal);
+        oui.bindEvent("resize", window, function() {
+            oui.center(box);
         });
         setTimeout(function() {
-            pk.addClass(el, 'pk-show');
+            oui.addClass(el, 'oui-show');
         }, 10);
 
         var boxH = box.offsetHeight || 0;
         setInterval(function() {
             var boxHN = box.offsetHeight;
             if (boxH !== boxHN) {
-                pk.center(box);
+                oui.center(box);
                 boxH = boxHN;
             }
         }, 500);
-        pk.center(box);
+        oui.center(box);
 
-        if (opt.draggable !== false && pk.drag) {
-            pk.drag({
+        if (opt.draggable !== false && oui.drag) {
+            oui.drag({
                 element: box,
                 handle: header,
                 move: true,
                 listeners: {
                     dragstart: function() {
-                        pk.removeClass(box, 'pk-animated');
+                        oui.removeClass(box, 'oui-animated');
                     },
                     dragend: function() {
-                        pk.addClass(box, 'pk-animated');
+                        oui.addClass(box, 'oui-animated');
                     }
                 }
             });

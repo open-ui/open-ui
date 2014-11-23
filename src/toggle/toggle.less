@@ -1,5 +1,5 @@
 @import "../core/core.less";
-.pk-toggle {
+.oui-toggle {
     width: @item-width;
     height: @item-height*0.85;
     border: 1px solid darken(@color-background, 10%);
@@ -11,15 +11,15 @@
     position: relative;
     overflow: hidden;
 	padding: 0;
-	.pk-noselect;
+	.oui-noselect;
 }
-.pk-toggle:focus, .pk-toggle:active{
+.oui-toggle:focus, .oui-toggle:active{
 	outline:none;
 }
-.pk-toggle input {
+.oui-toggle input {
     display: none;
 }
-.pk-toggle .pk-option{
+.oui-toggle .oui-option{
     text-transform: uppercase;
     display: inline-block;
     box-sizing: border-box;
@@ -28,15 +28,15 @@
     transition: color 100ms ease-in;
 	border-radius:@item-rounding;
 }
-.pk-toggle:not(.pk-disabled) .pk-option:not(.pk-selected):hover{
+.oui-toggle:not(.oui-disabled) .oui-option:not(.oui-selected):hover{
 	color:@color-highlight;
 }
-.pk-toggle .pk-option.pk-selected {
+.oui-toggle .oui-option.oui-selected {
     color: @color-background;
 }
 
 
-.pk-toggle .pk-toggle-indicator {
+.oui-toggle .oui-toggle-indicator {
     position: absolute;
     border-radius: @item-rounding;
     left: 2px;
@@ -47,6 +47,6 @@
     transition: left 200ms ease-in;
 }
 
-.pk-toggle.pk-disabled .pk-toggle-indicator {
+.oui-toggle.oui-disabled .oui-toggle-indicator {
     background: darken(@color-background, 30%);
 }

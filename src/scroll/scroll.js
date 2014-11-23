@@ -10,17 +10,17 @@ HTML:
 	
 Javascript:
 
-	pk.scroll({
+	oui.scroll({
 		element: document.getElementById('scroll'),
 		axis: 'xy'
 	});
 	
-@class pk.scroll
+@class oui.scroll
 @constructor
 @param options {Object}
 @param options.element {Object} DOM element to attach drag handlers to
 @param [options.sensitivity=60] {Number} Number in px to scroll incrementally on `mousewheel` and `key` events. Can also be expressed as percentage, e.g. `10%` of content
-@param [options.axis=y] {Object} Object consisting of `x` and `y` {Boolean} values denoting scrollable axis, DOM element to attach drag handlers to. Defaults to element attribute `pk-scroll` or `y`
+@param [options.axis=y] {Object} Object consisting of `x` and `y` {Boolean} values denoting scrollable axis, DOM element to attach drag handlers to. Defaults to element attribute `oui-scroll` or `y`
 @return Object {Object} Consisting of original DOM element (item `0`)
 @chainable
 */
@@ -30,7 +30,7 @@ Javascript:
         // jquery available
         jQuery.fn.extend({
             pkScroll: function(axis) {
-                pk.scroll({
+                oui.scroll({
                     element: this[0],
                     axis: axis
                 });
@@ -42,21 +42,21 @@ Javascript:
         ( 
 
             function() {
-                angular.module('pk-scroll', ['ng'])
+                angular.module('oui-scroll', ['ng'])
                     .directive('pkScroll', function() {
                         return {
                             restrict: 'A',
                             link: function(scope, el) {
-                                pk.scroll({
+                                oui.scroll({
                                     element: el[0],
-                                    axis: el[0].getAttribute('pk-scroll')
+                                    axis: el[0].getAttribute('oui-scroll')
                                 });
                             }
                         };
                     });
             })();
     }
-    pk.scroll = function(opt) {
+    oui.scroll = function(opt) {
 
         var el = opt.element,
 			sensitivity=60,
@@ -74,31 +74,31 @@ Javascript:
             contentHeight = 0,
             containerWidth = 0,
             containerHeight = 0,
-            scrollDir = opt.axis ? opt.axis.toLowerCase() : (pk.attribute(el, 'pk-scroll') ? pk.attribute(el, 'pk-scroll') : "y"),
-			tpl = "<div class='pk-scroll-container'>\
-            <" + el.nodeName + " class='pk-scroll-content'>\
+            scrollDir = opt.axis ? opt.axis.toLowerCase() : (oui.attribute(el, 'oui-scroll') ? oui.attribute(el, 'oui-scroll') : "y"),
+			tpl = "<div class='oui-scroll-container'>\
+            <" + el.nodeName + " class='oui-scroll-content'>\
                 " + el.innerHTML + "\
             </" + el.nodeName + ">\
-            <div class='pk-scroll-trackY'>\
-                <div class='pk-scroll-floatY'></div>\
+            <div class='oui-scroll-trackY'>\
+                <div class='oui-scroll-floatY'></div>\
             </div>\
-            <div class='pk-scroll-trackX'>\
-                <div class='pk-scroll-floatX'></div>\
+            <div class='oui-scroll-trackX'>\
+                <div class='oui-scroll-floatX'></div>\
             </div>\
         </div>";
 		el.innerHTML='';
-        el = pk.replaceEl(el, tpl);
+        el = oui.replaceEl(el, tpl);
         var container = el.children[0],
             trackY = el.children[1],
             floatY = trackY.children[0],
             trackX = el.children[2],
             floatX = trackX.children[0];
 			
-        if (pk.getStyle(el, 'position') === "static") {
+        if (oui.getStyle(el, 'position') === "static") {
             el.style.position = "relative";
         }
 
-        pk.bindEvent("scroll", container, function() {
+        oui.bindEvent("scroll", container, function() {
             percY = container.scrollTop / (contentH - containerH);
             percX = container.scrollLeft / (contentW - containerW);
             percY = percY < 0 ? 0 : percY > 1 ? 1 : percY;
@@ -107,10 +107,10 @@ Javascript:
             floatX.style.left = (containerW - floatXw) * percX + 'px';
         });
 		
-		pk.bindEvent("scroll", el, function(e){
+		oui.bindEvent("scroll", el, function(e){
 			container.scrollTop=el.scrollTop;
 			container.scrollLeft=el.scrollLeft;
-			pk.preventBubble(e);
+			oui.preventBubble(e);
 		});
 		
 
@@ -121,22 +121,22 @@ Javascript:
             containerW = el.offsetWidth;
             if (scrollDir.indexOf("y") > -1 && contentH > containerH) {
                 allowY = true;
-                pk.addClass(el, 'pk-scroll-enableY');
+                oui.addClass(el, 'oui-scroll-enableY');
                 floatYh = floatY.offsetHeight;
                 container.scrollTop = (contentH - containerH) * percY;
             } else {
                 allowY = false;
-                pk.removeClass(el, 'pk-scroll-enableY');
+                oui.removeClass(el, 'oui-scroll-enableY');
                 container.scrollTop = 0;
             }
             if (scrollDir.indexOf("x") > -1 && contentW > containerW) {
                 allowX = true;
-                pk.addClass(el, 'pk-scroll-enableX');
+                oui.addClass(el, 'oui-scroll-enableX');
                 floatXw = floatX.offsetWidth;
                 container.scrollLeft = (contentW - containerW) * percX;
             } else {
                 allowX = false;
-                pk.removeClass(el, 'pk-scroll-enableX');
+                oui.removeClass(el, 'oui-scroll-enableX');
                 container.scrollLeft = 0;
             }
         }
@@ -159,7 +159,7 @@ Javascript:
         // DRAG HANDLERS
 
         if (allowY) {
-            pk.drag({
+            oui.drag({
                 element: floatY,
                 move: {
                     y: true
@@ -175,7 +175,7 @@ Javascript:
             });
         }
         if (allowX) {
-            pk.drag({
+            oui.drag({
                 element: floatX,
                 move: {
                     x: true
@@ -191,19 +191,19 @@ Javascript:
                 }
             });
         }
-        pk.bindEvent("click", floatY, function(e) {
-            pk.preventBubble(e);
+        oui.bindEvent("click", floatY, function(e) {
+            oui.preventBubble(e);
         });
-        pk.bindEvent("click", floatX, function(e) {
-            pk.preventBubble(e);
+        oui.bindEvent("click", floatX, function(e) {
+            oui.preventBubble(e);
         });
 
         // TRACK CLICKING HANDLERS
-        pk.bindEvent("click", trackY, function(e) {
-            container.scrollTop = (pk.getEventOffset(e).y / containerH * (contentH - containerH));
+        oui.bindEvent("click", trackY, function(e) {
+            container.scrollTop = (oui.getEventOffset(e).y / containerH * (contentH - containerH));
         });
-        pk.bindEvent("click", trackX, function(e) {
-            container.scrollLeft = (pk.getEventOffset(e).x / containerW * (contentW - containerW));
+        oui.bindEvent("click", trackX, function(e) {
+            container.scrollLeft = (oui.getEventOffset(e).x / containerW * (contentW - containerW));
         });
 
         // MOUSE WHEEL HANDLERS
@@ -220,10 +220,10 @@ Javascript:
 				container.scrollLeft += typeof sensitivity === 'string' && sensitivity.indexOf('%') ?  containerW * parseInt(sensitivity.replace('%',''),0)/100 : sensitivity;			
 			}
             /* Stop wheel propogation (prevent parent scrolling) */
-            pk.preventBubble(e);
+            oui.preventBubble(e);
         }
 
-        pk.bindEvent("mousewheel", container, mouseScroll);
+        oui.bindEvent("mousewheel", container, mouseScroll);
 
         // TOUCH EVENT HANDLERS
 
@@ -281,14 +281,14 @@ Javascript:
             return false;
         }
         if (typeof window.ontouchstart !== 'undefined') {
-            pk.bindEvent('touchstart', container[0], tap);
-            pk.bindEvent('touchmove', container[0], drag);
-            pk.bindEvent('touchend', window, release);
+            oui.bindEvent('touchstart', container[0], tap);
+            oui.bindEvent('touchmove', container[0], drag);
+            oui.bindEvent('touchend', window, release);
         }
 
         // KEYBOARD HANDLERS    
         container.setAttribute("tabindex", 0);
-        pk.bindEvent('keydown', container, function(e) {
+        oui.bindEvent('keydown', container, function(e) {
             if (document.activeElement !== container) {
                 return;
             }
@@ -296,28 +296,28 @@ Javascript:
                 switch (e.keyCode) {
                     case 38: //up cursor						
                         container.scrollTop -= typeof sensitivity === 'string' && sensitivity.indexOf('%') ?  containerH * parseInt(sensitivity.replace('%',''),0)/100 : sensitivity;
-                        pk.preventBubble(e);
+                        oui.preventBubble(e);
                         break;
                     case 40: //down cursor
                     case 32: //spacebar
                         container.scrollTop += typeof sensitivity === 'string' && sensitivity.indexOf('%') ?  containerH * parseInt(sensitivity.replace('%',''),0)/100 : sensitivity;
-                        pk.preventBubble(e);
+                        oui.preventBubble(e);
                         break;
                     case 33: //page up
                         container.scrollTop -= containerH;
-                        pk.preventBubble(e);
+                        oui.preventBubble(e);
                         break;
                     case 34: //page down
                         container.scrollTop += containerH;
-                        pk.preventBubble(e);
+                        oui.preventBubble(e);
                         break;
                     case 36: //home
                         container.scrollTop = 0;
-                        pk.preventBubble(e);
+                        oui.preventBubble(e);
                         break;
                     case 35: //end
                         container.scrollTop = contentH;
-                        pk.preventBubble(e);
+                        oui.preventBubble(e);
                         break;
                 }
             }
@@ -325,11 +325,11 @@ Javascript:
                 switch (e.keyCode) {
                     case 37: //left cursor
                         container.scrollLeft -= typeof sensitivity === 'string' && sensitivity.indexOf('%') ?  containerW * parseInt(sensitivity.replace('%',''),0)/100 : sensitivity;
-                        pk.preventBubble(e);
+                        oui.preventBubble(e);
                         break;
                     case 39: //right cursor
                         container.scrollLeft += typeof sensitivity === 'string' && sensitivity.indexOf('%') ?  containerW * parseInt(sensitivity.replace('%',''),0)/100 : sensitivity;
-                        pk.preventBubble(e);
+                        oui.preventBubble(e);
                         break;
                 }
             }

@@ -3,11 +3,11 @@ var pk = pk || {};
 Utility class for SVG helpers
 
 
-@class pk.svg
+@class oui.svg
 */
 
 (function(pk) {
-    pk.svg = {
+    oui.svg = {
 		polar2cartesian:function(centerX, centerY, radius, angleInDegrees) {
 		  var angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
 		  return {

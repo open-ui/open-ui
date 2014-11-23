@@ -1,10 +1,10 @@
 @import "../core/core.less";
-.pk-carousel{
+.oui-carousel{
     position:relative;
     text-align:center;
 	overflow:hidden;
 	height:@item-width;
-	.pk-noselect;
+	.oui-noselect;
 	&:focus, &:active{
 		outline:none;
 	}
@@ -31,17 +31,17 @@
 		transition:all 500ms ease-in;
 		text-align:center;
 		opacity:0;
-		&.pk-selected{  
+		&.oui-selected{  
 			z-index:2;
 			// transform:scale(1);
 			opacity:1;
 		}
 		
 	}
-	.pk-carousel-out{		
+	.oui-carousel-out{		
 		z-index:1;
 	}
-	.pk-carousel-in-right{
+	.oui-carousel-in-right{
 		// left:100%;
 		animation-duration: 1s;
 		animation-delay:100ms;
@@ -53,7 +53,7 @@
 		from {left:100%;}
 		to {left:0;}
 	}
-	.pk-carousel-in-left{
+	.oui-carousel-in-left{
 		// right:100%;
 		animation-duration: 1s;
 		animation-delay:100ms;
@@ -65,7 +65,7 @@
 		from {right:100%;}
 		to {right:0;}
 	}	
-	.pk-nav-prev, .pk-nav-next{
+	.oui-nav-prev, .oui-nav-next{
 		z-index:4;
 		position:absolute;
 		left:-1 * (@item-height + (@item-height/3));
@@ -94,7 +94,7 @@
 		//	background:fade(@color-foreground, 15%);
 		}
 	}
-	 .pk-nav-next{
+	 .oui-nav-next{
 		left:auto;
 		right:-1 * (@item-height + (@item-height/3));
 		border-radius:100%;
@@ -107,7 +107,7 @@
 		}
 	 }
 	 
-	 .pk-nav-item{
+	 .oui-nav-item{
 		z-index:4;
 		cursor:pointer;
 		display:inline-block;
@@ -118,7 +118,7 @@
 		text-align:center;
 		transition:all 100ms ease-in;
 		font-size:0;
-		&.pk-selected:after{
+		&.oui-selected:after{
 			transform: scale(1);
 			opacity:1;
 		}
@@ -134,19 +134,19 @@
 			transform: scale(0.6);
 			transition:all 100ms ease-in;
 		}
-		&:not(.pk-selected):hover:after{
+		&:not(.oui-selected):hover:after{
 			transform: scale(0.8);
 			opacity:1;
 		}
 	}
 	&:hover{
-		.pk-nav-prev{
+		.oui-nav-prev{
 			left:0;
 		}
-		.pk-nav-next{
+		.oui-nav-next{
 			right:0;
 		}
-		.pk-nav-item{		
+		.oui-nav-item{		
 		//	background:fade(@color-foreground, 5%);
 		}
 	}

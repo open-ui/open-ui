@@ -6,20 +6,20 @@ HTML:
 
 	<ul id='accordian'>
         <li>
-            <h3 class='pk-content-header'>Content header</h3>
-            <div class='pk-content'>
+            <h3 class='oui-content-header'>Content header</h3>
+            <div class='oui-content'>
 				Content to collapse
 			</div>
         </li>
         <li>
-            <h3 class='pk-content-header'>Content header</h3>
-            <div class='pk-content'>
+            <h3 class='oui-content-header'>Content header</h3>
+            <div class='oui-content'>
 				Content to collapse
 			</div>
         </li>
         <li>
-            <h3 class='pk-content-header'>Content header</h3>
-            <div class='pk-content'>
+            <h3 class='oui-content-header'>Content header</h3>
+            <div class='oui-content'>
 				Content to collapse
 			</div>
         </li>		
@@ -27,13 +27,13 @@ HTML:
 
 Javascript:
 
-	pk.accordian({
+	oui.accordian({
 		element: document.getElementById('accordian'),
 		animate: true,
 		multiple: true
 	});		
 		
-@class pk.accordian
+@class oui.accordian
 @constructor
 @param options {Object}
 @param options.element {Object} DOM element to convert to component
@@ -44,16 +44,16 @@ Javascript:
 */
 
 (function(pk) {
-    pk.accordian = function(opt) {
+    oui.accordian = function(opt) {
         var el = opt.element,
             anim = opt.animate === false ? false : opt.animate || true,
             multiple = opt.multiple === false ? false : opt.multiple || true;
 
-		pk.addClass(el, 'pk-accordian');
+		oui.addClass(el, 'oui-accordian');
 		
         function animHeight(tEl) {
             tEl.style.height = 'auto';
-            var h = pk.layout(tEl).height;
+            var h = oui.layout(tEl).height;
             tEl.style.height = '0';
             setTimeout(function() {
                 tEl.style.height = h + 'px';
@@ -67,9 +67,9 @@ Javascript:
                 var content = el.children[a].children[1];
                 // if multiple set to false and node passed, hide all other nodes
                 if (tEl && el.children[a] !== tEl && multiple === false) {
-                    pk.removeClass(el.children[a], 'pk-show');
+                    oui.removeClass(el.children[a], 'oui-show');
                 }
-                if (pk.hasClass(el.children[a], 'pk-show')) {
+                if (oui.hasClass(el.children[a], 'oui-show')) {
                     // show...if not already shown
                     if (parseInt(content.style.height, 0) === 0 || !content.style.height) {
                         if (anim) {
@@ -84,11 +84,11 @@ Javascript:
                 }
             }
         }
-        pk.bindEvent('click', el, function(e) {
-            if (!pk.hasClass(e.target, 'pk-content-header')) {
+        oui.bindEvent('click', el, function(e) {
+            if (!oui.hasClass(e.target, 'oui-content-header')) {
                 return;
             }
-            pk.toggleClass(e.target.parentNode, 'pk-show');
+            oui.toggleClass(e.target.parentNode, 'oui-show');
             doLayout(e.target.parentNode);
         });
         doLayout();
