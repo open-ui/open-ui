@@ -1,4 +1,4 @@
-var pk = pk || {};
+var oui = oui || {};
 /**
 Create a new slider control
 
@@ -36,7 +36,7 @@ Javascript:
 @return Object {Object} Consisting of original DOM element (item `0`) and class methods (see below)
 @chainable
 */
-(function(pk) {
+(function(oui) {
     oui.slider = function(opt) {
         var el = opt.element,
             units = opt.units === undefined ? '' : opt.units,
@@ -275,5 +275,5 @@ Javascript:
         obj.val(inputValue, true);
         return obj;
     };
-    return pk;
-})(pk);
+    return oui;
+})(oui);

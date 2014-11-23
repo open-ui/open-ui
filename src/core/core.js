@@ -38,14 +38,14 @@ if (!Array.prototype.indexOf) {
     };
 }
 
-// Pocketknife Core
+// Open UI Core
 /**
-@module pocketknife
+@module open-ui
 */
-var pk = pk || {};
-(function(pk) {
+var oui = oui || {};
+(function(oui) {
 /**
-@class pk
+@class oui
 @static
 */
 
@@ -519,4 +519,4 @@ Gets browser agnostic offset coordinates for applicable mouse events
 	};
 	
     window.onload=function(){oui.addClass(document.body, 'oui-ui');};
-})(pk);
+})(oui);

@@ -1,4 +1,4 @@
-var pk = pk || {};
+var oui = oui || {};
 /**
 Utility class for creating draggable elements
 
@@ -41,7 +41,7 @@ Javascript:
 @return Object {Object} Consisting of original DOM element (item `0`)
 @chainable
 */
-(function(pk) {
+(function(oui) {
     oui.drag = function(opt) {
         var el = opt.element;
         var handle = opt.handle || opt.element;
@@ -182,4 +182,4 @@ Javascript:
             0: el
         };
     };
-})(pk);
+})(oui);

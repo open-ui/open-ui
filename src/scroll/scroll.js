@@ -1,4 +1,4 @@
-var pk = pk || {};
+var oui = oui || {};
 /**
 Attach custom scrollbars to an element
 
@@ -24,12 +24,12 @@ Javascript:
 @return Object {Object} Consisting of original DOM element (item `0`)
 @chainable
 */
-(function(pk) {
+(function(oui) {
     // HELPERS FOR jQUERY+ANGULAR
     if (typeof jQuery === 'object') {
         // jquery available
         jQuery.fn.extend({
-            pkScroll: function(axis) {
+            ouiScroll: function(axis) {
                 oui.scroll({
                     element: this[0],
                     axis: axis
@@ -43,7 +43,7 @@ Javascript:
 
             function() {
                 angular.module('oui-scroll', ['ng'])
-                    .directive('pkScroll', function() {
+                    .directive('ouiScroll', function() {
                         return {
                             restrict: 'A',
                             link: function(scope, el) {
@@ -339,5 +339,5 @@ Javascript:
 
         });
     };
-    return pk;
-})(pk);
+    return oui;
+})(oui);

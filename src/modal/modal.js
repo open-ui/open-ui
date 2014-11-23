@@ -1,4 +1,4 @@
-var pk = pk || {};
+var oui = oui || {};
 
 /**
 Create a new modal component
@@ -28,7 +28,7 @@ Javascript:
 @chainable
 */
 
-(function(pk) {
+(function(oui) {
     oui.modal = function(opt) {
         var h = opt.header,
             c = opt.content;
@@ -105,5 +105,5 @@ Javascript:
             close: closeModal
         };
     };
-    return pk;
-})(pk);
+    return oui;
+})(oui);

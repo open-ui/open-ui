@@ -1,4 +1,4 @@
-var pk = pk || {};
+var oui = oui || {};
 /**
 Create a new carousel component from an unordered list element `<ul>`
 
@@ -27,7 +27,7 @@ Javascript:
 @return Object {Object} Consisting of original DOM element (item `0`) and class methods (see below)
 @chainable
 */
-(function(pk) {
+(function(oui) {
     oui.carousel = function(opt) {
         var el = opt.element,
             options = opt.options || [],
@@ -173,5 +173,5 @@ Javascript:
 
         return obj;
     };
-    return pk;
-})(pk);
+    return oui;
+})(oui);

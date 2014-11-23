@@ -1,4 +1,4 @@
-var pk = pk || {};
+var oui = oui || {};
 
 /**
 Create a new checkbox control
@@ -28,7 +28,7 @@ Javascript:
 @return Object {Object} Consisting of original DOM element (item `0`) and class methods (see below)
 @chainable
 */
-(function(pk) {
+(function(oui) {
     oui.checkbox = function(opt) {
         var el = opt.element,
             //    listeners = opt.listeners === undefined ? {} : opt.listeners,
@@ -82,5 +82,5 @@ Javascript:
         oui.bindListeners(listeners, el.children[0]);
         return obj;
     };
-    return pk;
-})(pk);
+    return oui;
+})(oui);

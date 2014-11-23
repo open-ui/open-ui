@@ -1,4 +1,4 @@
-var pk = pk || {};
+var oui = oui || {};
 /**
 Utility class for converting color types and generating color schemes. 
 
@@ -9,7 +9,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
 @class oui.color
 */
 
-(function(pk) {
+(function(oui) {
     oui.color = {
 
         /**
@@ -635,5 +635,5 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
             return palette; 
         }
     };
-    return pk;
-})(pk);
+    return oui;
+})(oui);

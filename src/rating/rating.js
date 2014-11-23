@@ -1,4 +1,4 @@
-var pk = pk || {};
+var oui = oui || {};
 /**
 Create a new rating control
 
@@ -26,7 +26,7 @@ Javascript:
 @return Object {Object} Consisting of original DOM element (item `0`) and class methods (see below)
 @chainable
 */
-(function(pk) {
+(function(oui) {
     oui.rating = function(opt) {
         var el = opt.element,
             listeners = opt.listeners === undefined ? {} : opt.listeners,
@@ -132,6 +132,6 @@ Javascript:
         }
         return obj;
     }; 
-    return pk;
+    return oui;
 	
-})(pk);
+})(oui);

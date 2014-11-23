@@ -1,4 +1,4 @@
-var pk = pk || {};
+var oui = oui || {};
 /**
 Class used for notification management
 
@@ -32,7 +32,7 @@ Remove a notification
 @method remove
 @param element {Object} Notification element to remove
 */
-(function(pk) {
+(function(oui) {
     var nEl = oui.createEl("<ul class='oui-notify'></ul>");
     document.body.appendChild(nEl);
     oui.notify = {
@@ -67,4 +67,4 @@ Remove a notification
             }, 1000);
         }
     };
-})(pk);
+})(oui);

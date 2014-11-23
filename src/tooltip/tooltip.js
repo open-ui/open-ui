@@ -1,4 +1,4 @@
-var pk = pk || {};
+var oui = oui || {};
 /**
 Class used for creating tooltips
 
@@ -29,7 +29,7 @@ Javascript:
 @chainable
 */
 
-(function(pk) {
+(function(oui) {
 	var ttEl=null;
 	oui.tooltip=function(opt){
 		if(!ttEl){
@@ -84,5 +84,5 @@ Javascript:
 			0:opt.element
 		};
 	};
-    return pk;
-})(pk);
+    return oui;
+})(oui);

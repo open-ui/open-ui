@@ -1,4 +1,4 @@
-var pk = pk || {};
+var oui = oui || {};
 /**
 Create a new datepicker control
 
@@ -24,7 +24,7 @@ Javascript
 @return Object {Object} Consisting of original DOM element (item `0`) and class methods (see below)
 @chainable
 */
-(function(pk) {
+(function(oui) {
     oui.datepicker = function(opt) {
 		var y = opt.year || 2014,
 			m = opt.month || 11,
@@ -256,5 +256,5 @@ Javascript
 		};
 		
     };
-    return pk;
-})(pk);
+    return oui;
+})(oui);

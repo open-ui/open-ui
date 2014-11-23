@@ -87,6 +87,12 @@ gulp.task('bump', function(){
 	.pipe(gulp.dest('./'));
 });
 
+gulp.task('replace',function() {
+  return gulp.src('src/**/*.*', {base: './'})
+	.pipe(plugins.plumber())
+	.pipe(plugins.replace('pk','oui'))
+    .pipe(gulp.dest('./'));
+});
 
 gulp.task('default', ['watch']);
 gulp.task('travis', ['build:styles', 'build:js']);

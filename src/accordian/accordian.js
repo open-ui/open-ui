@@ -1,4 +1,4 @@
-var pk = pk || {};
+var oui = oui || {};
 /**
 Create a new accordian component from an unordered list element `<ul>` with the below structure:
 
@@ -43,7 +43,7 @@ Javascript:
 @chainable
 */
 
-(function(pk) {
+(function(oui) {
     oui.accordian = function(opt) {
         var el = opt.element,
             anim = opt.animate === false ? false : opt.animate || true,
@@ -96,5 +96,5 @@ Javascript:
             0: el
         };
     };
-    return pk;
-})(pk);
+    return oui;
+})(oui);

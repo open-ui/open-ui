@@ -1,4 +1,4 @@
-var pk = pk || {};
+var oui = oui || {};
 /**
 Create a new chart component
 
@@ -47,7 +47,7 @@ Javascript:
 
 @chainable
 */
-(function(pk) {
+(function(oui) {
     oui.chart = function(opt) {
         var el=oui.replaceEl(opt.element, "<div class='oui-chart'></div>", true),
 			l=oui.layout(el),
@@ -369,5 +369,5 @@ Javascript:
 
 		
     };
-    return pk;
-})(pk);
+    return oui;
+})(oui);
