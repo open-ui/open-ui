@@ -10,4 +10,4 @@ Beautiful open source UI components written in lean, clean Javascript with no de
 
 ==============================
 
-[Website](http://www.ouijs.org)
+[About, API documentation, examples](http://www.ouijs.org)
