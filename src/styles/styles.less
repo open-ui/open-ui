@@ -85,28 +85,27 @@
 	textarea{
 		height:@item-width/2;
 	}
-	a{
-		color:lighten(@color-highlight, 30%);
+	a{		
 		text-decoration:none;
 		display:inline-block;
 		position:relative;
+		.oui-link-hover;
+		&:after{
+			position:absolute;
+			content:'';
+			border-top:1px solid lighten(@color-highlight, 30%);
+			width:0;
+			left:50%;
+			top:100%;
+			transition:all @transition-duration ease-in;
+		}
+		&:hover:after{
+			width:100%;
+			left:0;
+		}
 	}
-	a:after{
-		position:absolute;
-		content:'';
-		border-top:1px solid lighten(@color-highlight, 30%);
-		width:0;
-		left:50%;
-		top:100%;
-		transition:all @transition-duration ease-in;
-	}
-	a:hover:after{
-		width:100%;
-		left:0;
-	}
-
 	button{
-		background:@color-highlight;
+		background:lighten(@color-highlight, 10%);
 		color:@color-background;
 		display:inline-block;
 		padding:0 @item-height/3;
@@ -122,7 +121,7 @@
 		}
 		&:hover{
 			.oui-button-hover;
-		}	
+		}		
 	}	
 }
 
