@@ -1,9 +1,9 @@
 @import "../core/core.less";
-.oui-fileinput{
+.ui-fileinput{
 	width:@item-width;
 	display:inline-block;
 	position:relative;	
-	.oui-file-selected{		
+	.ui-file-selected{		
 		list-style:none;
 		margin:0;
 		padding:0;
@@ -11,7 +11,7 @@
 		line-height:@item-height;
 		color:lighten(@color-highlight, 20%);
 	}
-	.oui-file-browse{
+	.ui-file-browse{
 		overflow:hidden;
 		width:80px;
 		height:@item-height;
@@ -37,11 +37,11 @@
 			opacity:0;			
 			&:hover{
 				~button{				
-					.oui-button-hover;
+					.ui-button-hover;
 				}
 			}
 			&:active~button{
-				.oui-button-active;
+				.ui-button-active;
 			}
 		}
 	}

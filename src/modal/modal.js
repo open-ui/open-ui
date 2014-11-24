@@ -1,4 +1,4 @@
-var oui = oui || {};
+var $ui = $ui || {};
 
 /**
 Create a new modal component
@@ -10,14 +10,14 @@ HTML:
 Javascript: 
 
 	function showModal(){
-		oui.modal({
+		$ui.modal({
 			header:'Modal header',
 			content:'Modal content', 
 			draggable:true
 		});
 	}
 
-@class oui.modal
+@class $ui.modal
 @constructor
 @param options {Object}
 @param options.element {Object} DOM element to convert to component
@@ -28,19 +28,19 @@ Javascript:
 @chainable
 */
 
-(function(oui) {
-    oui.modal = function(opt) {
+(function($ui) {
+    $ui.modal = function(opt) {
         var h = opt.header,
             c = opt.content;
         /*jshint multistr: true */
-        var tpl = "<div class='oui-modal-mask'>\
-			<div class='oui-modal-box oui-animated'>\
-				<div class='oui-modal-header'>" + h + "<span class='oui-modal-close'></span></div>\
-				<div class='oui-modal-content'>" + c + "</div>\
+        var tpl = "<div class='ui-modal-mask'>\
+			<div class='ui-modal-box ui-animated'>\
+				<div class='ui-modal-header'>" + h + "<span class='ui-modal-close'></span></div>\
+				<div class='ui-modal-content'>" + c + "</div>\
 			</div>\
 		</div>";
 
-        var el = oui.createEl(tpl),
+        var el = $ui.createEl(tpl),
             box = el.children[0],
             header = box.children[0],
             close = header.children[0];
@@ -52,46 +52,46 @@ Javascript:
         }
 
         function closeModal() {
-            oui.removeClass(el, 'oui-show');
+            $ui.removeClass(el, 'ui-show');
             setTimeout(function() {
                 el.parentNode.removeChild(el);
             }, 500);
         }
-        oui.bindEvent("click", el, function(e) {
+        $ui.bindEvent("click", el, function(e) {
             if (e.target !== el) {
                 return;
             }
             closeModal();
         });
-        oui.bindEvent("click", close, closeModal);
-        oui.bindEvent("resize", window, function() {
-            oui.center(box);
+        $ui.bindEvent("click", close, closeModal);
+        $ui.bindEvent("resize", window, function() {
+            $ui.center(box);
         });
         setTimeout(function() {
-            oui.addClass(el, 'oui-show');
+            $ui.addClass(el, 'ui-show');
         }, 10);
 
         var boxH = box.offsetHeight || 0;
         setInterval(function() {
             var boxHN = box.offsetHeight;
             if (boxH !== boxHN) {
-                oui.center(box);
+                $ui.center(box);
                 boxH = boxHN;
             }
         }, 500);
-        oui.center(box);
+        $ui.center(box);
 
-        if (opt.draggable !== false && oui.drag) {
-            oui.drag({
+        if (opt.draggable !== false && $ui.drag) {
+            $ui.drag({
                 element: box,
                 handle: header,
                 move: true,
                 listeners: {
                     dragstart: function() {
-                        oui.removeClass(box, 'oui-animated');
+                        $ui.removeClass(box, 'ui-animated');
                     },
                     dragend: function() {
-                        oui.addClass(box, 'oui-animated');
+                        $ui.addClass(box, 'ui-animated');
                     }
                 }
             });
@@ -105,5 +105,5 @@ Javascript:
             close: closeModal
         };
     };
-    return oui;
-})(oui);
+    return $ui;
+})($ui);

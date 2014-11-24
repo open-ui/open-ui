@@ -1,4 +1,4 @@
-var oui = oui || {};
+var $ui = $ui || {};
 /**
 Create a new carousel component from an unordered list element `<ul>`
 
@@ -12,12 +12,12 @@ HTML:
 
 Javascript:
 	
-	oui.carousel({
+	$ui.carousel({
 		element: document.getElementById('carousel'),
 		delay:5000
 	});
 
-@class oui.carousel
+@class $ui.carousel
 @constructor
 @param options {Object}
 @param options.element {Object} DOM element to convert to component
@@ -27,8 +27,8 @@ Javascript:
 @return Object {Object} Consisting of original DOM element (item `0`) and class methods (see below)
 @chainable
 */
-(function(oui) {
-    oui.carousel = function(opt) {
+(function($ui) {
+    $ui.carousel = function(opt) {
         var el = opt.element,
             options = opt.options || [],
             value = opt.value || 0,
@@ -41,37 +41,37 @@ Javascript:
                 options.push(el.children[i].innerHTML);
             }
         }
-        var tpl = "<div class='oui-carousel' tabindex='" + inputTabIndex + "'><ul>",
+        var tpl = "<div class='ui-carousel' tabindex='" + inputTabIndex + "'><ul>",
             navEl = [],
             optionEl = [];
         for (var o = 0; o < options.length; o++) {
-            optionEl.push(oui.createEl("<li class='oui-option'>" + options[o] + "</li>"));
-            navEl.push(oui.createEl("<span class='oui-nav-item' data-nav='=" + o + "'>" + o + "</span>"));
+            optionEl.push($ui.createEl("<li class='ui-option'>" + options[o] + "</li>"));
+            navEl.push($ui.createEl("<span class='ui-nav-item' data-nav='=" + o + "'>" + o + "</span>"));
         }
-        tpl += "</ul><span class='oui-nav-prev' data-nav='-1'></span><span data-nav='+1' class='oui-nav-next'></span></div>";
+        tpl += "</ul><span class='ui-nav-prev' data-nav='-1'></span><span data-nav='+1' class='ui-nav-next'></span></div>";
 
         el.innerHTML = '';
-        el = oui.replaceEl(el, tpl);
+        el = $ui.replaceEl(el, tpl);
         for (o = 0; o < options.length; o++) {
             el.children[0].appendChild(optionEl[o]);
             el.appendChild(navEl[o]);
         }
 
         function clickHandler(e) {
-            obj.val(oui.attribute(e.target, 'data-nav'));
+            obj.val($ui.attribute(e.target, 'data-nav'));
         }
         for (var c in el.children) {
-            if (oui.attribute(el.children[c], 'data-nav')) {
-                oui.bindEvent('click', el.children[c], clickHandler);
+            if ($ui.attribute(el.children[c], 'data-nav')) {
+                $ui.bindEvent('click', el.children[c], clickHandler);
             }
         }
 
-        oui.bindEvent("mousewheel", el, function(e) {
-            oui.preventBubble(e);
+        $ui.bindEvent("mousewheel", el, function(e) {
+            $ui.preventBubble(e);
             obj.val((e.wheelDelta < 0 || e.detail > 0) ? '-1' : '+1');
         });
 
-        oui.bindEvent('keydown', el, function(e) {
+        $ui.bindEvent('keydown', el, function(e) {
             if (document.activeElement !== el) {
                 return;
             }
@@ -80,22 +80,22 @@ Javascript:
                 case 40: //down cursor
                 case 37: //left cursor
                     obj.val('-1');
-                    oui.preventBubble(e);
+                    $ui.preventBubble(e);
                     break;
                 case 33: //page up
                 case 32: //spacebar				
                 case 38: //up cursor
                 case 39: //right cursor
                     obj.val('+1');
-                    oui.preventBubble(e);
+                    $ui.preventBubble(e);
                     break;
                 case 36: //home
                     obj.val(0);
-                    oui.preventBubble(e);
+                    $ui.preventBubble(e);
                     break;
                 case 35: //end
                     obj.val(options.length - 1);
-                    oui.preventBubble(e);
+                    $ui.preventBubble(e);
                     break;
             }
         });
@@ -136,23 +136,23 @@ Javascript:
                 }
                 for (o = 0; o < options.length; o++) {
                     if (oldVal !== undefined && oldVal === o) {
-                        oui.addClass(optionEl[o], 'oui-carousel-out-' + outClass);
+                        $ui.addClass(optionEl[o], 'ui-carousel-out-' + outClass);
                     } else if (oldVal !== undefined) {
-                        oui.removeClass(optionEl[o], 'oui-carousel-out-left');
-                        oui.removeClass(optionEl[o], 'oui-carousel-out-right');
+                        $ui.removeClass(optionEl[o], 'ui-carousel-out-left');
+                        $ui.removeClass(optionEl[o], 'ui-carousel-out-right');
                     }
                     if (parseInt(o, 0) === value) {
                         // add the selected class to the current iteration					
-                        oui.addClass(optionEl[o], 'oui-selected');
-                        oui.addClass(navEl[o], 'oui-selected');
+                        $ui.addClass(optionEl[o], 'ui-selected');
+                        $ui.addClass(navEl[o], 'ui-selected');
                         if (oldVal !== undefined) {
-                            oui.addClass(optionEl[o], 'oui-carousel-in-' + inClass);
+                            $ui.addClass(optionEl[o], 'ui-carousel-in-' + inClass);
                         }
                     } else {
-                        oui.removeClass(optionEl[o], 'oui-selected');
-                        oui.removeClass(optionEl[o], 'oui-carousel-in-right');
-                        oui.removeClass(optionEl[o], 'oui-carousel-in-left');
-                        oui.removeClass(navEl[o], 'oui-selected');
+                        $ui.removeClass(optionEl[o], 'ui-selected');
+                        $ui.removeClass(optionEl[o], 'ui-carousel-in-right');
+                        $ui.removeClass(optionEl[o], 'ui-carousel-in-left');
+                        $ui.removeClass(navEl[o], 'ui-selected');
                     }
                 }
                 oldVal = value;
@@ -173,5 +173,5 @@ Javascript:
 
         return obj;
     };
-    return oui;
-})(oui);
+    return $ui;
+})($ui);

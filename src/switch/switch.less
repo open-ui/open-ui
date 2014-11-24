@@ -1,5 +1,5 @@
 @import "../core/core.less";
-.oui-switch{
+.ui-switch{
     height:@item-height*.6;
     line-height:@item-height*.6;;
     width:@item-height*2;
@@ -9,22 +9,22 @@
 	input{
 		display:none;
 		&:checked{
-			~ .oui-indicator{
+			~ .ui-indicator{
 				left:50%;				
 				border-color:@color-highlight;
 			}
-			+ .oui-label{
+			+ .ui-label{
 				border-color:@color-highlight; 
 				background:@color-highlight; 
 			}
 		}
 	}
-	.oui-label,.oui-indicator{	
+	.ui-label,.ui-indicator{	
 		height:100%;
 		position:absolute;
 		pointer-events:none;
 	}
-	.oui-label{
+	.ui-label{
 		border-radius:@item-rounding*2;    
 		border:1px solid darken(@color-background, 20%);
 		background:darken(@color-background, 15%);
@@ -48,7 +48,7 @@
 			font-size:@item-height*.8;
 		}
 	}
-	.oui-indicator{
+	.ui-indicator{
 		width:50%;
 		background:@color-background;
 		left:0;

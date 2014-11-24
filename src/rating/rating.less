@@ -1,5 +1,5 @@
 @import "../core/core.less";
-.oui-rating {
+.ui-rating {
 	fieldset {
 		float: left;
 		border: none;
@@ -34,7 +34,7 @@
 		    position: relative;
 		}
 	}
-	&.oui-disabled{
+	&.ui-disabled{
 		label, label ~ label {
 			color: darken(@color-background, 20%);
 		}
@@ -46,7 +46,7 @@
 			color: darken(@color-background, 40%);
 		}
 	}
-	&:not(.oui-disabled){
+	&:not(.ui-disabled){
 		input{
 			&:checked{
 				& + label:hover,

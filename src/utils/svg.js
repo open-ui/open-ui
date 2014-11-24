@@ -1,13 +1,13 @@
-var oui = oui || {};
+var $ui = $ui || {};
 /**
 Utility class for SVG helpers
 
 
-@class oui.svg
+@class $ui.svg
 */
 
-(function(oui) {
-    oui.svg = {
+(function($ui) {
+    $ui.svg = {
 		polar2cartesian:function(centerX, centerY, radius, angleInDegrees) {
 		  var angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
 		  return {
@@ -39,5 +39,5 @@ Utility class for SVG helpers
 			};			
 		}
     };
-    return oui;
-})(oui);
+    return $ui;
+})($ui);

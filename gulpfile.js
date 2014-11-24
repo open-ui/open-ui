@@ -107,7 +107,7 @@ gulp.task('replace', function() {
             base: './'
         })
         .pipe(plugins.plumber())
-        .pipe(plugins.replace('pk', 'oui'))
+        .pipe(plugins.replace('oui', '$ui'))
         .pipe(gulp.dest('./'));
 });
 

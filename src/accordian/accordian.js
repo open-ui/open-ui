@@ -1,4 +1,4 @@
-var oui = oui || {};
+var $ui = $ui || {};
 /**
 Create a new accordian component from an unordered list element `<ul>` with the below structure:
 
@@ -6,20 +6,20 @@ HTML:
 
 	<ul id='accordian'>
         <li>
-            <h3 class='oui-content-header'>Content header</h3>
-            <div class='oui-content'>
+            <h3 class='ui-content-header'>Content header</h3>
+            <div class='ui-content'>
 				Content to collapse
 			</div>
         </li>
         <li>
-            <h3 class='oui-content-header'>Content header</h3>
-            <div class='oui-content'>
+            <h3 class='ui-content-header'>Content header</h3>
+            <div class='ui-content'>
 				Content to collapse
 			</div>
         </li>
         <li>
-            <h3 class='oui-content-header'>Content header</h3>
-            <div class='oui-content'>
+            <h3 class='ui-content-header'>Content header</h3>
+            <div class='ui-content'>
 				Content to collapse
 			</div>
         </li>		
@@ -27,13 +27,13 @@ HTML:
 
 Javascript:
 
-	oui.accordian({
+	$ui.accordian({
 		element: document.getElementById('accordian'),
 		animate: true,
 		multiple: true
 	});		
 		
-@class oui.accordian
+@class $ui.accordian
 @constructor
 @param options {Object}
 @param options.element {Object} DOM element to convert to component
@@ -43,17 +43,17 @@ Javascript:
 @chainable
 */
 
-(function(oui) {
-    oui.accordian = function(opt) {
+(function($ui) {
+    $ui.accordian = function(opt) {
         var el = opt.element,
             anim = opt.animate === false ? false : opt.animate || true,
             multiple = opt.multiple === false ? false : opt.multiple || true;
 
-		oui.addClass(el, 'oui-accordian');
+		$ui.addClass(el, 'ui-accordian');
 		
         function animHeight(tEl) {
             tEl.style.height = 'auto';
-            var h = oui.layout(tEl).height;
+            var h = $ui.layout(tEl).height;
             tEl.style.height = '0';
             setTimeout(function() {
                 tEl.style.height = h + 'px';
@@ -67,9 +67,9 @@ Javascript:
                 var content = el.children[a].children[1];
                 // if multiple set to false and node passed, hide all other nodes
                 if (tEl && el.children[a] !== tEl && multiple === false) {
-                    oui.removeClass(el.children[a], 'oui-show');
+                    $ui.removeClass(el.children[a], 'ui-show');
                 }
-                if (oui.hasClass(el.children[a], 'oui-show')) {
+                if ($ui.hasClass(el.children[a], 'ui-show')) {
                     // show...if not already shown
                     if (parseInt(content.style.height, 0) === 0 || !content.style.height) {
                         if (anim) {
@@ -84,11 +84,11 @@ Javascript:
                 }
             }
         }
-        oui.bindEvent('click', el, function(e) {
-            if (!oui.hasClass(e.target, 'oui-content-header')) {
+        $ui.bindEvent('click', el, function(e) {
+            if (!$ui.hasClass(e.target, 'ui-content-header')) {
                 return;
             }
-            oui.toggleClass(e.target.parentNode, 'oui-show');
+            $ui.toggleClass(e.target.parentNode, 'ui-show');
             doLayout(e.target.parentNode);
         });
         doLayout();
@@ -96,5 +96,5 @@ Javascript:
             0: el
         };
     };
-    return oui;
-})(oui);
+    return $ui;
+})($ui);

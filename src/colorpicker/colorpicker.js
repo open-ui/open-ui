@@ -1,4 +1,4 @@
-var oui = oui || {};
+var $ui = $ui || {};
 /**
 Create a new colorpicker control
 
@@ -8,7 +8,7 @@ HTML
 
 Javascript:
 
-	oui.colorpicker({
+	$ui.colorpicker({
 		element: document.getElementById('colorpicker'),
 		value:'#FF0000',
 		listeners:{
@@ -18,7 +18,7 @@ Javascript:
 		}
 	});
 	
-@class oui.colorpicker
+@class $ui.colorpicker
 @constructor
 @param options {Object}
 @param options.element {Object} DOM element to convert to control 
@@ -27,24 +27,24 @@ Javascript:
 @return Object {Object} Consisting of original DOM element (item `0`) and class methods (see below)
 @chainable
 */
-(function(oui) {
-    oui.colorpicker = function(opt) {
+(function($ui) {
+    $ui.colorpicker = function(opt) {
 
 
         var type = (window.SVGAngle || document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1") ? "SVG" : "VML"),
             listeners = opt.listeners === undefined ? {} : opt.listeners,
             el = opt.element,
             value = opt.value || '#000000',
-            tpl = "<div class='oui-colorpicker'>\
-				<div class='oui-colorpicker-area'>\
-					<div class='oui-colorpicker-slPicker'></div>\
+            tpl = "<div class='ui-colorpicker'>\
+				<div class='ui-colorpicker-area'>\
+					<div class='ui-colorpicker-slPicker'></div>\
 				</div>\
-				<div class='oui-colorpicker-range'>\
-					<div class='oui-colorpicker-hPicker'></div>\
+				<div class='ui-colorpicker-range'>\
+					<div class='ui-colorpicker-hPicker'></div>\
 				</div>\
 			</div>";
 
-        el = oui.replaceEl(el, tpl);
+        el = $ui.replaceEl(el, tpl);
         var areaTpl, areaEl, rangeTpl, rangeEl;
         if (type === 'SVG') {
             areaTpl = "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='100%' height='100%'>\
@@ -101,8 +101,8 @@ Javascript:
 
 
 
-        areaEl = oui.createEl(areaTpl);
-        rangeEl = oui.createEl(rangeTpl);
+        areaEl = $ui.createEl(areaTpl);
+        rangeEl = $ui.createEl(rangeTpl);
         el.children[0].appendChild(areaEl);
         el.children[1].appendChild(rangeEl);
 
@@ -120,10 +120,10 @@ Javascript:
             var x = c.x,
                 y = c.y,
                 pEl = rEl.parentNode,
-                pH = oui.layout(pEl).height,
-                pW = oui.layout(pEl).width,
-                h = oui.layout(rEl).height,
-                w = oui.layout(rEl).width,
+                pH = $ui.layout(pEl).height,
+                pW = $ui.layout(pEl).width,
+                h = $ui.layout(rEl).height,
+                w = $ui.layout(rEl).width,
                 prevCol = color;
 
             if (x) {
@@ -158,36 +158,36 @@ Javascript:
             if (rEl === lightnessEl) {
                 hsv.s = Math.round(c.x * 100);
                 hsv.v = Math.round((1 - c.y) * 100);
-                color = oui.color.hsv2hex([hsv.h, hsv.s, hsv.v]);
+                color = $ui.color.hsv2hex([hsv.h, hsv.s, hsv.v]);
             }
             if (rEl === hueEl) {
                 hsv.h = Math.round(c.y * 360);
-                color = oui.color.hsv2hex([hsv.h, hsv.s, hsv.v]);
-                lightnessEl.parentNode.style.backgroundColor = oui.color.hsv2hex([hsv.h, 100, 100]);
+                color = $ui.color.hsv2hex([hsv.h, hsv.s, hsv.v]);
+                lightnessEl.parentNode.style.backgroundColor = $ui.color.hsv2hex([hsv.h, 100, 100]);
             }
             if (listeners.change && typeof listeners.change === 'function') {
                 listeners.change(prevCol, color);
             }
         }
-        oui.bindEvent('click', lightnessEl.parentNode, function(e) {
+        $ui.bindEvent('click', lightnessEl.parentNode, function(e) {
             if (e.target === lightnessEl) {
                 return;
             }
             resolvePos(lightnessEl, {
-                x: (oui.getEventOffset(e).x - oui.layout(lightnessEl).width / 2) / oui.layout(lightnessEl.parentNode).width,
-                y: (oui.getEventOffset(e).y - oui.layout(lightnessEl).height / 2) / oui.layout(lightnessEl.parentNode).width
+                x: ($ui.getEventOffset(e).x - $ui.layout(lightnessEl).width / 2) / $ui.layout(lightnessEl.parentNode).width,
+                y: ($ui.getEventOffset(e).y - $ui.layout(lightnessEl).height / 2) / $ui.layout(lightnessEl.parentNode).width
             });
         });
-        oui.bindEvent('click', hueEl.parentNode, function(e) {
+        $ui.bindEvent('click', hueEl.parentNode, function(e) {
             if (e.target === hueEl) {
                 return;
             }
             resolvePos(hueEl, {
                 x: false,
-                y: oui.getEventOffset(e).y / oui.layout(hueEl.parentNode).height
+                y: $ui.getEventOffset(e).y / $ui.layout(hueEl.parentNode).height
             });
         });
-        oui.drag({
+        $ui.drag({
             element: hueEl.parentNode,
             move: false,
             container: {
@@ -203,7 +203,7 @@ Javascript:
             }
         });
 
-        oui.drag({
+        $ui.drag({
             element: lightnessEl.parentNode,
             move: false,
             container: {
@@ -235,7 +235,7 @@ Javascript:
                 if (!val) {
                     return color;
                 }
-                var hsvArr = oui.color.hex2hsv(val);
+                var hsvArr = $ui.color.hex2hsv(val);
                 hsv = {
                     h: hsvArr[0],
                     s: hsvArr[1],
@@ -255,5 +255,5 @@ Javascript:
         return obj;
 
     };
-    return oui;
-})(oui);
+    return $ui;
+})($ui);

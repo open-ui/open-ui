@@ -1,4 +1,4 @@
-var oui = oui || {};
+var $ui = $ui || {};
 /**
 Utility class for creating draggable elements
 
@@ -8,7 +8,7 @@ HTML:
 
 Javascript:
 	
-	oui.drag({
+	$ui.drag({
 		element: document.getElementById('draggable'),
 		move: true,
 		container:{
@@ -28,7 +28,7 @@ Javascript:
 		}
 	});
 
-@class oui.drag
+@class $ui.drag
 @constructor
 @param options {Object}
 @param options.element {Object} DOM element to attach drag handlers to
@@ -41,8 +41,8 @@ Javascript:
 @return Object {Object} Consisting of original DOM element (item `0`)
 @chainable
 */
-(function(oui) {
-    oui.drag = function(opt) {
+(function($ui) {
+    $ui.drag = function(opt) {
         var el = opt.element;
         var handle = opt.handle || opt.element;
         var container = {
@@ -50,7 +50,7 @@ Javascript:
             style: opt.container && opt.container.style ? opt.container.style : 'restrict'
         };
 
-        oui.addClass(handle, 'oui-drag');
+        $ui.addClass(handle, 'ui-drag');
         var fn = opt.listeners;
         var m = opt.move;
         if (m && typeof m !== 'object') {
@@ -77,8 +77,8 @@ Javascript:
                     y: e.dragEnd.y - e.dragStart.y
                 };
                 e.dragPerc = {
-                    x: ( e.dragDist.x + e.dragOffset.x) / oui.layout(container.element).width,
-                    y: ( e.dragDist.y + e.dragOffset.y) / oui.layout(container.element).height
+                    x: ( e.dragDist.x + e.dragOffset.x) / $ui.layout(container.element).width,
+                    y: ( e.dragDist.y + e.dragOffset.y) / $ui.layout(container.element).height
                 };
                 return e;
             }
@@ -102,7 +102,7 @@ Javascript:
         @param element {Object} Element event fired on
         @param event {Object} Event object
         */
-        oui.bindEvent("mousedown", handle, function(e) {
+        $ui.bindEvent("mousedown", handle, function(e) {
             dragging = true;
             dragStart = {
                 x: e.clientX,
@@ -113,8 +113,8 @@ Javascript:
                 y: e.clientY - el.getBoundingClientRect().top
             };
             e = augmentEvent(e);
-            oui.addClass(handle, 'oui-drag-dragging');
-            oui.addClass(document.body, 'oui-noselect');
+            $ui.addClass(handle, 'ui-drag-dragging');
+            $ui.addClass(document.body, 'ui-noselect');
             document.onselectstart = function() {
                 return false;
             };
@@ -122,14 +122,14 @@ Javascript:
                 fn.dragstart(el, e);
             }
         });
-        oui.bindEvent("mouseup", window, function(e) {
+        $ui.bindEvent("mouseup", window, function(e) {
             if (!dragging) {
                 return;
             }
             dragging = false;
             e = augmentEvent(e);
-            oui.removeClass(handle, 'oui-drag-dragging');
-            oui.removeClass(document.body, 'oui-noselect');
+            $ui.removeClass(handle, 'ui-drag-dragging');
+            $ui.removeClass(document.body, 'ui-noselect');
             document.onselectstart = function() {
                 return true;
             };
@@ -160,7 +160,7 @@ Javascript:
                 el.style.top = h - el.offsetHeight - oY + 'px';
             }
         }
-        oui.bindEvent("mousemove", window, function(e) {
+        $ui.bindEvent("mousemove", window, function(e) {
             if (!dragging) {
                 return;
             }
@@ -182,4 +182,4 @@ Javascript:
             0: el
         };
     };
-})(oui);
+})($ui);

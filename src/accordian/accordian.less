@@ -1,17 +1,17 @@
 @import "../core/core.less";
-.oui-accordian{
+.ui-accordian{
     list-style:none;
 	margin:0;
 	padding:0;
 	li{
 	    margin:0;
 		padding:0;
-		&.oui-show .oui-content-header:before{
+		&.ui-show .ui-content-header:before{
 			content:'\25BE';
 		}
-		.oui-content-header{
+		.ui-content-header{
 			transition: all 200ms ease-in;
-			.oui-noselect;
+			.ui-noselect;
 			&:before{
 				content:'\25B8';
 				font-size:1.5em;
@@ -24,7 +24,7 @@
 				color:@color-highlight;
 			}
 		}
-		.oui-content{
+		.ui-content{
 			overflow:hidden;
 			transition:all 100ms ease-in;
 			height:0;

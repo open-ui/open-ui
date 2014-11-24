@@ -1,4 +1,4 @@
-var oui = oui || {};
+var $ui = $ui || {};
 /**
 Attach custom scrollbars to an element
 
@@ -10,27 +10,27 @@ HTML:
 	
 Javascript:
 
-	oui.scroll({
+	$ui.scroll({
 		element: document.getElementById('scroll'),
 		axis: 'xy'
 	});
 	
-@class oui.scroll
+@class $ui.scroll
 @constructor
 @param options {Object}
 @param options.element {Object} DOM element to attach drag handlers to
 @param [options.sensitivity=60] {Number} Number in px to scroll incrementally on `mousewheel` and `key` events. Can also be expressed as percentage, e.g. `10%` of content
-@param [options.axis=y] {Object} Object consisting of `x` and `y` {Boolean} values denoting scrollable axis, DOM element to attach drag handlers to. Defaults to element attribute `oui-scroll` or `y`
+@param [options.axis=y] {Object} Object consisting of `x` and `y` {Boolean} values denoting scrollable axis, DOM element to attach drag handlers to. Defaults to element attribute `ui-scroll` or `y`
 @return Object {Object} Consisting of original DOM element (item `0`)
 @chainable
 */
-(function(oui) {
+(function($ui) {
     // HELPERS FOR jQUERY+ANGULAR
     if (typeof jQuery === 'object') {
         // jquery available
         jQuery.fn.extend({
-            ouiScroll: function(axis) {
-                oui.scroll({
+            $uiScroll: function(axis) {
+                $ui.scroll({
                     element: this[0],
                     axis: axis
                 });
@@ -42,21 +42,21 @@ Javascript:
         ( 
 
             function() {
-                angular.module('oui-scroll', ['ng'])
-                    .directive('ouiScroll', function() {
+                angular.module('ui-scroll', ['ng'])
+                    .directive('$uiScroll', function() {
                         return {
                             restrict: 'A',
                             link: function(scope, el) {
-                                oui.scroll({
+                                $ui.scroll({
                                     element: el[0],
-                                    axis: el[0].getAttribute('oui-scroll')
+                                    axis: el[0].getAttribute('ui-scroll')
                                 });
                             }
                         };
                     });
             })();
     }
-    oui.scroll = function(opt) {
+    $ui.scroll = function(opt) {
 
         var el = opt.element,
 			sensitivity=60,
@@ -74,31 +74,31 @@ Javascript:
             contentHeight = 0,
             containerWidth = 0,
             containerHeight = 0,
-            scrollDir = opt.axis ? opt.axis.toLowerCase() : (oui.attribute(el, 'oui-scroll') ? oui.attribute(el, 'oui-scroll') : "y"),
-			tpl = "<div class='oui-scroll-container'>\
-            <" + el.nodeName + " class='oui-scroll-content'>\
+            scrollDir = opt.axis ? opt.axis.toLowerCase() : ($ui.attribute(el, 'ui-scroll') ? $ui.attribute(el, 'ui-scroll') : "y"),
+			tpl = "<div class='ui-scroll-container'>\
+            <" + el.nodeName + " class='ui-scroll-content'>\
                 " + el.innerHTML + "\
             </" + el.nodeName + ">\
-            <div class='oui-scroll-trackY'>\
-                <div class='oui-scroll-floatY'></div>\
+            <div class='ui-scroll-trackY'>\
+                <div class='ui-scroll-floatY'></div>\
             </div>\
-            <div class='oui-scroll-trackX'>\
-                <div class='oui-scroll-floatX'></div>\
+            <div class='ui-scroll-trackX'>\
+                <div class='ui-scroll-floatX'></div>\
             </div>\
         </div>";
 		el.innerHTML='';
-        el = oui.replaceEl(el, tpl);
+        el = $ui.replaceEl(el, tpl);
         var container = el.children[0],
             trackY = el.children[1],
             floatY = trackY.children[0],
             trackX = el.children[2],
             floatX = trackX.children[0];
 			
-        if (oui.getStyle(el, 'position') === "static") {
+        if ($ui.getStyle(el, 'position') === "static") {
             el.style.position = "relative";
         }
 
-        oui.bindEvent("scroll", container, function() {
+        $ui.bindEvent("scroll", container, function() {
             percY = container.scrollTop / (contentH - containerH);
             percX = container.scrollLeft / (contentW - containerW);
             percY = percY < 0 ? 0 : percY > 1 ? 1 : percY;
@@ -107,10 +107,10 @@ Javascript:
             floatX.style.left = (containerW - floatXw) * percX + 'px';
         });
 		
-		oui.bindEvent("scroll", el, function(e){
+		$ui.bindEvent("scroll", el, function(e){
 			container.scrollTop=el.scrollTop;
 			container.scrollLeft=el.scrollLeft;
-			oui.preventBubble(e);
+			$ui.preventBubble(e);
 		});
 		
 
@@ -121,22 +121,22 @@ Javascript:
             containerW = el.offsetWidth;
             if (scrollDir.indexOf("y") > -1 && contentH > containerH) {
                 allowY = true;
-                oui.addClass(el, 'oui-scroll-enableY');
+                $ui.addClass(el, 'ui-scroll-enableY');
                 floatYh = floatY.offsetHeight;
                 container.scrollTop = (contentH - containerH) * percY;
             } else {
                 allowY = false;
-                oui.removeClass(el, 'oui-scroll-enableY');
+                $ui.removeClass(el, 'ui-scroll-enableY');
                 container.scrollTop = 0;
             }
             if (scrollDir.indexOf("x") > -1 && contentW > containerW) {
                 allowX = true;
-                oui.addClass(el, 'oui-scroll-enableX');
+                $ui.addClass(el, 'ui-scroll-enableX');
                 floatXw = floatX.offsetWidth;
                 container.scrollLeft = (contentW - containerW) * percX;
             } else {
                 allowX = false;
-                oui.removeClass(el, 'oui-scroll-enableX');
+                $ui.removeClass(el, 'ui-scroll-enableX');
                 container.scrollLeft = 0;
             }
         }
@@ -159,7 +159,7 @@ Javascript:
         // DRAG HANDLERS
 
         if (allowY) {
-            oui.drag({
+            $ui.drag({
                 element: floatY,
                 move: {
                     y: true
@@ -175,7 +175,7 @@ Javascript:
             });
         }
         if (allowX) {
-            oui.drag({
+            $ui.drag({
                 element: floatX,
                 move: {
                     x: true
@@ -191,19 +191,19 @@ Javascript:
                 }
             });
         }
-        oui.bindEvent("click", floatY, function(e) {
-            oui.preventBubble(e);
+        $ui.bindEvent("click", floatY, function(e) {
+            $ui.preventBubble(e);
         });
-        oui.bindEvent("click", floatX, function(e) {
-            oui.preventBubble(e);
+        $ui.bindEvent("click", floatX, function(e) {
+            $ui.preventBubble(e);
         });
 
         // TRACK CLICKING HANDLERS
-        oui.bindEvent("click", trackY, function(e) {
-            container.scrollTop = (oui.getEventOffset(e).y / containerH * (contentH - containerH));
+        $ui.bindEvent("click", trackY, function(e) {
+            container.scrollTop = ($ui.getEventOffset(e).y / containerH * (contentH - containerH));
         });
-        oui.bindEvent("click", trackX, function(e) {
-            container.scrollLeft = (oui.getEventOffset(e).x / containerW * (contentW - containerW));
+        $ui.bindEvent("click", trackX, function(e) {
+            container.scrollLeft = ($ui.getEventOffset(e).x / containerW * (contentW - containerW));
         });
 
         // MOUSE WHEEL HANDLERS
@@ -220,10 +220,10 @@ Javascript:
 				container.scrollLeft += typeof sensitivity === 'string' && sensitivity.indexOf('%') ?  containerW * parseInt(sensitivity.replace('%',''),0)/100 : sensitivity;			
 			}
             /* Stop wheel propogation (prevent parent scrolling) */
-            oui.preventBubble(e);
+            $ui.preventBubble(e);
         }
 
-        oui.bindEvent("mousewheel", container, mouseScroll);
+        $ui.bindEvent("mousewheel", container, mouseScroll);
 
         // TOUCH EVENT HANDLERS
 
@@ -281,14 +281,14 @@ Javascript:
             return false;
         }
         if (typeof window.ontouchstart !== 'undefined') {
-            oui.bindEvent('touchstart', container[0], tap);
-            oui.bindEvent('touchmove', container[0], drag);
-            oui.bindEvent('touchend', window, release);
+            $ui.bindEvent('touchstart', container[0], tap);
+            $ui.bindEvent('touchmove', container[0], drag);
+            $ui.bindEvent('touchend', window, release);
         }
 
         // KEYBOARD HANDLERS    
         container.setAttribute("tabindex", 0);
-        oui.bindEvent('keydown', container, function(e) {
+        $ui.bindEvent('keydown', container, function(e) {
             if (document.activeElement !== container) {
                 return;
             }
@@ -296,28 +296,28 @@ Javascript:
                 switch (e.keyCode) {
                     case 38: //up cursor						
                         container.scrollTop -= typeof sensitivity === 'string' && sensitivity.indexOf('%') ?  containerH * parseInt(sensitivity.replace('%',''),0)/100 : sensitivity;
-                        oui.preventBubble(e);
+                        $ui.preventBubble(e);
                         break;
                     case 40: //down cursor
                     case 32: //spacebar
                         container.scrollTop += typeof sensitivity === 'string' && sensitivity.indexOf('%') ?  containerH * parseInt(sensitivity.replace('%',''),0)/100 : sensitivity;
-                        oui.preventBubble(e);
+                        $ui.preventBubble(e);
                         break;
                     case 33: //page up
                         container.scrollTop -= containerH;
-                        oui.preventBubble(e);
+                        $ui.preventBubble(e);
                         break;
                     case 34: //page down
                         container.scrollTop += containerH;
-                        oui.preventBubble(e);
+                        $ui.preventBubble(e);
                         break;
                     case 36: //home
                         container.scrollTop = 0;
-                        oui.preventBubble(e);
+                        $ui.preventBubble(e);
                         break;
                     case 35: //end
                         container.scrollTop = contentH;
-                        oui.preventBubble(e);
+                        $ui.preventBubble(e);
                         break;
                 }
             }
@@ -325,11 +325,11 @@ Javascript:
                 switch (e.keyCode) {
                     case 37: //left cursor
                         container.scrollLeft -= typeof sensitivity === 'string' && sensitivity.indexOf('%') ?  containerW * parseInt(sensitivity.replace('%',''),0)/100 : sensitivity;
-                        oui.preventBubble(e);
+                        $ui.preventBubble(e);
                         break;
                     case 39: //right cursor
                         container.scrollLeft += typeof sensitivity === 'string' && sensitivity.indexOf('%') ?  containerW * parseInt(sensitivity.replace('%',''),0)/100 : sensitivity;
-                        oui.preventBubble(e);
+                        $ui.preventBubble(e);
                         break;
                 }
             }
@@ -339,5 +339,5 @@ Javascript:
 
         });
     };
-    return oui;
-})(oui);
+    return $ui;
+})($ui);

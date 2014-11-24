@@ -1,5 +1,5 @@
 @import "../core/core.less";
-.oui-tooltip{
+.ui-tooltip{
 	position:absolute;
 	z-index:999;
 	background:@color-foreground;
@@ -16,7 +16,7 @@
 		height: 0;
 		border-style: solid;
 	}	
-	&.oui-top{		
+	&.ui-top{		
 		&:before{
 			border-width: 7px 7px 0 7px;
 			border-color: @color-foreground transparent transparent transparent;
@@ -24,7 +24,7 @@
 			left:7px;		
 		}
 	}
-	&.oui-right{		
+	&.ui-right{		
 		&:before{	
 			border-width: 7px 7px 7px 0;
 			border-color: transparent @color-foreground transparent transparent;
@@ -32,7 +32,7 @@
 			left:-7px;
 		}
 	}
-	&.oui-bottom{		
+	&.ui-bottom{		
 		&:before{
 			border-width: 0 7px 7px 7px;
 			border-color: transparent transparent @color-foreground transparent;
@@ -40,7 +40,7 @@
 			left:7px;		
 		}
 	}	
-	&.oui-left{
+	&.ui-left{
 		&:before{
 			border-width: 7px 0 7px 7px;
 			border-color: transparent transparent transparent @color-foreground;
@@ -48,35 +48,35 @@
 			right:-7px;
 		}
 	}
-	&.oui-show{
+	&.ui-show{
 		display:block;		
 		padding:@item-height/8 @item-height/4;
 		animation-duration:200ms;
 		animation-timing-function:ease-in;
 		animation-fill-mode:forwards;
-		&.oui-top{	
-			animation-name: oui-anim-tooltip-top;
+		&.ui-top{	
+			animation-name: ui-anim-tooltip-top;
 			opacity:1;	
 			margin:-1 * (@item-height/2) 0 0 0;
 		}		
-		&.oui-right{		
-			animation-name: oui-anim-tooltip-right;	
+		&.ui-right{		
+			animation-name: ui-anim-tooltip-right;	
 			opacity:1;		
 			margin:-3.5px 0 0 @item-height/2;	
 		}		
-		&.oui-bottom{
-			animation-name: oui-anim-tooltip-bottom;		
+		&.ui-bottom{
+			animation-name: ui-anim-tooltip-bottom;		
 			margin:@item-height/2 0 0 0;	
 			opacity:1;	
 		}		
-		&.oui-left{		
-			animation-name: oui-anim-tooltip-left;
+		&.ui-left{		
+			animation-name: ui-anim-tooltip-left;
 			opacity:1;	
 			margin:-3.5px 0 0 -1*(@item-height); 
 		}
 	}
 }
-@keyframes oui-anim-tooltip-top { 
+@keyframes ui-anim-tooltip-top { 
 	from { 
 		opacity:0;
 		margin:-1 * (@item-height) 0 0 0; 
@@ -86,7 +86,7 @@
 		margin:-1 * (@item-height/2) 0 0 0;
 	}  
 }
-@keyframes oui-anim-tooltip-right { 
+@keyframes ui-anim-tooltip-right { 
 	from { 
 		opacity:0;
 		margin:-3.5px 0 0 @item-height;
@@ -96,7 +96,7 @@
 		margin:-3.5px 0 0 @item-height/2;
 	}  
 }
-@keyframes oui-anim-tooltip-bottom { 
+@keyframes ui-anim-tooltip-bottom { 
 	from { 
 		opacity:0;
 		margin:@item-height 0 0 0;
@@ -107,7 +107,7 @@
 	}  
 }
 
-@keyframes oui-anim-tooltip-left { 
+@keyframes ui-anim-tooltip-left { 
 	from { 
 		opacity:0;
 		margin:-3.5px 0 0 -1*(@item-height*2); 

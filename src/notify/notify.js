@@ -1,4 +1,4 @@
-var oui = oui || {};
+var $ui = $ui || {};
 /**
 Class used for notification management
 
@@ -9,12 +9,12 @@ HTML
 Javascript:
 
 	function showNotification(){
-		oui.notify.push({
+		$ui.notify.push({
 			content:'Default message'
 		});
 	}
 
-@class oui.notify
+@class $ui.notify
 @static
 */
 
@@ -32,23 +32,23 @@ Remove a notification
 @method remove
 @param element {Object} Notification element to remove
 */
-(function(oui) {
-    var nEl = oui.createEl("<ul class='oui-notify'></ul>");
+(function($ui) {
+    var nEl = $ui.createEl("<ul class='ui-notify'></ul>");
     document.body.appendChild(nEl);
-    oui.notify = {
+    $ui.notify = {
         add: function(opt) {
-            var mEl = oui.createEl("<li tabindex='" + oui.getRand(1, 999) + "'>" + opt.content + "</li>"),
+            var mEl = $ui.createEl("<li tabindex='" + $ui.getRand(1, 999) + "'>" + opt.content + "</li>"),
                 delay = opt.delay || 8000;
             nEl.appendChild(mEl);
             setTimeout(function() {
-                oui.addClass(mEl, 'oui-show');
+                $ui.addClass(mEl, 'ui-show');
             }, 10);
             var scope = this;
             setTimeout(function() {
                 scope.remove(mEl);
             }, delay);
 
-            oui.bindEvent('click', mEl, function() {
+            $ui.bindEvent('click', mEl, function() {
                 scope.remove(mEl);
             });
             return {
@@ -56,10 +56,10 @@ Remove a notification
             };
         },
         remove: function(dEl) {
-            if (!oui.hasClass(dEl, 'oui-show')) {
+            if (!$ui.hasClass(dEl, 'ui-show')) {
                 return;
             }
-            oui.removeClass(dEl, 'oui-show');
+            $ui.removeClass(dEl, 'ui-show');
             setTimeout(function() {
                 if (dEl) {
                     nEl.removeChild(dEl);
@@ -67,4 +67,4 @@ Remove a notification
             }, 1000);
         }
     };
-})(oui);
+})($ui);

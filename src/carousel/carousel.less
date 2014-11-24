@@ -1,10 +1,10 @@
 @import "../core/core.less";
-.oui-carousel{
+.ui-carousel{
     position:relative;
     text-align:center;
 	overflow:hidden;
 	height:@item-width;
-	.oui-noselect;
+	.ui-noselect;
 	&:focus, &:active{
 		outline:none;
 	}
@@ -31,17 +31,17 @@
 		transition:all 500ms ease-in;
 		text-align:center;
 		opacity:0;
-		&.oui-selected{  
+		&.ui-selected{  
 			z-index:2;
 			// transform:scale(1);
 			opacity:1;
 		}
 		
 	}
-	.oui-carousel-out{		
+	.ui-carousel-out{		
 		z-index:1;
 	}
-	.oui-carousel-in-right{
+	.ui-carousel-in-right{
 		// left:100%;
 		animation-duration: 1s;
 		animation-delay:100ms;
@@ -53,7 +53,7 @@
 		from {left:100%;}
 		to {left:0;}
 	}
-	.oui-carousel-in-left{
+	.ui-carousel-in-left{
 		// right:100%;
 		animation-duration: 1s;
 		animation-delay:100ms;
@@ -65,7 +65,7 @@
 		from {right:100%;}
 		to {right:0;}
 	}	
-	.oui-nav-prev, .oui-nav-next{
+	.ui-nav-prev, .ui-nav-next{
 		z-index:4;
 		position:absolute;
 		left:-1 * (@item-height + (@item-height/3));
@@ -94,7 +94,7 @@
 		//	background:fade(@color-foreground, 15%);
 		}
 	}
-	 .oui-nav-next{
+	 .ui-nav-next{
 		left:auto;
 		right:-1 * (@item-height + (@item-height/3));
 		border-radius:100%;
@@ -107,7 +107,7 @@
 		}
 	 }
 	 
-	 .oui-nav-item{
+	 .ui-nav-item{
 		z-index:4;
 		cursor:pointer;
 		display:inline-block;
@@ -118,7 +118,7 @@
 		text-align:center;
 		transition:all 100ms ease-in;
 		font-size:0;
-		&.oui-selected:after{
+		&.ui-selected:after{
 			transform: scale(1);
 			opacity:1;
 		}
@@ -134,19 +134,19 @@
 			transform: scale(0.6);
 			transition:all 100ms ease-in;
 		}
-		&:not(.oui-selected):hover:after{
+		&:not(.ui-selected):hover:after{
 			transform: scale(0.8);
 			opacity:1;
 		}
 	}
 	&:hover{
-		.oui-nav-prev{
+		.ui-nav-prev{
 			left:0;
 		}
-		.oui-nav-next{
+		.ui-nav-next{
 			right:0;
 		}
-		.oui-nav-item{		
+		.ui-nav-item{		
 		//	background:fade(@color-foreground, 5%);
 		}
 	}

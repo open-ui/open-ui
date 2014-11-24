@@ -1,5 +1,5 @@
 @import "../core/core.less";
-.oui-toggle {
+.ui-toggle {
     width: @item-width;
     height: @item-height*0.85;
     border: 1px solid darken(@color-background, 10%);
@@ -11,15 +11,15 @@
     position: relative;
     overflow: hidden;
 	padding: 0;
-	.oui-noselect;
+	.ui-noselect;
 }
-.oui-toggle:focus, .oui-toggle:active{
+.ui-toggle:focus, .ui-toggle:active{
 	outline:none;
 }
-.oui-toggle input {
+.ui-toggle input {
     display: none;
 }
-.oui-toggle .oui-option{
+.ui-toggle .ui-option{
     text-transform: uppercase;
     display: inline-block;
     box-sizing: border-box;
@@ -28,15 +28,15 @@
     transition: color 100ms ease-in;
 	border-radius:@item-rounding;
 }
-.oui-toggle:not(.oui-disabled) .oui-option:not(.oui-selected):hover{
+.ui-toggle:not(.ui-disabled) .ui-option:not(.ui-selected):hover{
 	color:@color-highlight;
 }
-.oui-toggle .oui-option.oui-selected {
+.ui-toggle .ui-option.ui-selected {
     color: @color-background;
 }
 
 
-.oui-toggle .oui-toggle-indicator {
+.ui-toggle .ui-toggle-indicator {
     position: absolute;
     border-radius: @item-rounding;
     left: 2px;
@@ -47,6 +47,6 @@
     transition: left 200ms ease-in;
 }
 
-.oui-toggle.oui-disabled .oui-toggle-indicator {
+.ui-toggle.ui-disabled .ui-toggle-indicator {
     background: darken(@color-background, 30%);
 }

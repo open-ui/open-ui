@@ -1,20 +1,20 @@
 @import "../core/core.less";
-.oui-datepicker{
+.ui-datepicker{
 	border:1px solid @color-highlight;
 	position:relative;
 	overflow:hidden;
 	display:inline-block;
 	background:@color-highlight;
 	width:@item-width;
-	.oui-noselect;
-	.oui-datepicker-meta{
+	.ui-noselect;
+	.ui-datepicker-meta{
 		float: left;
 		position: relative;
 		top: 23px;
 		left: 10px;
 		color:lighten(@color-highlight, 25%);
 	}
-	.oui-datepicker-year{
+	.ui-datepicker-year{
 		text-align:right;
 		font-size:2em;
 		margin:20px 5px 10px 5px;
@@ -22,7 +22,7 @@
 		font-weight:100;
 	}
 
-	.oui-datepicker-years{		
+	.ui-datepicker-years{		
 		display:none;
 		width:100%;
 		color:lighten(@color-highlight, 40%);
@@ -36,7 +36,7 @@
 			text-align:center;
 		}
 	}
-	.oui-datepicker-month{
+	.ui-datepicker-month{
 		padding:2px 0 0 0;
 		margin:0 5px;
 		list-style:none;
@@ -70,7 +70,7 @@
 			}
 		}
 	}
-	.oui-datepicker-day{
+	.ui-datepicker-day{
 		background:@color-background;
 		border-collapse:collapse;	
 		box-sizing:border-box;
@@ -113,7 +113,7 @@
 				background:@color-prominent;
 				color:@color-background;			
 			}
-			&.oui-prev, &.oui-next{
+			&.ui-prev, &.ui-next{
 				color:darken(@color-background, 20%);
 				&:hover{
 					background:lighten(@color-highlight, 70%);					

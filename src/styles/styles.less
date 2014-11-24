@@ -2,7 +2,7 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900);
 
 
-.oui-overlay {
+.ui-overlay {
     position: fixed;
     left: 0;
     top: 0;
@@ -14,31 +14,31 @@
 	transition:all 0ms ease-in 200ms;
 	transition:opacity 150ms ease-in;
 }
-.oui-overlay.oui-show{
+.ui-overlay.ui-show{
 	width:100%;
 	height:100%;
 }
-.oui-hide {
+.ui-hide {
     display: none;
 }
 
-.oui-table{
+.ui-table{
 	display:table;
 }
 
-.oui-row{
+.ui-row{
 	display:table-row;
 }
 
-.oui-cell{
+.ui-cell{
 	display:table-cell;
 }
 
-.oui-overlay {
+.ui-overlay {
     background:@color-background;
 }
 
-.oui-ui{
+.ui-ui{
     font-family:@font-family;
 	color:@font-color;
     font-size: @font-size;
@@ -89,7 +89,7 @@
 		text-decoration:none;
 		display:inline-block;
 		position:relative;
-		.oui-link-hover;
+		.ui-link-hover;
 		&:after{
 			position:absolute;
 			content:'';
@@ -117,29 +117,29 @@
 		line-height:@item-height;
 		position:relative;
 		&:active{
-			.oui-button-active;
+			.ui-button-active;
 		}
 		&:hover{
-			.oui-button-hover;
+			.ui-button-hover;
 		}		
 	}	
 }
 
 h1{
-	.oui-headers;
+	.ui-headers;
 	font-size:2em;
 	margin:@item-height/2 0;
 }
 h2{
-	.oui-headers;
+	.ui-headers;
 	font-size:1.5em;
 	margin:@item-height/4 0;
 }
 h3{
-	.oui-headers;
+	.ui-headers;
 	font-size:1.2em;
 	margin:@item-height/6 0;
 }
 h4, h5, h6{
-	.oui-headers;
+	.ui-headers;
 }

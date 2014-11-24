@@ -1,50 +1,50 @@
 @import "../core/core.less";
-.oui-chart{
+.ui-chart{
 	position:relative;
 	height:@item-width;
 	width:@item-width*2;
-	&.oui-legend-right{
+	&.ui-legend-right{
 		text-align:left;
-		.oui-legend{
+		.ui-legend{
 			position:absolute;
 			right:0;
 			top: 50%;
 			transform: translateY(-50%);
 		}
 	}
-	.oui-legend{
+	.ui-legend{
 		background:fade(@color-background, 50%);
 		border-collapse:collapse;
 		border-spacing:0;
 		margin:0 auto;
-		.oui-cell{
+		.ui-cell{
 			vertical-align:bottom;
 			position:relative;
 			padding:2px 5px;
 			font-size:1.2em;
 			font-weight:300;
 		}
-		&.oui-bottom{
+		&.ui-bottom{
 			width:100%;
 			position:relative;
 		}
-		.oui-legend-category{
+		.ui-legend-category{
 			text-align:left;
 			font-size:.85em;
 			font-weight:500;
 		}
-		.oui-legend-series{ 
+		.ui-legend-series{ 
 			text-align:center;
 			padding:0 5px 0 30px;
 			cursor:default;
 			position:relative;
 			&.selected{
-				.oui-indicator:before{
+				.ui-indicator:before{
 					opacity:0.2;
 				}
 			}
 		}
-		.oui-indicator{
+		.ui-indicator{
 			display:inline-block;
 			margin-left:5px;
 			border-radius:100%;
@@ -87,12 +87,12 @@
 	text{
 		font-size:.8em;
 	}
-	&:not(.oui-pie-chart){
+	&:not(.ui-pie-chart){
 		path, circle, rect{
 			transition:all 150ms ease-in;
 		}
-		.oui-axes{
-			.oui-tick-line{
+		.ui-axes{
+			.ui-tick-line{
 				stroke:darken(@color-background,3%);
 			}
 			line{
@@ -113,7 +113,7 @@
 		rect.selected{
 			fill-opacity:1;
 		}
-		.oui-series g{
+		.ui-series g{
 			path.selected{
 				stroke-width:2;
 			}
@@ -121,16 +121,16 @@
 				stroke-opacity:0.2;
 			}
 		}
-		.oui-legend{
+		.ui-legend{
 			position:absolute;
 			bottom:0;
 			width:100%;
 			text-align:center;
-			.oui-legend-series{
+			.ui-legend-series{
 				display:inline-block;
 			}
 		}
-		.oui-area{
+		.ui-area{
 			opacity:0.1;
 		}
 	}

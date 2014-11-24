@@ -1,13 +1,13 @@
 @import "../core/core.less";
-.oui-scroll-content:focus, .oui-scroll-content:active {
+.ui-scroll-content:focus, .ui-scroll-content:active {
     outline: 0;
 }
 
-.oui-scroll-scrolling {
+.ui-scroll-scrolling {
     cursor: default;
 }
 
-.oui-scroll-content {
+.ui-scroll-content {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -17,7 +17,7 @@
     box-sizing: border-box;
 }
 
-.oui-scroll-trackY, .oui-scroll-trackX {
+.ui-scroll-trackY, .ui-scroll-trackX {
     position: absolute;
     background: rgba(0, 0, 0, .04);
     cursor: default;
@@ -28,27 +28,27 @@
     overflow: hidden;
 }
 
-.oui-scroll-container.oui-scroll-enableY .oui-scroll-trackY {
+.ui-scroll-container.ui-scroll-enableY .ui-scroll-trackY {
     display: block;
 }
 
-.oui-scroll-container.oui-scroll-enableX .oui-scroll-trackX {
+.ui-scroll-container.ui-scroll-enableX .ui-scroll-trackX {
     display: block;
 }
 
-.oui-scroll-trackY {
+.ui-scroll-trackY {
     right: 0;
     height: 100%;
     width: 7px;
 }
 
-.oui-scroll-trackX {
+.ui-scroll-trackX {
     bottom: 0;
     height: 7px;
     width: 100%;
 }
 
-.oui-scroll-floatY, .oui-scroll-floatX {
+.ui-scroll-floatY, .ui-scroll-floatX {
     position: absolute;
     cursor: default;
     border-radius: 10px;
@@ -57,17 +57,17 @@
     box-sizing: border-box;
 }
 
-.oui-scroll-container:hover .oui-scroll-floatY, .oui-scroll-container:hover .oui-scroll-floatX, .oui-scroll-floatY.oui-drag-dragging,.oui-scroll-floatX.oui-drag-dragging {
+.ui-scroll-container:hover .ui-scroll-floatY, .ui-scroll-container:hover .ui-scroll-floatX, .ui-scroll-floatY.ui-drag-dragging,.ui-scroll-floatX.ui-drag-dragging {
     background: @color-prominent;
 }
 
-.oui-scroll-floatY {
+.ui-scroll-floatY {
     top: 0;
     height: 20%;
     width: 100%;
 }
 
-.oui-scroll-floatX {
+.ui-scroll-floatX {
     height: 100%;
     width: 20%;
 }

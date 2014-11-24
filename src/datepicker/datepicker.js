@@ -1,4 +1,4 @@
-var oui = oui || {};
+var $ui = $ui || {};
 /**
 Create a new datepicker control
 
@@ -8,24 +8,24 @@ HTML
 
 Javascript
 
-	oui.datepicker({
+	$ui.datepicker({
 		element: document.getElementById('datepicker')
 	});	
 			
 	
-@class oui.datepicker
+@class $ui.datepicker
 @constructor
 @param options {Object}
 @param options.element {Object} DOM element to convert to control
 @param [options.value=0] {String} Value of initially selected option, defaults to the attribute value set on the passed element, or `0`
-@param [options.name=oui-select-RandInt] {String} Name of underlying input control, defaults to the attribute value set on the passed element, or `oui-select-RandInt`
+@param [options.name=ui-select-RandInt] {String} Name of underlying input control, defaults to the attribute value set on the passed element, or `ui-select-RandInt`
 @param [options.tabindex=0] {Number} Tabindex of control, defaults to the attribute value set on the passed element, or `0`
 @param [options.disabled=false] {Boolean} Disabled state of control, defaults to the attribute value set on the passed element, or `false`
 @return Object {Object} Consisting of original DOM element (item `0`) and class methods (see below)
 @chainable
 */
-(function(oui) {
-    oui.datepicker = function(opt) {
+(function($ui) {
+    $ui.datepicker = function(opt) {
 		var y = opt.year || 2014,
 			m = opt.month || 11,
 			d = opt.day || 1,
@@ -37,7 +37,7 @@ Javascript
 			month={
 				m:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']		
 			},
-			tpl="<div class='oui-datepicker'></div>",			
+			tpl="<div class='ui-datepicker'></div>",			
 			el=opt.element,
 			yearEl=null,
 			yearsEl=null,
@@ -46,7 +46,7 @@ Javascript
 			sD=0,
 			eD=0,
 			pD=0;
-		el=oui.replaceEl(el, tpl);		
+		el=$ui.replaceEl(el, tpl);		
 		function parseDate(){
 			function normalizeDay(v){
 				if(v===0){
@@ -84,9 +84,9 @@ Javascript
 				if(c>=sD && c<=eD+sD-1){
 					tpl+="<td data-day='"+(c-sD+1)+"'>"+(c-sD+1)+"</td>";
 				}else if(c<sD){
-					tpl+="<td class='oui-prev' data-day='"+(pD-(sD-c-1))+"' data-month='"+(m-2 < 0 ? 11 : m-2)+"' "+(m-2 < 0 ? "data-year='"+(y-1)+"'": '')+">"+(pD-(sD-c-1))+"</td>"; 
+					tpl+="<td class='ui-prev' data-day='"+(pD-(sD-c-1))+"' data-month='"+(m-2 < 0 ? 11 : m-2)+"' "+(m-2 < 0 ? "data-year='"+(y-1)+"'": '')+">"+(pD-(sD-c-1))+"</td>"; 
 				}else{
-					tpl+="<td class='oui-next' data-day='"+(c-sD-eD+1)+"' data-month='"+(m===12 ? 0 : m)+"' "+(m===12 ? "data-year='"+(y+1)+"'": '')+">"+(c-sD-eD+1)+"</td>"; 
+					tpl+="<td class='ui-next' data-day='"+(c-sD-eD+1)+"' data-month='"+(m===12 ? 0 : m)+"' "+(m===12 ? "data-year='"+(y+1)+"'": '')+">"+(c-sD-eD+1)+"</td>"; 
 				}
 				if(c%7 === 6){
 					tpl+="</tr>";
@@ -112,26 +112,26 @@ Javascript
 			yearsEl.innerHTML=tpl;
 		}
 		
-		metaEl=oui.createEl("<div class='oui-datepicker-meta'>"+666+"</div>");
+		metaEl=$ui.createEl("<div class='ui-datepicker-meta'>"+666+"</div>");
 		el.appendChild(metaEl);			
-		yearEl=oui.createEl("<div class='oui-datepicker-year'>"+y+"</div>");
+		yearEl=$ui.createEl("<div class='ui-datepicker-year'>"+y+"</div>");
 		el.appendChild(yearEl);
 		
-		tpl="<ul class='oui-datepicker-month'>";
+		tpl="<ul class='ui-datepicker-month'>";
 		for(var n=0;n<12;n++){		
 			tpl+="<li data-month='"+n+"'>"+month.m[n]+"</li>";
 		}
 		tpl+="</ul>";
-		monthEl=oui.createEl(tpl);
+		monthEl=$ui.createEl(tpl);
 		el.appendChild(monthEl);	
 		
 		
-		tpl="<table class='oui-datepicker-day'></table>";
-		daysEl=oui.createEl(tpl);
+		tpl="<table class='ui-datepicker-day'></table>";
+		daysEl=$ui.createEl(tpl);
 		el.appendChild(daysEl);		
 		
 			
-		yearsEl=oui.createEl("<table class='oui-datepicker-years'></table>");
+		yearsEl=$ui.createEl("<table class='ui-datepicker-years'></table>");
 		el.appendChild(yearsEl); 
 		createYears();
 		
@@ -149,9 +149,9 @@ Javascript
 		}		
 		function setMonth(){		
 			for(var n=0;n<12;n++){			
-				oui.removeClass(monthEl.children[n], 'selected');
+				$ui.removeClass(monthEl.children[n], 'selected');
 			}
-			oui.addClass(monthEl.children[m-1], 'selected');
+			$ui.addClass(monthEl.children[m-1], 'selected');
 			createDays();	
 		}
 		function setDay(){	
@@ -159,33 +159,33 @@ Javascript
 			for(w=0;w<6;w++){
 				for(c=0;c<7;c++){
 					i++;	 				
-					oui.removeClass(daysEl.children[1].children[w].children[c], 'selected');
+					$ui.removeClass(daysEl.children[1].children[w].children[c], 'selected');
 					if(i===sD+d){
-						oui.addClass(daysEl.children[1].children[w].children[c], 'selected');
+						$ui.addClass(daysEl.children[1].children[w].children[c], 'selected');
 					}
 				}		
 			}
 		}				
 		function resolveClick(e){
 			var tEl=e.target;
-			if(oui.attribute(tEl, 'year')!==null){ 			
-				y=parseInt(oui.attribute(tEl, 'year'),0);	
+			if($ui.attribute(tEl, 'year')!==null){ 			
+				y=parseInt($ui.attribute(tEl, 'year'),0);	
 				setYear();		
 			}			
-			if(oui.attribute(tEl, 'month')!==null){
-				m=parseInt(oui.attribute(tEl, 'month'),0)+1;		
+			if($ui.attribute(tEl, 'month')!==null){
+				m=parseInt($ui.attribute(tEl, 'month'),0)+1;		
 				setMonth();				
 			}
-			if(oui.attribute(tEl, 'day')!==null){ 			
-				d=parseInt(oui.attribute(tEl, 'day'),0);		
+			if($ui.attribute(tEl, 'day')!==null){ 			
+				d=parseInt($ui.attribute(tEl, 'day'),0);		
 				setDay();
 			}
 			setMeta();
 		}
-		oui.bindEvent('click', el, resolveClick);	
+		$ui.bindEvent('click', el, resolveClick);	
 
-		oui.bindEvent("mousewheel", yearEl, function(e) { 
-			oui.preventBubble(e);
+		$ui.bindEvent("mousewheel", yearEl, function(e) { 
+			$ui.preventBubble(e);
 			if (e.wheelDelta > 0 || e.detail < 0) {
 				y++;
             }else{ 
@@ -194,8 +194,8 @@ Javascript
 			setYear();
 			setMeta();
 		});		
-		oui.bindEvent("mousewheel", monthEl, function(e) { 
-			oui.preventBubble(e);
+		$ui.bindEvent("mousewheel", monthEl, function(e) { 
+			$ui.preventBubble(e);
 			if (e.wheelDelta > 0 || e.detail < 0) {
 				d=d > parseDate().nextend ? parseDate().nextend : d;
 				if(m===12){
@@ -216,8 +216,8 @@ Javascript
 			setYear();
 			setMeta();
 		});
-		oui.bindEvent("mousewheel", daysEl, function(e) { 
-		 	oui.preventBubble(e); 
+		$ui.bindEvent("mousewheel", daysEl, function(e) { 
+		 	$ui.preventBubble(e); 
 			if (e.wheelDelta > 0 || e.detail < 0) {
 				if(d===eD){				
 					d=1;
@@ -256,5 +256,5 @@ Javascript
 		};
 		
     };
-    return oui;
-})(oui);
+    return $ui;
+})($ui);

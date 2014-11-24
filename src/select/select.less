@@ -1,19 +1,19 @@
 @import "../core/core.less";
-.oui-select {
+.ui-select {
     line-height: @item-height;
     position: relative;
     width:@item-width;
-	&.oui-select-multiple .oui-select-value:not(.oui-placeholder){
+	&.ui-select-multiple .ui-select-value:not(.ui-placeholder){
 		padding-left:0;
 	}
 
 }
 
-.oui-select:focus, .oui-select:active {
+.ui-select:focus, .ui-select:active {
     outline: none;
 }
 
-.oui-select ul {
+.ui-select ul {
     display: block;
     position: relative;
     border: 1px solid darken(@color-background, 10%);
@@ -24,20 +24,20 @@
     padding: 0;
     background: @color-background;
 }
-.oui-select.oui-disabled ul{
+.ui-select.ui-disabled ul{
 	background:darken(@color-background, 2%);
 }
 
-.oui-select-value {
+.ui-select-value {
     border: 1px solid darken(@color-background, 10%);
     display: none;
     padding: 0 @item-height 0 6px;
 }
-.oui-select.oui-disabled .oui-select-value{
+.ui-select.ui-disabled .ui-select-value{
 	background:darken(@color-background, 2%);
 }
 
-.oui-select-dropdown .oui-select-value:after {
+.ui-select-dropdown .ui-select-value:after {
     content: '\25BC';
     position: absolute;
     color: darken(@color-background, 30%);
@@ -49,15 +49,15 @@
     text-align: center;
 }
 
-.oui-select-dropdown.oui-show .oui-select-value:after {
+.ui-select-dropdown.ui-show .ui-select-value:after {
     content: '\25B2';
 }
 
-.oui-select.oui-select-dropdown .oui-select-value {
+.ui-select.ui-select-dropdown .ui-select-value {
     display: block;
 }
 
-.oui-select-value-tag {
+.ui-select-value-tag {
     border: 1px solid darken(@color-background, 10%);
     background: @color-highlight;
     color:@color-background;
@@ -70,11 +70,11 @@
 	transition:all 50ms ease-in;
 	cursor:pointer;
 }
-.oui-select.oui-disabled .oui-select-value-tag{
+.ui-select.ui-disabled .ui-select-value-tag{
 	background:  darken(@color-background, 10%);
 	border-color:  darken(@color-background, 15%);
 }
-.oui-select-value-tag:after{
+.ui-select-value-tag:after{
 	position:absolute;
 	content:'';
 	left:50%;
@@ -83,57 +83,57 @@
 	border-top:1px solid @color-foreground;	
 	transition:all 200ms ease-in;
 }
-.oui-select:not(.oui-disabled) .oui-select-value-tag:hover:after{
+.ui-select:not(.ui-disabled) .ui-select-value-tag:hover:after{
 	left:5px;
 	width:calc(~"100% - 10px");
 	
 }
 
 
-.oui-select:not(.oui-disabled) .oui-select-value-tag:hover {
+.ui-select:not(.ui-disabled) .ui-select-value-tag:hover {
 	color:darken(@color-background, 30%);
 	border-color:@color-background;
 	background:none;
 }
 
-.oui-select .oui-select-value.oui-placeholder {
+.ui-select .ui-select-value.ui-placeholder {
     color: darken(@color-background, 30%);
     font-style: italic;
 }
 
-.oui-select.oui-select-dropdown ul {
+.ui-select.ui-select-dropdown ul {
     display: none;
     position: absolute;
     border-top: none;
 	box-shadow: 0 0 5px -1px darken(@color-background, 30%);
 }
-.oui-select.oui-show{ 
+.ui-select.ui-show{ 
     z-index: 999;
 }
-.oui-select.oui-show ul {
+.ui-select.ui-show ul {
     display: block;
 }
 
-.oui-select li {
+.ui-select li {
     transition: all 80ms ease-in;
     margin: 0;
     padding: 0 6px;
 }
 
-.oui-select:not(.oui-disabled) li:hover {
+.ui-select:not(.ui-disabled) li:hover {
     background: darken(@color-background, 5%);
 }
 
-.oui-select li.oui-selected {
+.ui-select li.ui-selected {
     background: @color-highlight;
     color: @color-background;
 }
-.oui-select.oui-disabled li.oui-selected {
+.ui-select.ui-disabled li.ui-selected {
     background:  darken(@color-background, 30%);
 }
 
 
 
-.oui-select:not(.oui-disabled) li.oui-selected:hover {
+.ui-select:not(.ui-disabled) li.ui-selected:hover {
     background: lighten(@color-highlight, 5%);
 }
