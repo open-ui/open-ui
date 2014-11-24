@@ -71,8 +71,8 @@ gulp.task('browser-sync', function () {
 });
 
 gulp.task('watch', ['browser-sync'], function () {
-   gulp.watch('src/**/*.less', ['build:styles', 'bump']);
-   gulp.watch('src/**/*.js', ['build:js', 'bump', 'document']);
+   gulp.watch('src/**/*.less', ['build:styles', 'bump', 'zip']);
+   gulp.watch('src/**/*.js', ['build:js', 'bump', 'document', 'zip']);
    return true;
 });
 
@@ -86,7 +86,11 @@ gulp.task('bump', function(){
 	.pipe(plugins.bump({type:'patch'}))
 	.pipe(gulp.dest('./'));
 });
-
+gulp.task('zip', function () {
+    return gulp.src(['dist/**/*.js','dist/**/*.css'])
+        .pipe(plugins.zip(pkg.name+'.zip'))
+        .pipe(gulp.dest('dist/'));
+});
 gulp.task('replace',function() {
   return gulp.src('src/**/*.*', {base: './'})
 	.pipe(plugins.plumber())
