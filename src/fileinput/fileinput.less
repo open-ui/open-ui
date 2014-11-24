@@ -1,17 +1,15 @@
 @import "../core/core.less";
 .oui-fileinput{
-	height:@item-height;
 	width:@item-width;
 	display:inline-block;
-	position:relative;
-	overflow:hidden;
-	vertical-align:middle;
-	
+	position:relative;	
 	.oui-file-selected{		
+		list-style:none;
+		margin:0;
+		padding:0;
 		width:100%;
 		line-height:@item-height;
 		color:lighten(@color-highlight, 20%);
-		transition: all @transition-duration ease-in;
 	}
 	.oui-file-browse{
 		overflow:hidden;
