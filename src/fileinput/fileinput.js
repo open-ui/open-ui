@@ -39,15 +39,17 @@ Javascript:
  
         /*jshint multistr:true */
         var str = "<div class='oui-fileinput' for='" + inputName + "'>\
-			<input  class='oui-file-input' type = 'file'  id = '" + inputName + "'  name = '" + inputName + "'   tabindex = '" + inputTabIndex + "' / >\
 			<label class='oui-file-selected'>"+inputPlaceholder+"</label>\
-			<button class='oui-browse-file'>"+inputLabel+"</button>\
+			<div class='oui-file-browse'>\
+				<input type = 'file'  id = '" + inputName + "'  name = '" + inputName + "'   tabindex = '" + inputTabIndex + "' / >\
+				<button>"+inputLabel+"</button>\
+			</div>\
 		</div>";
         el.innerHTML = '';
         el = oui.replaceEl(el, str);
  
-		oui.bindEvent('change', el.children[0], function(e){
-			el.getElementsByTagName('label')[0].innerHTML=el.children[0].files[0] && el.children[0].files[0].name ? el.children[0].files[0].name : inputPlaceholder;
+		oui.bindEvent('change', el.children[1].children[0], function(e){
+			el.getElementsByTagName('label')[0].innerHTML=el.children[1].children[0].files[0] && el.children[1].children[0].files[0].name ? el.children[1].children[0].files[0].name : inputPlaceholder;
 		}); 
 		 
         /**
