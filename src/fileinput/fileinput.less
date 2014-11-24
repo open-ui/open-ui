@@ -1,0 +1,46 @@
+@import "../core/core.less";
+.oui-fileinput{
+	height:@item-height;
+	width:@item-width;
+	display:inline-block;
+	position:relative;
+	overflow:hidden;
+	vertical-align:middle;
+	.oui-browse-file{
+		width:auto;
+		right:0;
+	}
+	.oui-file-selected{		
+		width:100%;
+		line-height:@item-height;
+		color:lighten(@color-highlight, 20%);
+		transition: all @transition-duration ease-in;
+	}
+	.oui-file-input,.oui-browse-file, .oui-file-selected{
+		position:absolute;
+		height:100%;
+		top:0;
+		right:0;
+		z-index:0;
+		cursor:pointer;
+		vertical-align:middle; 
+	}	
+	.oui-file-input{
+		height:100%;
+		width:200%;
+		z-index:1;	 
+		opacity:0;			
+		&:hover{
+			~button{				
+				.oui-button-hover;
+			}
+			~label{
+				.oui-link-hover;
+			}
+		}
+		&:active~button{
+			.oui-button-active;
+		}
+	}	
+}
+
