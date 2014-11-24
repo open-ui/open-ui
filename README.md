@@ -1,4 +1,4 @@
-open-ui
+[open-ui](http://www.ouijs.org)
 =======
 
 Beautiful open source UI components written in lean, clean Javascript with no dependancies
