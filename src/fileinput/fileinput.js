@@ -47,7 +47,7 @@ Javascript:
         el = oui.replaceEl(el, str);
  
 		oui.bindEvent('change', el.children[0], function(e){
-			el.getElementsByTagName('label')[0].innerHTML=el.children[0].value ? el.children[0].value : inputPlaceholder;
+			el.getElementsByTagName('label')[0].innerHTML=el.children[0].files[0] && el.children[0].files[0].name ? el.children[0].files[0].name : inputPlaceholder;
 		}); 
 		 
         /**
