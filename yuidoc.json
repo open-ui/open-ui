@@ -5,7 +5,7 @@
     "url": "https://github.com/open-ui/open-ui",
     "options": {
         "linkNatives": "true",
-        "outdir": "../public-site/docs",
+        "outdir": "../public-site/dist/docs",
         "paths": "./src"
     }
 }
