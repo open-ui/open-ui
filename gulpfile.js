@@ -45,7 +45,8 @@ gulp.task('build:styles', function() {
         .pipe(plugins.header(banner, {
             pkg: pkg
         }))
-        .pipe(gulp.dest('dist/'));
+        .pipe(gulp.dest('dist/'))		
+		.pipe(gulp.dest('../public-site/lib/')); // copy as resource for public website
 });
 
 gulp.task('build:js', function() {
@@ -63,7 +64,8 @@ gulp.task('build:js', function() {
         .pipe(plugins.header(banner, {
             pkg: pkg
         }))
-        .pipe(gulp.dest('dist/'));
+        .pipe(gulp.dest('dist/'))		
+		.pipe(gulp.dest('../public-site/lib/')); // copy as resource for public website
 });
 
 gulp.task('browser-sync', function() {
