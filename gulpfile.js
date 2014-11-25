@@ -46,7 +46,7 @@ gulp.task('build:styles', function() {
             pkg: pkg
         }))
         .pipe(gulp.dest('dist/'))		
-		.pipe(gulp.dest('../public-site/lib/')); // copy as resource for public website
+		.pipe(gulp.dest('../public-site/dist/css/')); // copy as resource for public website
 });
 
 gulp.task('build:js', function() {
@@ -65,7 +65,7 @@ gulp.task('build:js', function() {
             pkg: pkg
         }))
         .pipe(gulp.dest('dist/'))		
-		.pipe(gulp.dest('../public-site/lib/')); // copy as resource for public website
+		.pipe(gulp.dest('../public-site/dist/js/')); // copy as resource for public website
 });
 
 gulp.task('browser-sync', function() {
