@@ -4,8 +4,8 @@
 Beautiful open source UI components written in lean, clean Javascript with no dependancies
 
 [![Build Status](https://img.shields.io/travis/open-ui/open-ui.svg?style=flat-square)](https://travis-ci.org/open-ui/open-ui)
-[![Node](https://img.shields.io/node/open-ui/open-ui.svg?style=flat-square)]()
-[![NPM](https://img.shields.io/npm/open-ui/open-ui.svg?style=flat-square)]()
+[![Node](https://img.shields.io/node/v/open-ui/open-ui.svg?style=flat-square)]()
+[![NPM](https://img.shields.io/npm/v/open-ui/open-ui.svg?style=flat-square)]()
 [![devDependency Status](https://img.shields.io/david/dev/open-ui/open-ui.svg?style=flat-square)](https://david-dm.org/open-ui/open-ui#info=devDependencies)
 [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://github.com/open-ui/open-ui/blob/master/LICENSE-MIT.md)
 [![Issues](https://img.shields.io/github/issues/open-ui/open-ui.svg?style=flat-square)](https://github.com/open-ui/open-ui/issues)
