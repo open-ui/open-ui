@@ -30,39 +30,36 @@ Javascript:
     $ui.rating = function(opt) {
         var el = opt.element,
             listeners = opt.listeners === undefined ? {} : opt.listeners,
-            inputValue = opt.value || el.getAttribute('value') || 0,
-            inputDisabled = (opt.disabled || el.getAttribute('disabled')) ? 'disabled' : '',
-            inputName = opt.name || el.getAttribute('name') || 'ui-rating-' + $ui.getRand(1, 999),
-            inputTabIndex = opt.tabindex || el.getAttribute('tabindex') || 0,
-            lastVal = inputValue,
+            lastVal = opt.value,
 			count=opt.count || 5;
-
-
 			
-        /*jshint multistr:true */
-        var str = "<div class='"+ (opt.stages ? 'ui-stages' : 'ui-rating') +"'><fieldset tabindex='"+inputTabIndex+"'>";
-			for(var o = count; o > 0; o--){			 
-				var style='';
-				if(opt.stages){
-					style="style='width:"+(100/count)+"%;z-index:"+(count-o)+"'";
-				}
-				str+="<input type='radio' id='" + inputName + "_"+o+"' name='" + inputName + "' value='"+o+"'/><label for='" + inputName + "_"+o+"' data-label='"+o+"' "+style+"></label>";			
-			}				
-            str+="</fieldset></div>";
-        el = $ui.replaceEl(el, str);
-
+		opt=$ui.inputCtrlMeta(opt, 'rating');		
+        el.innerHTML = '';
+        el = $ui.replaceEl(el, $ui.compile('rating', opt));
+		
+		for(var o = count; o > 0; o--){		
+			var tOpt={
+				id:opt.name + "_"+o,
+				name:opt.name,
+				value:o				
+			};
+			el.children[0].appendChild($ui.createEl($ui.compile('rating_item', tOpt)));
+			el.children[0].appendChild($ui.createEl($ui.compile('rating_label', tOpt)));
+		}		
+		
         var rEl = [];
         rEl.push(el.children[0].children[8]);
         rEl.push(el.children[0].children[6]);
         rEl.push(el.children[0].children[4]);
         rEl.push(el.children[0].children[2]);
         rEl.push(el.children[0].children[0]);
-        $ui.bindListeners(listeners, rEl[0]);
-        $ui.bindListeners(listeners, rEl[1]);
-        $ui.bindListeners(listeners, rEl[2]);
-        $ui.bindListeners(listeners, rEl[3]);
-        $ui.bindListeners(listeners, rEl[4]);
-
+		if(opt.listeners){
+			$ui.bindListeners(opt.listeners, rEl[0]);
+			$ui.bindListeners(opt.listeners, rEl[1]);
+			$ui.bindListeners(opt.listeners, rEl[2]);
+			$ui.bindListeners(opt.listeners, rEl[3]);
+			$ui.bindListeners(opt.listeners, rEl[4]);
+		}
         $ui.bindEvent("mousewheel", el, function(e) {
             $ui.preventBubble(e);
             var offset = 1;
@@ -126,8 +123,8 @@ Javascript:
                 return $ui.attribute(rEl[0], 'disabled');
             }
         };
-        obj.val(inputValue);
-        if (inputDisabled) {
+        obj.val(opt.value);
+        if (opt.disabled) {
             obj.disabled(true);
         }
         return obj;
