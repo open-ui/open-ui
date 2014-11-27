@@ -41,17 +41,18 @@ Javascript:
                 options.push(el.children[i].innerHTML);
             }
         }
-        var tpl = "<div class='ui-carousel' tabindex='" + inputTabIndex + "'><ul>",
-            navEl = [],
+        var navEl = [],
             optionEl = [];
         for (var o = 0; o < options.length; o++) {
-            optionEl.push($ui.createEl("<li class='ui-option'>" + options[o] + "</li>"));
-            navEl.push($ui.createEl("<span class='ui-nav-item' data-nav='=" + o + "'>" + o + "</span>"));
+            optionEl.push($ui.createEl($ui.compile('carousel_item', {html:options[o]})));
+            navEl.push($ui.createEl($ui.compile('carousel_nav', {index:o})));
         }
-        tpl += "</ul><span class='ui-nav-prev' data-nav='-1'></span><span data-nav='+1' class='ui-nav-next'></span></div>";
-
+		opt=$ui.inputCtrlMeta(opt, 'rating');		
         el.innerHTML = '';
-        el = $ui.replaceEl(el, tpl);
+        el = $ui.replaceEl(el, $ui.compile('carousel',opt));
+		
+		
+		
         for (o = 0; o < options.length; o++) {
             el.children[0].appendChild(optionEl[o]);
             el.appendChild(navEl[o]);
