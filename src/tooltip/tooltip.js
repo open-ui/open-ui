@@ -33,7 +33,7 @@ Javascript:
 	var ttEl=null;
 	$ui.tooltip=function(opt){
 		if(!ttEl){
-			ttEl=$ui.createEl("<div class='ui-tooltip'></div>");
+			ttEl=$ui.createEl($ui.compile('tooltip', opt));
 			document.body.appendChild(ttEl);
 		}
 		var delay=opt.delay || 500, timer=null;
