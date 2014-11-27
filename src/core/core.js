@@ -58,7 +58,10 @@ var $ui = $ui || {};
 		opt.label = opt.label || el.getAttribute('label') || el.innerHTML || opt.name;
 		opt.tabindex = opt.tabindex || el.getAttribute('tabindex') || 0;
 		opt.disabled = (opt.disabled || el.getAttribute('disabled')) ? 'disabled' : '';
-		return opt;
+		opt.placeholder = opt.placeholder || el.getAttribute('placeholder') || "Please select...";
+		opt.multiple = Boolean(opt.multiple) === true || el.getAttribute('multiple') ? true : false;
+		opt.name = (opt.multiple && opt.name.indexOf('[]') === -1) ? opt.name + '[]' : opt.name.replace('[]', '');
+		return opt; 
 	};
 
 /** 
