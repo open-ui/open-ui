@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
     pkg = require('./package.json'),
     browserSync = require('browser-sync'),
+	del = require('del'),
     plugins = require("gulp-load-plugins")({
         pattern: ['gulp-*', 'gulp.*'],
         replaceString: /\bgulp[\-.]/
@@ -49,8 +50,21 @@ gulp.task('build:styles', function() {
 		.pipe(gulp.dest('../public-site/dist/css/')); // copy as resource for public website
 });
 
+gulp.task('build:templates', function() {
+	return gulp.src('src/**/*.tpl.html', {
+			base: './'
+		})
+		.pipe(plugins.jshtml({
+			invoke:'$ui.templateCache'
+		}))      
+		.pipe(plugins.jshint.reporter('jshint-stylish'))
+		.pipe(plugins.uglify())
+		.pipe(plugins.concat(pkg.name + '.tpl.js'))		
+		.pipe(gulp.dest('dist/'));
+});
+
 gulp.task('build:js', function() {
-    return gulp.src('src/**/*.js', {
+    return gulp.src([pkg.name + '.tpl.js','src/**/*.js'], {
             base: './'
         })
         .pipe(plugins.plumber())
@@ -83,13 +97,20 @@ gulp.task('browser-sync', function() {
 
 gulp.task('watch', ['browser-sync'], function() {
     gulp.watch('src/**/*.less', ['build:styles', 'bump', 'zip']);
-    gulp.watch('src/**/*.js', ['build:js', 'bump', 'document', 'zip']);
+    gulp.watch(['src/**/*.tpl.html', 'src/**/*.js'], ['build:templates', 'build:js', 'clean', 'bump', 'document', 'zip']);
     return true;
 });
 
 gulp.task('document', function() {
     plugins.run('yuidoc').exec();
 });
+
+
+gulp.task('clean', function() {    
+    del('dist/**/*.tpl.js');
+});
+
+
 
 gulp.task('bump', function() {
     return gulp.src('./package.json')
