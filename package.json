@@ -2,7 +2,7 @@
   "name": "open-ui",
   "title": "Open UI",
   "description": "Open UI",
-  "version": "0.0.55",
+  "version": "0.0.378",
   "homepage": "https://github.com/open-ui/open-ui",
   "author": {
     "name": "Open UI"
@@ -38,7 +38,7 @@
     "gulp-csslint": "^0.1.5",
     "gulp-git": "^0.5.4",
     "gulp-header": "^1.2.2",
-    "gulp-jsbeautifier": "0.0.3",
+    "gulp-jsbeautifier": "0.0.4",
     "gulp-jshint": "^1.8.6",
     "gulp-jshtml": "0.0.7",
     "gulp-less": "^1.3.6",
