@@ -74,20 +74,9 @@ Javascript:
             contentHeight = 0,
             containerWidth = 0,
             containerHeight = 0,
-            scrollDir = opt.axis ? opt.axis.toLowerCase() : ($ui.attribute(el, 'ui-scroll') ? $ui.attribute(el, 'ui-scroll') : "y"),
-			tpl = "<div class='ui-scroll-container'>\
-            <" + el.nodeName + " class='ui-scroll-content'>\
-                " + el.innerHTML + "\
-            </" + el.nodeName + ">\
-            <div class='ui-scroll-trackY'>\
-                <div class='ui-scroll-floatY'></div>\
-            </div>\
-            <div class='ui-scroll-trackX'>\
-                <div class='ui-scroll-floatX'></div>\
-            </div>\
-        </div>";
+            scrollDir = opt.axis ? opt.axis.toLowerCase() : ($ui.attribute(el, 'ui-scroll') ? $ui.attribute(el, 'ui-scroll') : "y");
 		el.innerHTML='';
-        el = $ui.replaceEl(el, tpl);
+        el = $ui.replaceEl(el, $ui.compile('scroll', {nodeName:el.nodeName, html:el.innerHTML}));
         var container = el.children[0],
             trackY = el.children[1],
             floatY = trackY.children[0],
