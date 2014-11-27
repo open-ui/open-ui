@@ -28,7 +28,7 @@ Javascript:
 @param [options.name=ui-slider-RandInt] {String} Name of underlying input control, defaults to the attribute value set on the passed element, or `ui-slider-RandInt`
 @param [options.tabindex=0] {Number} Tabindex of control, defaults to the attribute value set on the passed element, or `0`
 @param [options.disabled=false] {Boolean} Disabled state of control, defaults to the attribute value set on the passed element, or `false`
-@param [options.listeners] {Object} Object array of event listeners to bind to underlying input(s)
+@param [options.opt.listeners] {Object} Object array of event opt.listeners to bind to underlying input(s)
 @param [options.circle=false] {Object} Object array of properties to define circular slider
 @param [options.circle.stroke=20] {Number} Stroke width of slider circle
 @param [options.circle.stroke.inner=options.circle.stroke.outer] {Number} Stroke width of inner slider circle
@@ -38,19 +38,16 @@ Javascript:
 */
 (function($ui) {
     $ui.slider = function(opt) {
-        var el = opt.element,
-            units = opt.units === undefined ? '' : opt.units,
-            listeners = opt.listeners === undefined ? {} : opt.listeners,
+        var el = opt.element,            
             min = opt.min || 0,
             max = opt.max || 100,
             decimals = opt.decimals || 0,
             axis = opt.axis || "x",
             range = Math.abs(max - min),
-            inputValue = opt.value || el.getAttribute('value') || 0,
-            inputDisabled = (opt.disabled || el.getAttribute('disabled')) ? 'disabled' : '',
-            inputName = opt.name || el.getAttribute('name') || 'ui-slider-' + $ui.getRand(1, 999),
-            inputTabIndex = opt.tabindex || el.getAttribute('tabindex') || 0,
 			circle = opt.circle || false;
+			
+			opt=$ui.inputCtrlMeta(opt, 'slider');	
+			
 			// circle=false;
 			if(circle){			
 				circle={
@@ -67,12 +64,12 @@ Javascript:
         if (!axis || !(axis.indexOf("x") < 0 || axis.indexOf("y") < 0)) {
             axis = "x";
         }
+		opt.classList="ui-slider-" + axis + " " + (opt.disabled ? 'ui-disabled' : '') + " " +(circle ? 'ui-slider-circle': '');
+		opt.units = opt.units || '';
 
-        var tpl = "<div class='ui-slider ui-slider-" + axis + " " + (inputDisabled ? 'ui-disabled' : '') + " " +(circle ? 'ui-slider-circle': '') + "' tabindex='" + inputTabIndex + "'>\
-            <input type='hidden' name='" + inputName + "' " + inputDisabled + " value='" + inputValue + "'/>\
-        </div>";
-		
-        el = $ui.replaceEl(el, tpl);
+		el.innerHTML = '';
+        el = $ui.replaceEl(el, $ui.compile('slider', opt));
+		var monitorEl = $ui.createEl($ui.compile('slider_monitor', opt));
 		var l=$ui.layout(el);
 		var d = l.height > l.width ? l.width : l.height;
 		function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
@@ -93,28 +90,29 @@ Javascript:
 		}
 		var pathEl='';
 		var innerTpl='';
-		if(circle){			
-			innerTpl="<svg height='"+d+"' width='"+d+"' xmlns='http://www.w3.org/2000/svg' version='1.1'>\
-			   <circle class='ui-slider-circle' cx='"+d/2+"' cy='"+d/2+"' r='"+((d-Math.max(circle.stroke.inner, circle.stroke.outer))/2)+"' stroke='black' stroke-width='"+circle.stroke.outer+"' fill='none' />\
-			   <path x='"+d/2+"' y='"+d/2+"' fill='none' d='' stroke-width='"+circle.stroke.inner+"'/>\
-			</svg>";
-			el.appendChild($ui.createEl(innerTpl));
-			el.appendChild($ui.createEl("<span class='ui-slider-monitor'><span class='ui-slider-value'></span><span class='ui-slider-units'></span></span>"));
-			
+		if(circle){	
+			el.appendChild($ui.createEl($ui.compile('slider_circle', {
+				width:d,
+				height:d,
+				x:d/2,
+				y:d/2,
+				cx:d/2,
+				cy:d/2,
+				r:((d-Math.max(circle.stroke.inner, circle.stroke.outer))/2),
+				trackWidth:circle.stroke.outer,
+				floatWidth:	circle.stroke.inner		
+			})));
+			el.appendChild(monitorEl);			
 			pathEl = el.children[1].childNodes[3]; 
 			$ui.attribute(pathEl, 'd', describeArc(d/2, d/2, (d-Math.max(circle.stroke.inner, circle.stroke.outer))/2, 0, 360));	
 		}else{
-			// get biggest dimension
-			innerTpl="<div class='ui-slider-bar ui-animated'>\
-                <span class='ui-slider-value'></span><span class='ui-slider-units'></span>\
-            </div>";
-			el.appendChild($ui.createEl(innerTpl));
-		}
-		
+			el.appendChild($ui.createEl($ui.compile('slider_bar', opt)));
+			el.children[1].appendChild(monitorEl);
+		}		
         var indicatorEl = circle ? el.children[1].childNodes[1] : el.children[1],
             inputEl = el.children[0],
-            valueEl = circle ? el.children[2].children[0] : indicatorEl.children[0],
-            unitsEl = circle ? el.children[2].children[1] : indicatorEl.children[1];
+            valueEl = circle ? el.children[2].children[0] : indicatorEl.children[0].children[0],
+            unitsEl = circle ? el.children[2].children[1] : indicatorEl.children[0].children[1];
 
         /**
         Fired on slide event starting
@@ -136,7 +134,7 @@ Javascript:
         @param element {Object} Element event fired on
         @param event {Object} Event object
         */
-        $ui.bindListeners(listeners, inputEl);
+        if(opt.listeners){$ui.bindopt.listeners(opt.listeners, inputEl);}
         $ui.drag({
             element: el,
             contain: {
@@ -168,8 +166,8 @@ Javascript:
 						
 					}
 					obj.val(min + Math.round(perc * range));
-                    if (listeners && listeners.sliding) {
-                        listeners.sliding(el, e);
+                    if (opt.listeners && opt.listeners.sliding) {
+                        opt.listeners.sliding(el, e);
                     }
                 },
                 dragstart: function(el, e) {
@@ -177,8 +175,8 @@ Javascript:
                     if (obj.disabled()) {
                         return false;
                     }
-                    if (listeners && listeners.slidestart) {
-                        listeners.slidestart(el, e);
+                    if (opt.listeners && opt.listeners.slidestart) {
+                        opt.listeners.slidestart(el, e);
                     }
                     $ui.removeClass(indicatorEl, 'ui-animated');
                 },
@@ -186,8 +184,8 @@ Javascript:
                     if (obj.disabled()) {
                         return false;
                     }
-                    if (listeners && listeners.slideend) {
-                        listeners.slideend(el, e);
+                    if (opt.listeners && opt.listeners.slideend) {
+                        opt.listeners.slideend(el, e);
                     }
                     $ui.addClass(indicatorEl, 'ui-animated');
                 }
@@ -259,9 +257,9 @@ Javascript:
 					}
 				}
                 valueEl.innerHTML = val.toFixed(decimals);
-                unitsEl.innerHTML = units;
-				if (listeners && listeners.change) {
-					listeners.change(el, val, inputEl);
+                unitsEl.innerHTML = opt.units;
+				if (opt.listeners && opt.listeners.change) {
+					opt.listeners.change(el, val, inputEl);
 				}
             },
             disabled: function(val) {
@@ -272,7 +270,7 @@ Javascript:
                 return $ui.attribute(inputEl, 'disabled');
             }
         };
-        obj.val(inputValue, true);
+        obj.val(opt.value, true);
         return obj;
     };
     return $ui;
