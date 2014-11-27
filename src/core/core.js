@@ -69,6 +69,7 @@ Adds the passed HTML string to the template cache
 @method templateCache
 @param HTML {String} Template HTML
 @param Reference {String} Unique identifier (e.g template name)
+@return {Array} Array of currently cached templates
 */ 
 	$ui.templates={};  
     $ui.templateCache = function(tpl, ref) {
@@ -77,10 +78,10 @@ Adds the passed HTML string to the template cache
     }; 
 	
 /** 
-Compiles the given template against the provided {object}
+Compiles the given template against the provided Object
 @method compile
 @param ref {String} Template reference
-@param object {Object} Data object to compile template with, only shallow references are supported
+@param object {Object} Object containing data to compile template with, only shallow references are supported
 */ 	
     $ui.compile = function(ref, obj) { 	
         var tpl=$ui.templates[ref];
