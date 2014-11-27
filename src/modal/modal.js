@@ -30,17 +30,8 @@ Javascript:
 
 (function($ui) {
     $ui.modal = function(opt) {
-        var h = opt.header,
-            c = opt.content;
-        /*jshint multistr: true */
-        var tpl = "<div class='ui-modal-mask'>\
-			<div class='ui-modal-box ui-animated'>\
-				<div class='ui-modal-header'>" + h + "<span class='ui-modal-close'></span></div>\
-				<div class='ui-modal-content'>" + c + "</div>\
-			</div>\
-		</div>";
 
-        var el = $ui.createEl(tpl),
+        var el = $ui.createEl($ui.compile('modal',opt)),
             box = el.children[0],
             header = box.children[0],
             close = header.children[0];
