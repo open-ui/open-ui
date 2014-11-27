@@ -27,24 +27,11 @@ Javascript:
 */
 (function($ui) {
     $ui.switch = function(opt) {
-        var el = opt.element,
-            //    listeners = opt.listeners === undefined ? {} : opt.listeners,
-            inputValue = opt.value || el.getAttribute('value') || true,
-            inputLabel = opt.label || el.getAttribute('label') || el.innerHTML,
-            inputDisabled = (opt.disabled || el.getAttribute('disabled')) ? 'disabled' : '',
-            inputName = opt.name || el.getAttribute('name') || 'ui-switch-' + $ui.getRand(1, 999),
-            listeners = opt.listeners === undefined ? {} : opt.listeners,
-            inputTabIndex = opt.tabindex || el.getAttribute('tabindex') || 0;
+        var el = opt.element;
 
-        /*jshint multistr:true */
-        var str = "<label class='ui-switch' for='" + inputName + "'>\
-			<input type = 'checkbox'  id = '" + inputName + "'  name = '" + inputName + "' tabindex = '" + inputTabIndex + "' / >\
-            <span class = 'ui-label' > " + inputLabel + " </span>\
-			<span class = 'ui-indicator' > " + inputLabel + " </span>\
-		</label>";
-		
+		opt=$ui.inputCtrlMeta(opt, 'switch');		
         el.innerHTML = '';
-        el = $ui.replaceEl(el, str);
+        el = $ui.replaceEl(el, $ui.compile('switch', opt));
 		
 		$ui.bindEvent("mousewheel", el, function(e) { 
 		 	$ui.preventBubble(e); 
@@ -83,11 +70,11 @@ Javascript:
                 return $ui.attribute(el.children[0], 'disabled');
             }
         };
-        obj.val(inputValue);
-        if (inputDisabled) {
+        obj.val(opt.value);
+        if (opt.disabled) {
             obj.disabled(true);
         }
-        $ui.bindListeners(listeners, el.children[0]);
+        if(opt.listeners){$ui.bindListeners(opt.listeners, el.children[0]);}
         return obj;
     };
     return $ui;
