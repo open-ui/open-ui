@@ -32,7 +32,7 @@ Javascript:
 		opt.label = opt.label || 'Browse';
 		opt.placeholder = opt.placeholder || 'Please select...';
 		opt=$ui.inputCtrlMeta(opt, 'fileinput');		
-        el.innerHTML = '';
+        el.innerHTML = ''; 
         el = $ui.replaceEl(el, $ui.compile('fileinput', opt));		
 		
 		$ui.bindEvent('change', el.children[1].children[0], function(e){
@@ -42,7 +42,7 @@ Javascript:
 					el.children[0].appendChild($ui.createEl($ui.compile('fileinput_item', {value:el.children[1].children[0].files[i].name})));
 				}
 			}else{
-				el.children[0].appendChild($ui.createEl($ui.compile('fileinput_item', {value:opt.placeholder}));
+				el.children[0].appendChild($ui.createEl($ui.compile('fileinput_item', {value:opt.placeholder})));
 			}
 		}); 
 		 
