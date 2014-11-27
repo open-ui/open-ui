@@ -61,7 +61,7 @@ gulp.task('build:templates', function() {
         .pipe(gulp.dest('dist/'));
 });
 gulp.task('build:js', function() {
-    return gulp.src([pkg.name + '.tpl.js', 'src/**/*.js'], {
+    return gulp.src(['dist/**/*.tpl.js', 'src/**/*.js'], {
             base: './'
         })
         .pipe(plugins.plumber())
