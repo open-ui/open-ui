@@ -49,7 +49,17 @@ var $ui = $ui || {};
 @static
 */
 
- 
+	$ui.inputCtrlMeta = function(opt, type){
+		var el=opt.element;
+		opt.name=opt.name || el.getAttribute('name') || 'ui-'+type+'-' + $ui.getRand(1, 999);
+		opt.id= el.getAttribute('id') || opt.name;
+		opt.id+='-'+type;
+		opt.value = opt.value || el.getAttribute('value') || 0;
+		opt.label = opt.label || el.getAttribute('label') || el.innerHTML || opt.name;
+		opt.tabindex = opt.tabindex || el.getAttribute('tabindex') || 0;
+		opt.disabled = (opt.disabled || el.getAttribute('disabled')) ? 'disabled' : '';
+		return opt;
+	};
 
 /** 
 Adds the passed HTML string to the template cache
