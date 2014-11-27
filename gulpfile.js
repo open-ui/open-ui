@@ -98,8 +98,8 @@ gulp.task('browser-sync', function() {
     });
 });
 gulp.task('watch', ['browser-sync'], function() {
-    gulp.watch('src/**/*.less', ['build:styles', 'bump', 'zip']);
-    gulp.watch(['src/**/*.tpl.html', 'src/**/*.js'], ['build:templates', 'build:js', 'clean', 'bump', 'document', 'zip']);
+    gulp.watch('src/**/*.less', ['beautify', 'build:styles', 'bump', 'zip']);
+    gulp.watch(['src/**/*.tpl.html', 'src/**/*.js'], ['beautify', 'build:templates', 'build:js', 'clean', 'bump', 'document', 'zip']);
     return true;
 });
 gulp.task('document', ['build:templates', 'build:js'], function() {
@@ -110,6 +110,14 @@ gulp.task('clean', ['build:templates', 'build:js'], function() {
 		console.log('Files deleted');
 	});
 });
+
+gulp.task('beautify', function(){
+  return gulp.src(['src/**/*.html', 'src/**/*.js', 'src/**/*.less'], {base: './'})
+	.pipe(plugins.plumber())
+	.pipe(plugins.jsbeautifier())
+	.pipe(gulp.dest('./'));
+});
+
 gulp.task('bump', function() {
     return gulp.src('./package.json')
         .pipe(plugins.plumber())
