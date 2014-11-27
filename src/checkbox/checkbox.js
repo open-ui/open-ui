@@ -67,7 +67,7 @@ Javascript:
         if (opt.disabled) {
             obj.disabled(true);
         }
-        if(opt.listeners){$ui.bindListeners(listeners, el.children[0]);}
+        if(opt.listeners){$ui.bindListeners(opt.listeners, el.children[0]);}
         return obj;
     };
     return $ui;
