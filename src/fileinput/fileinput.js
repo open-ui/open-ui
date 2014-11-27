@@ -28,38 +28,22 @@ Javascript:
 */
 (function($ui) {
     $ui.fileinput = function(opt) {
-        var el = opt.element,
-            //    listeners = opt.listeners === undefined ? {} : opt.listeners,
-            inputLabel = opt.label || el.getAttribute('label') || "Browse",
-			inputPlaceholder = opt.placeholder || el.getAttribute('placeholder') || "Please select...",
-            inputMultiple = (Boolean(opt.multiple) === true || $ui.attribute(el, 'multiple')) ? true : false,
-            inputDisabled = (opt.disabled || el.getAttribute('disabled')) ? 'disabled' : '',
-            inputName = opt.name || el.getAttribute('name') || 'ui-fileinput-' + $ui.getRand(1, 999),
-            listeners = opt.listeners === undefined ? {} : opt.listeners,
-            inputTabIndex = opt.tabindex || el.getAttribute('tabindex') || 0;
- 
-		inputName = (inputMultiple && inputName.indexOf('[]') === -1) ? inputName + '[]' : inputName.replace('[]', '');
-  
-        /*jshint multistr:true */
-        var str = "<div class='ui-fileinput' for='" + inputName + "'>\
-			<ul class='ui-file-selected'><li>"+inputPlaceholder+"</li></ul>\
-			<div class='ui-file-browse'>\
-				<input type = 'file'  id = '" + inputName + "'  name = '" + inputName + "'   tabindex = '" + inputTabIndex + "' "+(inputMultiple?"multiple='multiple'":"")+"/ >\
-				<button>"+inputLabel+"</button>\
-			</div>\
-		</div>";
+        var el = opt.element;
+		opt.label = opt.label || 'Browse';
+		opt.placeholder = opt.placeholder || 'Please select...';
+		opt=$ui.inputCtrlMeta(opt, 'fileinput');		
         el.innerHTML = '';
-        el = $ui.replaceEl(el, str);
- 
+        el = $ui.replaceEl(el, $ui.compile('fileinput', opt));		
+		
 		$ui.bindEvent('change', el.children[1].children[0], function(e){
-			var selected="<li>"+inputPlaceholder+"</li>";
-			if(el.children[1].children[0].files[0] && el.children[1].children[0].files[0].name){
-				selected='';
-				for(var i=0;i<el.children[1].children[0].files.length;i++){
-					selected+="<li>"+el.children[1].children[0].files[i].name+"</li>";
+			el.children[0].innerHTML='';
+			if(el.children[1].children[0].files[0] && el.children[1].children[0].files[0].name){			
+				for(var i=0;i<el.children[1].children[0].files.length;i++){				
+					el.children[0].appendChild($ui.createEl($ui.compile('fileinput_item', {value:el.children[1].children[0].files[i].name})));
 				}
+			}else{
+				el.children[0].appendChild($ui.createEl($ui.compile('fileinput_item', {value:opt.placeholder}));
 			}
-			el.children[0].innerHTML= selected;
 		}); 
 		 
         /**
@@ -78,10 +62,10 @@ Javascript:
                 return $ui.attribute(el.children[0], 'disabled');
             }
         };
-        if (inputDisabled) {
+        if (opt.disabled) {
             obj.disabled(true);
         }
-        $ui.bindListeners(listeners, el.children[0]);
+        if(opt.listeners){$ui.bindListeners(opt.listeners, el.children[0]);}
         return obj;
     };
     return $ui;
