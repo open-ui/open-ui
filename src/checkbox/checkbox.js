@@ -30,20 +30,12 @@ Javascript:
 */
 (function($ui) {
     $ui.checkbox = function(opt) {
-        var el = opt.element,
-            //    listeners = opt.listeners === undefined ? {} : opt.listeners,
-            inputValue = opt.value || el.getAttribute('value') || 0,
-            inputLabel = opt.label || el.getAttribute('label') || el.innerHTML,
-            inputDisabled = (opt.disabled || el.getAttribute('disabled')) ? 'disabled' : '',
-            inputName = opt.name || el.getAttribute('name') || 'ui-checkbox-' + $ui.getRand(1, 999),
-            listeners = opt.listeners === undefined ? {} : opt.listeners,
-            inputTabIndex = opt.tabindex || el.getAttribute('tabindex') || 0;
-
-        /*jshint multistr:true */
-        var str = "<label class='ui-checkbox' for='" + inputName + "'>\
-		<input type = 'checkbox'  id = '" + inputName + "'  name = '" + inputName + "'  value = '" + inputValue + "'  tabindex = '" + inputTabIndex + "' / >\
-            <span class = 'ui-label' > " + inputLabel + " </span>\
-		</label>";
+	
+        var el = opt.element;       
+		opt=$ui.inputCtrlMeta(opt, 'checkbox');
+		
+		str=($ui.compile('checkbox', opt));
+		
         el.innerHTML = '';
         el = $ui.replaceEl(el, str);
         /**
@@ -63,7 +55,7 @@ Javascript:
             0: el,
             val: function(val) {
                 if (val === undefined) {
-                    return inputValue;
+                    return opt.value;
                 }
                 $ui.attribute(el.children[0], 'checked', Boolean(val));
             },
@@ -75,11 +67,11 @@ Javascript:
                 return $ui.attribute(el.children[0], 'disabled');
             }
         };
-        obj.val(inputValue);
-        if (inputDisabled) {
+        obj.val(opt.value);
+        if (opt.disabled) {
             obj.disabled(true);
         }
-        $ui.bindListeners(listeners, el.children[0]);
+        if(opt.listeners){$ui.bindListeners(listeners, el.children[0]);}
         return obj;
     };
     return $ui;
