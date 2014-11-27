@@ -29,15 +29,11 @@ Javascript:
 @chainable
 */
 (function($ui) {
-    $ui.checkbox = function(opt) {
-	
+    $ui.checkbox = function(opt) {	
         var el = opt.element;       
-		opt=$ui.inputCtrlMeta(opt, 'checkbox');
-		
-		str=($ui.compile('checkbox', opt));
-		
+		opt=$ui.inputCtrlMeta(opt, 'checkbox');		
         el.innerHTML = '';
-        el = $ui.replaceEl(el, str);
+        el = $ui.replaceEl(el, $ui.compile('checkbox', opt));
         /**
         Gets or sets control value
         @method val
