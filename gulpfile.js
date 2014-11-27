@@ -53,6 +53,7 @@ gulp.task('build:styles', function() {
         .pipe(gulp.dest('dist/'))
         .pipe(gulp.dest('../public-site/dist/css/')); // copy as resource for public website
 });
+
 gulp.task('build:templates', function() {
     return gulp.src('src/**/*.tpl.html', {
             base: './'
