@@ -16,6 +16,11 @@ var gulp = require('gulp'),
         ''
     ].join('\n');
 
+function errorHandler (error) {
+  console.log(error.toString());
+  this.emit('end');
+}	
+	
 gulp.task('build:styles', function() {
     return gulp.src(['src/**/*.less', '!src/**/*variables*.less'], {
             base: './'
@@ -52,16 +57,17 @@ gulp.task('build:templates', function() {
     return gulp.src('src/**/*.tpl.html', {
             base: './'
         })
+		.pipe(plugins.plumber())
         .pipe(plugins.jshtml({
             invoke: '$ui.templateCache'
-        }))
+        })).on('error', errorHandler)
         .pipe(plugins.jshint.reporter('jshint-stylish'))
         .pipe(plugins.uglify())
         .pipe(plugins.concat(pkg.name + '.tpl.js'))
         .pipe(gulp.dest('dist/'));
 });
-gulp.task('build:js', function() {
-    return gulp.src(['dist/**/*.tpl.js', 'src/**/*.js'], {
+gulp.task('build:js', ['build:templates'], function() {
+    return gulp.src(['src/**/*.js', 'dist/**/*.tpl.js'], {
             base: './'
         })
         .pipe(plugins.plumber())
@@ -95,11 +101,13 @@ gulp.task('watch', ['browser-sync'], function() {
     gulp.watch(['src/**/*.tpl.html', 'src/**/*.js'], ['build:templates', 'build:js', 'clean', 'bump', 'document', 'zip']);
     return true;
 });
-gulp.task('document', function() {
+gulp.task('document', ['build:templates', 'build:js'], function() {
     plugins.run('yuidoc').exec();
 });
-gulp.task('clean', function() {
-    del('dist/**/*.tpl.js');
+gulp.task('clean', ['build:templates', 'build:js'], function() {
+    del('dist/**/*.tpl.js', function (err) {
+		console.log('Files deleted');
+	});
 });
 gulp.task('bump', function() {
     return gulp.src('./package.json')
@@ -109,7 +117,7 @@ gulp.task('bump', function() {
         }))
         .pipe(gulp.dest('./'));
 });
-gulp.task('zip', function() {
+gulp.task('zip', ['clean', 'build:styles'], function() {
     return gulp.src(['dist/**/*.js', 'dist/**/*.css'])
         .pipe(plugins.zip(pkg.name + '.zip'))
         .pipe(gulp.dest('dist/'));
