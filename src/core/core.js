@@ -34,7 +34,7 @@ if (!Array.prototype.indexOf) {
             }
             k++;
         }
-        return -1;
+        return -1; 
     };
 }
 
@@ -48,6 +48,37 @@ var $ui = $ui || {};
 @class $ui
 @static
 */
+
+ 
+
+/** 
+Adds the passed HTML string to the template cache
+@method templateCache
+@param HTML {String} Template HTML
+@param Reference {String} Unique identifier (e.g template name)
+*/ 
+	$ui.templates={};  
+    $ui.templateCache = function(tpl, ref) {
+		ref=ref.replace(/^.*[\\\/]/, '');
+        $ui.templates[ref.substr(0, ref.indexOf('.'))]=tpl;
+    }; 
+	
+/** 
+Compiles the given template against the provided {object}
+@method compile
+@param ref {String} Template reference
+@param object {Object} Data object to compile template with, only shallow references are supported
+*/ 	
+    $ui.compile = function(ref, obj) { 	
+        var tpl=$ui.templates[ref];
+		for(var p in obj){ 
+			if(tpl.indexOf("{{"+p+"}}")>-1){ 
+				var re= new RegExp("{{"+p+"}}", "g");
+				tpl=tpl.replace(re, obj[p]);
+			} 
+		}
+		return tpl;
+    };
 
 /**
 For the passed event object prevent bubbling up the DOM tree
@@ -107,7 +138,7 @@ For the passed element, center horizontally and vertically within the parentNode
 @method center
 @param element {Object} DOM element
 @return {Object} Returns passed DOM element
-@chainable
+@chainable  
 */    
     $ui.center = function(el) {
         el.style.top = el.parentNode.clientHeight / 2 - (el.offsetHeight / 2) + 'px';
