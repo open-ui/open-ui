@@ -33,12 +33,17 @@ Remove a notification
 @param element {Object} Notification element to remove
 */
 (function($ui) {
-    var nEl = $ui.createEl("<ul class='ui-notify'></ul>");
-    document.body.appendChild(nEl);
     $ui.notify = {
         add: function(opt) {
-            var mEl = $ui.createEl("<li tabindex='" + $ui.getRand(1, 999) + "'>" + opt.content + "</li>"),
-                delay = opt.delay || 8000;
+		 
+			var nEl = document.getElementById('ui-notify');
+			if(!nEl){
+				nEl = $ui.createEl($ui.compile('notify'));
+				document.body.appendChild(nEl);
+			}
+		
+            var mEl = $ui.createEl($ui.compile('notify_item', {tabindex:$ui.getRand(1, 999), content:opt.content})),
+                delay = opt.delay || 8000; 
             nEl.appendChild(mEl);
             setTimeout(function() {
                 $ui.addClass(mEl, 'ui-show');
@@ -56,6 +61,7 @@ Remove a notification
             };
         },
         remove: function(dEl) {
+			var nEl = document.getElementById('ui-notify');
             if (!$ui.hasClass(dEl, 'ui-show')) {
                 return;
             }
