@@ -41,30 +41,22 @@ Javascript:
 (function($ui) {
     $ui.toggle = function(opt) {
         var el = opt.element,
-            options = opt.options || [],
-            // more complex as can take true/false values
-            inputValue = opt.value !== undefined ? opt.value : $ui.attribute(el, 'value') !== undefined ? $ui.attribute(el, 'value') : options[0].value,
-            listeners = opt.listeners === undefined ? {} : opt.listeners,
-            inputDisabled = (opt.disabled || el.getAttribute('disabled')) ? 'disabled' : '',
-            inputName = opt.name || el.getAttribute('name') || 'ui-toggle-' + $ui.getRand(1, 999),
-            inputTabIndex = opt.tabindex || el.getAttribute('tabindex') || 0;
+            options = opt.options || [];
 
         if (!options) {
             return;
         }
 
-        var tpl = "<div class='ui-toggle " + (inputDisabled ? 'ui-disabled' : '') + "' tabindex='" + inputTabIndex + "'>\
-			<input type='hidden' name = '" + inputName + "' value='" + inputValue + "'/>\
-			<div class='ui-toggle-indicator' style='width:" + (100 / options.length) + "%'></div>\
-		</div>";
-
-        tpl += "";
+			
+		opt=$ui.inputCtrlMeta(opt, 'rating');		
+		opt.classList=(opt.disabled ? 'ui-disabled' : '');
+		opt.styleList="width:" + (100 / options.length) + "%;";		
         el.innerHTML = '';
-        el = $ui.replaceEl(el, tpl);
+        el = $ui.replaceEl(el, $ui.compile('toggle', opt));		
 
         var optionEl = [];
         for (var o = 0; o < options.length; o++) {
-            var oEl = $ui.createEl("<div class='ui-option' style='width:" + (100 / options.length) + "%' data-value='" + options[o].value + "'>" + options[o].name + "</div>");
+            var oEl = $ui.createEl($ui.compile('toggle_item', {styleList:opt.styleList, value:options[o].value, label:options[o].name}));	
             el.appendChild(oEl);
             optionEl.push(oEl);
         }
@@ -109,14 +101,14 @@ Javascript:
                 return $ui.attribute(inputEl, 'disabled');
             }
         };
-        obj.val(inputValue);
+        obj.val(opt.value);
 
         function clickOpt(e) {
             obj.val($ui.attribute(e.target, 'data-value'));
         }
         for (o = 0; o < options.length; o++) {
-            $ui.bindListeners(listeners, optionEl[o]);
-            if (!inputDisabled) {
+            if(opt.listeners){$ui.bindListeners(opt.listeners, optionEl[o]);}
+            if (!opt.disabled) {
                 $ui.bindEvent('click', optionEl[o], clickOpt);
             }
         }
