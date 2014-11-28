@@ -64,28 +64,7 @@
 		color: darken(@color-background, 30%);
 		font-style: italic;
 	} 
-	input, textarea{
-		border:1px solid darken(@color-background, 30%);
-		height:@item-height;
-		line-height:@item-height;
-		padding:0 @item-height/3;
-		box-sizing:border-box;
-		width:@item-width;
-		font-family:@font-family;
-		font-size:@font-size;
-		resize:none;
-		transition:all @transition-duration*2 ease-in;		
-		&:focus, &:hover:focus{
-			border-color:@color-highlight;
-		}
-		&:hover{
-			border-color:@color-highlight;
-		}
-	}
-	textarea{
-		height:@item-width/2;
-	}
-	a{		
+	a.ui-ui{		
 		text-decoration:none;
 		display:inline-block;
 		position:relative;
@@ -104,7 +83,7 @@
 			left:0;
 		}
 	}
-	button{
+	button.ui-ui{
 		background:lighten(@color-highlight, 10%);
 		color:@color-background;
 		display:inline-block;
