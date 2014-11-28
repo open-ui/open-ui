@@ -564,7 +564,7 @@ For color conversion methods, where the expected parameter is an array e.g `[0,0
             var color=$ui.color.desaturate('#840000', 70);
             // color = "#820000";
 			
-        @method saturate
+        @method desaturate
 		@param hex {String} HEX color string
         @param perc {Number} Percentage to saturate color by
 		@param [abs=lightness] {Boolean} Define percentage desaturation as absolute value, defaults to relative
