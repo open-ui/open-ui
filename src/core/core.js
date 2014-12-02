@@ -72,7 +72,7 @@ Adds the passed HTML string to the template cache
 @return {Array} Array of currently cached templates
 */ 
 	$ui.templates={};  
-    $ui.templateCache = function(tpl, ref) {
+    $ui.templateCache = function(ref, tpl) {
 		ref=ref.replace(/^.*[\\\/]/, '');
         $ui.templates[ref.substr(0, ref.indexOf('.'))]=tpl;
     }; 
